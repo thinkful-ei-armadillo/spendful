@@ -20,11 +20,11 @@ export default class Dashboard extends Component{
         <Doughnut data={chartData} width={200} height={60}/>
         <div>
           <h4>Income</h4>
-          <IncomeExpenseList />
+          <IncomeExpenseList type="income" onlyShowRecent />
         </div>
         <div>
           <h4>Expenses</h4>
-          <IncomeExpenseList />
+          <IncomeExpenseList type="expenses" onlyShowRecent />
         </div>
       </div>
     )

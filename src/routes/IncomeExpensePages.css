@@ -1,3 +1,15 @@
 .page-controls {
-  
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.item-list li {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
 }
