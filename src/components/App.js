@@ -3,6 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
 import LoginPage from '../routes/LoginPage'; 
 import IncomePage from '../routes/IncomePage';
+import DashboardPage from '../routes/DashboardPage';
 import './App.css';
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/income" component={IncomePage} />
+          <Route exact path="/dashboard" component={DashboardPage} />
         </Switch>
       </div>
     </>;
