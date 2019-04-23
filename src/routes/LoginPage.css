@@ -1,0 +1,13 @@
+.login-form {
+  margin: 4em auto 0;
+  max-width: 20em;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form form input {
+  margin: 0 0 1em 0;
+}
