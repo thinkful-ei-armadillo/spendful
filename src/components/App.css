@@ -1,5 +1,21 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
 }
 
+nav div {
+  max-width: 65em;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+nav a {
+  display: block;
+}
+
+main {
+  margin: 0 auto;
+  padding: 2em;
+  max-width: 65em;
+}
