@@ -1,0 +1,15 @@
+.page-chart {
+  min-height: 20em;
+}
+
+.page-summaries {
+  margin: 2em 0 0 0;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.page-summaries article {
+  margin: 0 0 2em 0;
+  flex-basis: 20em;
+}
