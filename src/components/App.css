@@ -2,9 +2,14 @@ body {
   margin: 0;
 }
 
+nav {
+  background-color: #e0e0e0;
+}
+
 nav div {
-  max-width: 65em;
+  max-width: 60em;
   margin: 0 auto;
+  padding: 1em 2em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,5 +22,9 @@ nav a {
 main {
   margin: 0 auto;
   padding: 2em;
-  max-width: 65em;
+  max-width: 60em;
+}
+
+header {
+  background-color: #ececec;
 }
