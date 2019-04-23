@@ -5,6 +5,7 @@ import LoginPage from '../routes/LoginPage';
 import IncomePage from '../routes/IncomePage';
 import DashboardPage from '../routes/DashboardPage';
 import './App.css';
+import AddItemPage from '../routes/AddItemPage';
 
 class App extends Component {
   render() {
@@ -36,6 +37,7 @@ class App extends Component {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/income" component={IncomePage} />
           <Route exact path="/dashboard" component={DashboardPage} />
+          <Route exact path="/additem" component={AddItemPage} />
         </Switch>
       </div>
     </>;
