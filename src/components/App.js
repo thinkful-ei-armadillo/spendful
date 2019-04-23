@@ -11,7 +11,7 @@ class App extends Component {
     return <>
       <nav>
         <div>
-          <h1>Spendful</h1>
+          <Link to="/"><h1>Spendful</h1></Link>
 
           {isLoggedIn
             ? <Link to="/logout">Logout</Link>

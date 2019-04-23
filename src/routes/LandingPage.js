@@ -23,7 +23,7 @@ export default class LandingPage extends Component {
       </header>
 
       <main>
-        
+        <p>Landing page</p>
       </main>
     </>;
   }
