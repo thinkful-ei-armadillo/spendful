@@ -1,12 +1,31 @@
+canvas {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .page-chart {
+  max-width: 100%;
   min-height: 20em;
+  padding: 3.5em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 3;
+  flex-basis: 17em;
 }
 
 .page-summaries {
   margin: 2em 0 0 0;
+  padding: 0 1em;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  flex: 4;
+  flex-basis: 12em;
 }
 
 .page-summaries article {
