@@ -6,8 +6,8 @@ export default class LoginPage extends Component {
     return(
       <div>
         <form>
-          User Name: <input type='text'/>
-          Password: <input type='text'/>
+          <input type="text" placeholder="Username"/>
+          <input type="password" placeholder="Password"/>
           <button type="submit">Log In</button> 
         </form>
       </div>
