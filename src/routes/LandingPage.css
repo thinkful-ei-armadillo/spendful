@@ -1,7 +1,7 @@
 .landing-header {
   max-width: 60em;
   margin: 0 auto;
-  padding: 2em;
+  padding: 2em 15%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -9,18 +9,20 @@
 
 .landing-header-left {
   flex: 3;
-  flex-basis: 9em;
+  flex-basis: 12em;
   font-size: 1.25em;
 }
 
 .landing-header-left h2 {
   max-width: 12em;
+  margin: 0 1em;
 }
 
 .landing-header-right {
+  max-width: 15em;
+  display: flex;
+  align-items: center;
   flex: 8;
-  box-sizing: border-box;
-  max-width: 25em;
   flex-basis: 15em;
 }
 
