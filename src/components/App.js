@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
+import LoginPage from '../routes/LoginPage'; 
 import './App.css';
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
       <div id="app-container">
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route path="/login" component={LoginPage} />
         </Switch>
       </div>
     </>;
