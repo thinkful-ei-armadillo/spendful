@@ -6,7 +6,7 @@ nav {
   background-color: #e0e0e0;
 }
 
-nav div {
+nav > div {
   max-width: 60em;
   margin: 0 auto;
   padding: 1em 2em;
@@ -15,8 +15,21 @@ nav div {
   align-items: center;
 }
 
+nav h1 {
+  margin: 0 1em 0 0;
+}
+
 nav a {
   display: block;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-left a {
+  margin: 0 1.25em 0 0;
 }
 
 main {
