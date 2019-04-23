@@ -8,6 +8,10 @@ import './App.css';
 import AddItemPage from '../routes/AddItemPage';
 
 class App extends Component {
+  state = {
+    menu: false,
+  }
+
   render() {
     const isLoggedIn = true;
     const navLinks = <>
@@ -20,13 +24,23 @@ class App extends Component {
       <nav>
         <div>
           <div className="nav-left">
-            <Link to="/"><h1>Spendful</h1></Link>
+            <Link className="nav-show-all" to="/"><h1>Spendful</h1></Link>
             {isLoggedIn ? navLinks : ''}
           </div>
+
           <div className="nav-right">
             {isLoggedIn
               ? <Link to="/logout">Logout</Link>
               : <Link to="/login">Login</Link>}
+
+            <a className="nav-show-mobile" onClick={() => this.setState({menu: !this.state.menu})}>
+              <i className="fas fa-bars"></i>
+            </a>
+          </div>
+
+          <div className={this.state.menu ? 'nav-mobile-menu expanded' : 'nav-mobile-menu'}>
+            <p>test link 1</p>
+            <p>test link 2</p>
           </div>
         </div>
       </nav>
