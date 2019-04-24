@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import {Doughnut} from 'react-chartjs-2'; 
 import IncomeExpenseList from '../components/IncomeExpenseList';
 import './DashboardPage.css';
+import AppContext from '../components/AppContext';
 
 export default class Dashboard extends Component {
+
+  static contextType = AppContext;
+
   state = {
     chart: {
       data: {
@@ -30,6 +34,12 @@ export default class Dashboard extends Component {
       }
     }
   }
+
+  // generate
+
+  // generatePieChart = () => {
+
+  // }
 
   render() {
     return (
