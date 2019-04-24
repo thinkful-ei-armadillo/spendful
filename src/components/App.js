@@ -6,7 +6,7 @@ import IncomePage from '../routes/IncomePage';
 import ExpensesPage from '../routes/ExpensesPage';
 import DashboardPage from '../routes/DashboardPage';
 import AddItemPage from '../routes/AddItemPage';
-import PrivateRoute from '../routes/PrivateRoute';
+//import PrivateRoute from '../routes/PrivateRoute';
 import PublicOnlyRoute from '../routes/PublicOnlyRoute'
 import NotFoundPage from '../routes/NotFoundPage'
 import Navbar from './Navbar';
