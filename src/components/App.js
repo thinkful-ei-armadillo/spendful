@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
 import LoginPage from '../routes/LoginPage'; 
 import IncomePage from '../routes/IncomePage';
 import DashboardPage from '../routes/DashboardPage';
-import './App.css';
 import AddItemPage from '../routes/AddItemPage';
 import PrivateRoute from '../routes/PrivateRoute';
 import PublicOnlyRoute from '../routes/PublicOnlyRoute'
 import NotFoundPage from '../routes/NotFoundPage'
+import Navbar from './Navbar';
+import './App.css';
 
 class App extends Component {
-  render() {
-    const isLoggedIn = true;
-    const navLinks = <>
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/income">Income</Link>
-      <Link to="/expenses">Expenses</Link>
-    </>;
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      menuVisible: false,
+    }
+
+    this.props.history.listen((location, action) => {
+      this.setState({menuVisible: false});
+    });
+  }
+
+  render() {
     return <>
-      <nav>
-        <div>
-          <div className="nav-left">
-            <Link to="/"><h1>Spendful</h1></Link>
-            {isLoggedIn ? navLinks : ''}
-          </div>
-          <div className="nav-right">
-            {isLoggedIn
-              ? <Link to="/logout">Logout</Link>
-              : <Link to="/login">Login</Link>}
-          </div>
-        </div>
-      </nav>
+      <Navbar menuVisible={this.state.menuVisible} />
 
       <div id="app-container">
         <Switch>
@@ -48,4 +42,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

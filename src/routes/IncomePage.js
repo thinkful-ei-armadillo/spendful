@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './IncomeExpensePages.css';
+import IncomeExpenseList from '../components/IncomeExpenseList';
 
 export default class IncomePage extends Component {
   render() {
@@ -11,10 +11,11 @@ export default class IncomePage extends Component {
             <option>April 2019</option>
           </select>
 
-          <Link to="/income/add">Add income</Link>
+          <Link to="/additem">Add income</Link>
         </section>
+        
         <section className="page-content">
-          <p>stuff goes here</p>
+          <IncomeExpenseList />
         </section>
       </main>
     );

@@ -1,0 +1,41 @@
+canvas {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.page-chart {
+  max-width: 100%;
+  min-height: 20em;
+  padding: 3.5em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 3;
+  flex-basis: 20em;
+}
+
+.page-summaries {
+  margin: 2em 0 0 0;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex: 4;
+  flex-basis: 20em;
+}
+
+.page-summaries article {
+  margin: 1em .5em;
+  flex-basis: 17em;
+  background: #ececec;
+  padding: 1.25em;
+}
+
+
+
+@media only screen and (min-width: 944px) {
+  
+}
