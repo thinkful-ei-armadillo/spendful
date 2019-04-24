@@ -7,19 +7,16 @@ export default class Navbar extends Component {
     super(props);
 
     this.state = {
-      menuVisible: false,
+      menuVisible: this.props.menuVisible,
     }
     
-    this.onRouteChange = this.onRouteChange.bind(this);
     this.menuToggle = this.menuToggle.bind(this);
     this.menuOff = this.menuOff.bind(this);
   }
 
-  onRouteChange(e) {
-    // set menu to invisible every time a link is clicked (on mobile)
-    if(e.target.tagName === 'A') {
-      this.setState({menuVisible: false});
-    }
+  // this will reset mobile navbar when route is changed
+  componentWillReceiveProps() {
+    this.setState({menuVisible: this.props.menuVisible});
   }
 
   menuToggle() { this.setState({menuVisible: !this.state.menuVisible}) }
@@ -37,7 +34,7 @@ export default class Navbar extends Component {
       <nav onClick={this.onRouteChange}>
         <div className="nav-main">
           <div className="nav-left">
-            <Link className="nav-show-all" to="/">
+            <Link to="/">
               <h1>Spendful</h1>
             </Link>
             

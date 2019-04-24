@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
 import LoginPage from '../routes/LoginPage'; 
 import IncomePage from '../routes/IncomePage';
@@ -9,9 +9,21 @@ import Navbar from './Navbar';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menuVisible: false,
+    }
+
+    this.props.history.listen((location, action) => {
+      this.setState({menuVisible: false});
+    });
+  }
+
   render() {
     return <>
-      <Navbar />
+      <Navbar menuVisible={this.state.menuVisible} />
 
       <div id="app-container">
         <Switch>
@@ -26,4 +38,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
