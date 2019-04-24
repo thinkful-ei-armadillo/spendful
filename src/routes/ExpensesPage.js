@@ -11,7 +11,7 @@ export default class ExpensesPage extends Component {
             <option>April 2019</option>
           </select>
 
-          <Link to="/additem#expense">Add expense</Link>
+          <Link to="/add#expense">Add expense</Link>
         </section>
         
         <section className="page-content">

@@ -11,7 +11,7 @@ export default class IncomePage extends Component {
             <option>April 2019</option>
           </select>
 
-          <Link to="/additem#income">Add income</Link>
+          <Link to="/add#income">Add income</Link>
         </section>
         
         <section className="page-content">

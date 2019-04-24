@@ -36,7 +36,7 @@ class App extends Component {
           <PublicOnlyRoute path={'/income'} component={IncomePage} />
           <PublicOnlyRoute path={'/expenses'} component={ExpensesPage} />
           <PublicOnlyRoute path={'/dashboard'} component={DashboardPage} />
-          <PublicOnlyRoute path={'/additem'} component={AddItemPage} />
+          <PublicOnlyRoute path={'/add'} component={AddItemPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>
