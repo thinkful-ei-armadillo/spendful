@@ -27,13 +27,6 @@ canvas {
   flex-basis: 20em;
 }
 
-.page-summaries article {
-  margin: 1em .5em;
-  flex-basis: 17em;
-  background: #ececec;
-  padding: 1.25em;
-}
-
 
 
 @media only screen and (min-width: 944px) {
