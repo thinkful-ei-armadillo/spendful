@@ -56,7 +56,7 @@ export default class IncomeExpenseList extends Component {
     //<ul className={this.props.onlyShowRecent ? 'item-list-recent' : 'item-list'}>
     return <>
       <ul className="item-list">
-        {this.state.data.map(item => <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} />)}
+        {this.state.data.map((item, i) => <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
       </ul>
 
       {this.props.onlyShowRecent ? <Link to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
