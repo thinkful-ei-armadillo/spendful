@@ -15,26 +15,27 @@ canvas {
   align-items: center;
   position: relative;
   flex: 3;
-  flex-basis: 30em;
+  flex-basis: 20em;
 }
 
 .page-summaries {
   margin: 2em 0 0 0;
-  padding: 0 3em;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   flex: 4;
-  flex-basis: 12em;
+  flex-basis: 20em;
 }
 
 .page-summaries article {
-  margin: .5em 1em;
-  flex-basis: 13em;
+  margin: 1em .5em;
+  flex-basis: 17em;
+  background: #ececec;
+  padding: 1.25em;
 }
 
 
 
 @media only screen and (min-width: 944px) {
-  .page-summaries { padding: 0 3em 0 0 }
+  
 }

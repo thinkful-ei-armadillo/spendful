@@ -45,10 +45,10 @@ export default class IncomeExpenseList extends Component {
   componentDidMount() {
     if(this.props.type === 'income') {
       // fetch call goes here (GET /api/income/etc...)
-      this.setState({data:['testincome1', 'testincome2']});
+      this.setState({data:['testincome1', 'testincome2', 'testincome3', 'testincome4']});
     } else if(this.props.type === 'expenses') {
       // fetch call goes here (GET /api/expenses/etc...)
-      this.setState({data:['testexpense1', 'testexpense2']});
+      this.setState({data:['testexpense1', 'testexpense2', 'testexpense3', 'testexpense4', 'test5']});
     }
   }
 
