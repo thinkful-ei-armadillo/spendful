@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './LandingPage.css';
 import AuthApiService from '../services/auth-api-service';
 
-
 export default class LandingPage extends Component {
 
   static defaultProps = {
@@ -18,14 +17,14 @@ export default class LandingPage extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const {email, username, password } = e.target; 
+    const {fullname, username, password } = e.target; 
     AuthApiService.postUser({
-      name: email.value,
+      name: fullname.value,
       username: username.value,
       password: password.value 
     })
     .then( () => {
-      email.value= ''
+      fullname.value= ''
       username.value= ''
       password.value= ''
       this.handleRegistrationSuccess(); 
@@ -42,7 +41,7 @@ export default class LandingPage extends Component {
 
           <div className="landing-header-right">
             <form onSubmit={this.handleSubmit}>
-              <input type="text" placeholder="Email" name="email" required></input>
+              <input type="text" placeholder="Email" name="fullname" required></input>
               <input type="text" placeholder="Username" name="username" required></input>
               <input type="password" placeholder="Password" name="password" required></input>
               <button type="submit">Create an account!</button>
