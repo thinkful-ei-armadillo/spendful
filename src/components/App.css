@@ -22,6 +22,31 @@ h4 {
   flex-wrap: wrap;
 }
 
+.flex-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 25em;
+  margin: 4em auto 0;
+}
+
+.flex-form > input,
+.flex-form > select,
+.flex-form > button {
+  margin: 0.5em 0;
+  padding: 0.4em 0.5em;
+}
+
+.flex-form label {
+  margin: .5em 0 0 0;
+  font-size: .8em;
+  font-weight: bold;
+}
+
+.flex-form button {
+  margin-top: 3em;
+}
+
+
 .w-100 { width: 100%; height: 0 }
 
 
