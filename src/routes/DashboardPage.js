@@ -47,14 +47,8 @@ export default class Dashboard extends Component {
         </section>
 
         <section className="page-summaries">
-          <article>
-            <h4>Income</h4>
-            <IncomeExpenseList type="income" onlyShowRecent />
-          </article>
-          <article>
-            <h4>Expenses</h4>
-            <IncomeExpenseList type="expenses" onlyShowRecent />
-          </article>
+          <IncomeExpenseList type="income" onlyShowRecent />
+          <IncomeExpenseList type="expenses" onlyShowRecent />
         </section>
       </main>
     );

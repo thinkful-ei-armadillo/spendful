@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './IncomeExpenseList.css';
 
 function ListItem(props) {
   // in the future, props.item will probably be an object
@@ -55,11 +56,16 @@ export default class IncomeExpenseList extends Component {
   render() {
     //<ul className={this.props.onlyShowRecent ? 'item-list-recent' : 'item-list'}>
     return <>
-      <ul className="item-list">
-        {this.state.data.map((item, i) => <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
-      </ul>
+      <article>
+        <h4>{this.props.type}</h4>
 
-      {this.props.onlyShowRecent ? <Link to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
+        <ul className="item-list">
+          {this.state.data.map((item, i) => <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+        </ul>
+
+        {this.props.onlyShowRecent ? <Link to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
+      </article>
+
     </>;
   }
 }
