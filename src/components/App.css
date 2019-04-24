@@ -1,5 +1,52 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+}
+
+main {
+  margin: 0 auto;
+  padding: 2em;
+  max-width: 60em;
+}
+
+header {
+  background-color: #ececec;
+}
+
+h4 {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.flex-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.w-100 { width: 100%; height: 0 }
+
+
+.page-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3.5em;
+}
+
+.select-month {
+  font-size: 1.5em;
+  padding: 0.25em .5em;
+}
+
+.select-month option {
+  font-size: .6em;
 }
 
 
+/*
+@media only screen and (max-width: 425px) {
+  
+}
+
+@media only screen and (min-width: 426px) {
+  
+}
+*/
