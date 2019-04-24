@@ -5,6 +5,9 @@ import LoginPage from '../routes/LoginPage';
 import IncomePage from '../routes/IncomePage';
 import DashboardPage from '../routes/DashboardPage';
 import AddItemPage from '../routes/AddItemPage';
+import PrivateRoute from '../routes/PrivateRoute';
+import PublicOnlyRoute from '../routes/PublicOnlyRoute'
+import NotFoundPage from '../routes/NotFoundPage'
 import Navbar from './Navbar';
 import './App.css';
 
@@ -27,11 +30,12 @@ class App extends Component {
 
       <div id="app-container">
         <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/income" component={IncomePage} />
-          <Route exact path="/dashboard" component={DashboardPage} />
-          <Route exact path="/additem" component={AddItemPage} />
+          <PublicOnlyRoute exact path={'/'} component={LandingPage} />
+          <PublicOnlyRoute path={'/login'} component={LoginPage} />
+          <PrivateRoute path={'/income'} component={IncomePage} />
+          <PrivateRoute path={'/dashboard'} component={DashboardPage} />
+          <PrivateRoute path={'/additem'} component={AddItemPage} />
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
     </>;
