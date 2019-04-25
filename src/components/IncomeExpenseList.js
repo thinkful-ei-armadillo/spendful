@@ -36,7 +36,7 @@ function ListItem(props) {
 }
 
 
-
+// TODO: onlyShowRecents = true should limit # of items
 export default class IncomeExpenseList extends Component {
   constructor(props) {
     super(props);
