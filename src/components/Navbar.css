@@ -30,8 +30,26 @@ nav a {
 
 .nav-left a {
   margin: 0 1.25em 0 0;
+  text-decoration: none;
+}
+
+.nav-link {
   padding: 10px 15px;
+  border: 1px solid gray;
   border-radius: 5px;
+  text-decoration: none;
+}
+
+.nav-left a,
+.nav-link:link,
+.nav-link:visited {
+  color: #000;
+}
+
+.nav-link.nav-selected {
+  border-color: #fff;
+  background-color: gray;
+  color: #fff;
 }
 
 .nav-mobile-menu {
@@ -52,15 +70,12 @@ nav a {
   border: 1px solid #a0a0a0;
 }
 
-.nav-link {
+.btn-nav-menu {
+  padding: 7px 14px;
+  background: transparent;
   border: 1px solid gray;
-  text-decoration: none;
-}
-
-.nav-selected {
-  border-color: #fff;
-  background-color: gray;
-  color: #fff;
+  border-radius: 5px;
+  font-size: 1em;
 }
 
 

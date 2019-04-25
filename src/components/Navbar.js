@@ -60,11 +60,11 @@ export default class Navbar extends Component {
 
           <div className="nav-right nav-hide-mobile">
             {isLoggedIn
-              ? <Link to="/logout">Logout</Link>
-              : <Link to="/login">Login</Link>}
+              ? <Link className="nav-link" to="/logout">Logout</Link>
+              : <Link className="nav-link" to="/login">Login</Link>}
           </div>
           <div className="nav-right nav-show-mobile">
-            <button onClick={this.menuToggle}>
+            <button className="btn-nav-menu" onClick={this.menuToggle}>
               <i className="fas fa-bars"></i>
             </button>
           </div>
@@ -72,8 +72,8 @@ export default class Navbar extends Component {
 
         <div className={this.state.menuVisible ? 'nav-mobile-menu expanded' : 'nav-mobile-menu'}>
           {isLoggedIn
-            ? <>{navLinks} <Link to="/logout">Logout</Link></>
-            : <Link to="/login">Login</Link>}
+            ? <>{navLinks} <Link className="nav-link" to="/logout">Logout</Link></>
+            : <Link className="nav-link" to="/login">Login</Link>}
         </div>
       </nav>
     );
