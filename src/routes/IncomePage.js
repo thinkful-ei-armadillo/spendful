@@ -1,8 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeExpenseList from '../components/IncomeExpenseList';
-
+import config from '../config'
+import TokenService from '../services/token-service'
 export default class IncomePage extends Component {
+
+  state = {
+    incomes: []
+  }
+
+  getAllIncomes = () => {
+    fetch(`${config.API_ENDPOINT}/incomes`, {
+      headers: {
+        "Authorization": `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      }
+    })
+    .then(res =>{
+      return (!res.ok) ? res.json().then(e => Promise.reject(e))
+      : res.json()  
+    })
+    .then(incomes => {
+      this.setState({
+        incomes
+      })
+    })
+  }
+
+  componentDidMount(){
+    this.getAllIncomes(); 
+  }
+
   render() {
     return (
       <main>
@@ -15,7 +43,7 @@ export default class IncomePage extends Component {
         </section>
         
         <section className="page-content">
-          <IncomeExpenseList type="income" />
+          <IncomeExpenseList type="income" data={this.state.incomes}/>
         </section>
       </main>
     );
