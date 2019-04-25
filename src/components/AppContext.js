@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Config from '../config'
+import config from '../config'
+import TokenService from '../services/token-service'
 
 const AppContext = React.createContext({
   test: 0,
@@ -18,13 +19,14 @@ export class AppProvider extends Component {
     incomes: [],
     expenses: [],
     handleAllIncomes: () => {},
-    handleAllExpenses: () => {}
+    handleAllExpenses: () => {},
+    handleReports: () => {}
     
   }
 
   handleAllIncomes = () => {
     console.log('Searching for money');
-    fetch(`${Config.API_ENDPOINT}/incomes/user_id`)
+    fetch(`${config.API_ENDPOINT}/incomes/user_id`)
     .then(res =>{
       return (!res.ok) ? res.json().then(e => Promise.reject(e))
       : res.json()  
@@ -38,7 +40,7 @@ export class AppProvider extends Component {
 
   handleAllExpenses = () => {
     console.log('Searching for money');
-    fetch(`${Config.API_ENDPOINT}/expenses/user_id`)
+    fetch(`${config.API_ENDPOINT}/expenses/user_id`)
     .then(res =>{
       return (!res.ok) ? res.json().then(e => Promise.reject(e))
       : res.json()  
@@ -50,7 +52,25 @@ export class AppProvider extends Component {
     })
   }
 
-  
+  handleReports = (year, month) => {
+    fetch(`${config.API_ENDPOINT}/reports/2019/4`, {
+      headers: {
+        "Authorization": `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      }
+    })
+    .then(res =>{
+      return (!res.ok) ? res.json().then(e => Promise.reject(e))
+      : res.json()  
+    })
+    .then(report => {
+      this.setState({
+        incomes: report.incomes,
+        expenses: report.expenses
+      })
+      console.log(this.state)
+    })
+  }
 
   render() {
     const value = {
@@ -59,7 +79,7 @@ export class AppProvider extends Component {
       expenses: this.state.expenses,
       handleAllIncomes: this.handleAllIncomes,
       handleAllExpenses: this.handleAllExpenses,
-      
+      handleReports: this.handleReports
     };
 
     return (
