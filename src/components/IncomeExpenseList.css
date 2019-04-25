@@ -33,11 +33,13 @@
 
 
 .recent-link {
+  width: 15em;
   bottom: -10px;
   position: absolute;
   padding: .5em 1em;
   background: gray;
   color: #fff;
+  text-align: center;
 }
 
 

@@ -40,7 +40,7 @@ article {
 .flex-form > input,
 .flex-form > select,
 .flex-form > button {
-  margin: 0.5em 0;
+  margin: 0.5em 1px;
   padding: 0.4em 0.5em;
 }
 
@@ -82,6 +82,10 @@ article {
 
 @media only screen and (max-width: 425px) {
   .show-mobile { display: block; }
+
+  .flex-form {
+    min-width: 100%;
+  }
 }
 
 @media only screen and (min-width: 426px) {

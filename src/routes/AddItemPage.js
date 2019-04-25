@@ -6,7 +6,7 @@ class AddItemPage extends Component {
     super(props);
 
     this.state = {
-      type: 'category',
+      type: 'income',
       categories: {
         income: ['paycheck', 'personal'],
         expense: ['groceries', 'clothing', 'recreation'],
@@ -23,25 +23,27 @@ class AddItemPage extends Component {
     }
   }
 
-  handleChange = (event) => {
+  handleTypeChange = (event) => {
     this.setState({
       type: event.target.value 
     })
   }
 
-  renderForm = () => {
-    if(this.state.type === 'category') {
-      return <>
-        <label htmlFor="input-category">Category name</label>
-        <input type="text" id="input-category" />
-        <button type="submit">Submit</button>
-      </>;
-    }
+  handleCategoryChange = (e) => {
+    if(e.target.value == -1) {
+      const newCategory = prompt('Enter the name for the new category:');
 
+      // POST to create category
+    }
+  }
+
+  renderForm = () => {
     return <>
-      <label htmlFor="input-type">Type</label>
-      <select id="input-type">
-        {this.state.categories[this.state.type].map(category => <option key={category}>{category}</option>)}
+      <label htmlFor="input-category">Category</label>
+      <select id="input-category" onChange={this.handleCategoryChange}>
+        {this.state.categories[this.state.type]
+          .map(category => <option key={category}>{category}</option>)}
+        <option value="-1">create new category...</option>
       </select>
 
       <label htmlFor="input-date">Date</label>
@@ -68,10 +70,9 @@ class AddItemPage extends Component {
       <main className="flex-main">
         <form className="flex-form">
           <label htmlFor="input-type">I want to add...</label>
-          <select id="input-type" onChange={this.handleChange}> 
-            <option>category</option>
+          <select id="input-type" onChange={this.handleTypeChange} value={this.state.type}>
             {Object.keys(this.state.categories).map(type => 
-              <option key={type} selected={this.state.type === type}>{type}</option>)}
+              <option key={type}>{type}</option>)}
           </select>
 
           <hr></hr>
