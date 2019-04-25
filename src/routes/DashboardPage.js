@@ -3,8 +3,9 @@ import {Doughnut} from 'react-chartjs-2';
 import IncomeExpenseList from '../components/IncomeExpenseList';
 import './DashboardPage.css';
 import AppContext from '../components/AppContext';
-import config from '../config';
-import TokenService from '../services/token-service';
+import config from '../config'
+import TokenService from '../services/token-service'
+
 
 export default class Dashboard extends Component {
 
@@ -34,7 +35,9 @@ export default class Dashboard extends Component {
         responsive: true,
         maintainAspectRatio: false,
       }
-    }
+    },
+    incomes: [], 
+    expenses: [] 
   }
 
   componentDidMount() {
@@ -95,12 +98,36 @@ export default class Dashboard extends Component {
   // generatePieChart = () => {
 
   // }
+handleReports = (year, month) => {
+    fetch(`${config.API_ENDPOINT}/reports/2019/4`, {
+      headers: {
+        "Authorization": `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      }
+    })
+    .then(res =>{
+      return (!res.ok) ? res.json().then(e => Promise.reject(e))
+      : res.json()  
+    })
+    .then(report => {
+      this.setState({
+        incomes: report.incomes,
+        expenses: report.expenses
+      })
+      console.log(this.state)
+    })
+  }
+
+
+  componentDidMount(){
+    this.handleReports(2019, 4);
+  }
 
   render() {
     return (
       <main className="flex-main">
         <section className="page-controls">
-          <select className="select-month-lg">
+          <select className="select-month">
             <option>April 2019</option>
           </select>
         </section>
@@ -112,8 +139,8 @@ export default class Dashboard extends Component {
         </section>
 
         <section className="page-summaries">
-          <IncomeExpenseList type="income" onlyShowRecent />
-          <IncomeExpenseList type="expenses" onlyShowRecent />
+          <IncomeExpenseList type="income" data={this.state.incomes} onlyShowRecent />
+          <IncomeExpenseList type="expenses" data={this.state.expenses} onlyShowRecent />
         </section>
       </main>
     );
