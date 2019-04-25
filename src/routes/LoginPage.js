@@ -22,15 +22,16 @@ export default class LoginPage extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { username, password } = e.target
+    const { email_address, password } = e.target
     AuthApiService.postLogin({
-      username: username.value,
+      email_address: email_address.value,
       password: password.value, 
     })
     .then(res => {
-      username.value = ''
+      console.log(res)
+      email_address.value = ''
       password.value = ''
-      this.context.processLogin(res.authToken)
+      this.context.processLogin(res.token)
       this.handleLoginSuccess()
     })
   }
@@ -39,7 +40,7 @@ export default class LoginPage extends Component {
     return(
       <section className="login-form">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Username" name="username" required/>
+          <input type="text" placeholder="Username" name="email_address" required/>
           <input type="password" placeholder="Password" name="password" required/>
           <button type="submit">Log In</button> 
         </form>

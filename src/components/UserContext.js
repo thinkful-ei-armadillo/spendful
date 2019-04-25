@@ -15,7 +15,7 @@ const UserContext = React.createContext({
 
 export default UserContext
 
-export class UserProvider extends Component {
+export class UserContextProvider extends Component {
   constructor(props) {
     super(props)
     const state = { user: {}, error: null }
