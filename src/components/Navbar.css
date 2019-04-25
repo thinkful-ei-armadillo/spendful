@@ -30,6 +30,8 @@ nav a {
 
 .nav-left a {
   margin: 0 1.25em 0 0;
+  padding: 10px 15px;
+  border-radius: 5px;
 }
 
 .nav-mobile-menu {
@@ -39,7 +41,7 @@ nav a {
 }
 .nav-mobile-menu.expanded {
   height: auto;
-  padding: 1.5em;
+  padding: 0 1.5em 1.5em;
   display: block;
 }
 
@@ -48,6 +50,17 @@ nav a {
   margin: 1em 0 0;
   padding: 0.5em;
   border: 1px solid #a0a0a0;
+}
+
+.nav-link {
+  border: 1px solid gray;
+  text-decoration: none;
+}
+
+.nav-selected {
+  border-color: #fff;
+  background-color: gray;
+  color: #fff;
 }
 
 
