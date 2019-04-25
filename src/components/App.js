@@ -3,9 +3,10 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
 import LoginPage from '../routes/LoginPage'; 
 import IncomePage from '../routes/IncomePage';
+import ExpensesPage from '../routes/ExpensesPage';
 import DashboardPage from '../routes/DashboardPage';
 import AddItemPage from '../routes/AddItemPage';
-import PrivateRoute from '../routes/PrivateRoute';
+//import PrivateRoute from '../routes/PrivateRoute';
 import PublicOnlyRoute from '../routes/PublicOnlyRoute'
 import NotFoundPage from '../routes/NotFoundPage'
 import Navbar from './Navbar';
@@ -32,9 +33,10 @@ class App extends Component {
         <Switch>
           <PublicOnlyRoute exact path={'/'} component={LandingPage} />
           <PublicOnlyRoute path={'/login'} component={LoginPage} />
-          <PrivateRoute path={'/income'} component={IncomePage} />
-          <PrivateRoute path={'/dashboard'} component={DashboardPage} />
-          <PrivateRoute path={'/additem'} component={AddItemPage} />
+          <PublicOnlyRoute path={'/income'} component={IncomePage} />
+          <PublicOnlyRoute path={'/expenses'} component={ExpensesPage} />
+          <PublicOnlyRoute path={'/dashboard'} component={DashboardPage} />
+          <PublicOnlyRoute path={'/add'} component={AddItemPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeExpenseList from '../components/IncomeExpenseList';
 
-export default class IncomePage extends Component {
+export default class ExpensesPage extends Component {
   render() {
     return (
       <main>
@@ -11,11 +11,11 @@ export default class IncomePage extends Component {
             <option>April 2019</option>
           </select>
 
-          <Link to="/add#income">Add income</Link>
+          <Link to="/add#expense">Add expense</Link>
         </section>
         
         <section className="page-content">
-          <IncomeExpenseList type="income" />
+          <IncomeExpenseList type="expenses" />
         </section>
       </main>
     );

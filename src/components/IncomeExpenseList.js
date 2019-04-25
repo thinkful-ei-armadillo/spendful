@@ -28,11 +28,14 @@ function ListItem(props) {
   return (
     <li className={classname}>
       <p>{prefix} {props.item}</p>
+      <p className={props.type === 'income' ? 'text-green' : 'text-red'}>$350</p>
+      <p className="w-100 show-mobile"></p>
       {extras}
-      <p>$350</p>
     </li>
   );
 }
+
+
 
 export default class IncomeExpenseList extends Component {
   constructor(props) {
@@ -57,13 +60,13 @@ export default class IncomeExpenseList extends Component {
     //<ul className={this.props.onlyShowRecent ? 'item-list-recent' : 'item-list'}>
     return <>
       <article>
-        <h4>{this.props.type}</h4>
+        {this.props.onlyShowRecent ? <h4>{this.props.type}</h4> : ''}
 
         <ul className="item-list">
           {this.state.data.map((item, i) => <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
         </ul>
 
-        {this.props.onlyShowRecent ? <Link to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
+        {this.props.onlyShowRecent ? <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
       </article>
 
     </>;
