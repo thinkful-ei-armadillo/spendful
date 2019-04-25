@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import config from '../config'
+import TokenService from '../services/token-service'
 
 class AddItemPage extends Component {
   constructor(props) {
@@ -30,11 +32,25 @@ class AddItemPage extends Component {
   }
 
   handleCategoryChange = (e) => {
-    if(e.target.value == -1) {
+    if(e.target.value === -1) {
       const newCategory = prompt('Enter the name for the new category:');
+      
 
       // POST to create category
     }
+  }
+
+  addNewCategory = () => {
+    const addCategory = 
+    fetch(`${config.API_ENDPOINT}/categories`, {
+      method: 'POST',
+      headers: {
+        "Authorization": `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(newCategory)
+    }) 
+
   }
 
   renderForm = () => {
@@ -68,7 +84,7 @@ class AddItemPage extends Component {
   render() {
     return (
       <main className="flex-main">
-        <form className="flex-form">
+        <form className="flex-form" onSubmit=>
           <label htmlFor="input-type">I want to add...</label>
           <select id="input-type" onChange={this.handleTypeChange} value={this.state.type}>
             {Object.keys(this.state.categories).map(type => 
