@@ -76,4 +76,5 @@ export default class IncomeExpenseList extends Component {
 IncomeExpenseList.defaultProps = {
   type: 'income',
   onlyShowRecent: false,
+  data: [],
 }
