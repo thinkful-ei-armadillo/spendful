@@ -45,7 +45,7 @@ export default class Dashboard extends Component {
     return (
       <main className="flex-main">
         <section className="page-controls">
-          <select className="select-month">
+          <select className="select-month-lg">
             <option>April 2019</option>
           </select>
         </section>

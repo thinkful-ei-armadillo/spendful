@@ -59,7 +59,7 @@ export default class IncomeExpenseList extends Component {
   render() {
     //<ul className={this.props.onlyShowRecent ? 'item-list-recent' : 'item-list'}>
     return <>
-      <article>
+      <article className={this.props.onlyShowRecent ? 'item-list-dash' : ''}>
         {this.props.onlyShowRecent ? <h4>{this.props.type}</h4> : ''}
 
         <ul className="item-list">

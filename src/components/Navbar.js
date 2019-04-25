@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import UserContext from './UserContext';
 
 export default class Navbar extends Component {
+  static contextType = UserContext;
+  
   constructor(props) {
     super(props);
 
@@ -22,12 +25,26 @@ export default class Navbar extends Component {
   menuToggle() { this.setState({menuVisible: !this.state.menuVisible}) }
   menuOff() { this.setState({menuVisible: false}) }
 
+  getNavBtnClass(href) {
+    let location = this.props.location;
+
+    if(this.props.isLoggedIn) {
+      if(location === '/') location = 'dashboard';
+    }
+
+    if(href === location) {
+      return 'nav-link nav-selected';
+    }
+
+    return 'nav-link';
+  }
+
   render() {
-    const isLoggedIn = true;
+    const isLoggedIn = this.props.isLoggedIn;
     const navLinks = <>
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/income">Income</Link>
-      <Link to="/expenses">Expenses</Link>
+      <Link className={this.getNavBtnClass('dashboard')} to="/dashboard">Dashboard</Link>
+      <Link className={this.getNavBtnClass('income')} to="/income">Income</Link>
+      <Link className={this.getNavBtnClass('expenses')} to="/expenses">Expenses</Link>
     </>;
 
     return (
@@ -43,11 +60,11 @@ export default class Navbar extends Component {
 
           <div className="nav-right nav-hide-mobile">
             {isLoggedIn
-              ? <Link to="/logout">Logout</Link>
-              : <Link to="/login">Login</Link>}
+              ? <Link className="nav-link" to="/logout">Logout</Link>
+              : <Link className="nav-link" to="/login">Login</Link>}
           </div>
           <div className="nav-right nav-show-mobile">
-            <button onClick={this.menuToggle}>
+            <button className="btn-nav-menu" onClick={this.menuToggle}>
               <i className="fas fa-bars"></i>
             </button>
           </div>
@@ -55,8 +72,8 @@ export default class Navbar extends Component {
 
         <div className={this.state.menuVisible ? 'nav-mobile-menu expanded' : 'nav-mobile-menu'}>
           {isLoggedIn
-            ? <>{navLinks} <Link to="/logout">Logout</Link></>
-            : <Link to="/login">Login</Link>}
+            ? <>{navLinks} <Link className="nav-link" to="/logout">Logout</Link></>
+            : <Link className="nav-link" to="/login">Login</Link>}
         </div>
       </nav>
     );
