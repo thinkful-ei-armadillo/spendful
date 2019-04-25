@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import {Doughnut} from 'react-chartjs-2'; 
 import IncomeExpenseList from '../components/IncomeExpenseList';
 import './DashboardPage.css';
-import AppContext from '../components/AppContext';
 import config from '../config'
 import TokenService from '../services/token-service'
 
 
 export default class Dashboard extends Component {
-
-  static contextType = AppContext;
-
   state = {
+    categoryColors: {
+      0: '#f04511',
+      1: '#5501d0',
+      2: '#ff01fa',
+      3: '#508fe4',
+      4: '#0fa931',
+    },
     chart: {
       data: {
         labels: [],
         datasets: [
           {
             label: "Total Expenses",
-            backgroundColor: ["#DEB887", "#A9A9A9", "#DC143C"], 
-            borderColor: ["#CDA776", "#989898", "#CB252B"],
-            data: [200, 150, 1000],
+            backgroundColor: [],
+            data: [],
           }
         ],
       },
@@ -49,7 +51,17 @@ export default class Dashboard extends Component {
     })
     .then(res => res.json())
     .then(json => {
-      this.updateChart(json);
+      // get report info first
+      this.handleReports(2019, 4)
+        .then(report => {
+          this.setState({
+            incomes: report.incomes,
+            expenses: report.expenses
+          });
+
+          // only update chart after we have info
+          this.updateChart(json);          
+        })
     })
   }
 
@@ -57,49 +69,34 @@ export default class Dashboard extends Component {
     let chart = this.state.chart;
     let data = [];
     let labels = [];
+    let backgroundColor = [];
 
-    // replace fakeResponse with real data
-    let fakeResponse = [
-      {
-          "id": 1,
-          "owner_id": 1,
-          "category_id": 6,
-          "description": "Direct Deposit",
-          "amount": "2500.00",
-          "recurring_rule": null,
-          "created_at": "2019-04-25T15:09:13.328Z",
-          "updated_at": "2019-04-25T15:09:13.328Z"
-      },
-      {
-        "id": 1,
-        "owner_id": 1,
-        "category_id": 4,
-        "description": "Direct Deposit",
-        "amount": "1500.00",
-        "recurring_rule": null,
-        "created_at": "2019-04-25T15:09:13.328Z",
-        "updated_at": "2019-04-25T15:09:13.328Z"
-      },
-    ];
+    console.log(this.state.expenses);
 
-    fakeResponse.forEach(item => {
+    this.state.expenses.forEach(item => {
       data.push(parseInt(item.amount));
       labels.push(categories.find(c => c.id === item.category_id).name);
+      backgroundColor.push(this.state.categoryColors[item.category_id] || this.state.categoryColors[0]);
     });
 
     chart.data.labels = labels;
     chart.data.datasets[0].data = data;
+    chart.data.datasets[0].backgroundColor = backgroundColor;
 
     this.setState({chart});
   }
 
-  // generate
+  handleReports = (year, month) => {
+    year = parseInt(year);
+    month = parseInt(month);
 
-  // generatePieChart = () => {
+    // set defaults if inputs are invalid
+    if(isNaN(year) || isNaN(month)) {
+      year = new Date().getFullYear();
+      month = new Date().getMonth() + 1;
+    }
 
-  // }
-handleReports = (year, month) => {
-    fetch(`${config.API_ENDPOINT}/reports/2019/4`, {
+    return fetch(`${config.API_ENDPOINT}/reports/${year}/${month}`, {
       headers: {
         "Authorization": `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
@@ -109,18 +106,6 @@ handleReports = (year, month) => {
       return (!res.ok) ? res.json().then(e => Promise.reject(e))
       : res.json()  
     })
-    .then(report => {
-      this.setState({
-        incomes: report.incomes,
-        expenses: report.expenses
-      })
-      console.log(this.state)
-    })
-  }
-
-
-  componentDidMount(){
-    this.handleReports(2019, 4);
   }
 
   render() {
