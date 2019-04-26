@@ -26,6 +26,13 @@ article {
   padding: 1.25em;
 }
 
+label {
+  text-align: left;
+  font-size: 0.8em;
+  padding: 0 0 0.25em;
+  font-weight: bold;
+}
+
 .flex-main {
   display: flex;
   flex-wrap: wrap;
@@ -81,6 +88,18 @@ article {
 
 .text-green { color: green }
 .text-red { color: red }
+
+.alert-error {
+  text-align: center;
+  padding: 1.5em 0;
+  color: red;
+}
+.alert-error-lg {
+  padding: 1em;
+  text-align: center;
+  background-color: #ff5f5f;
+  color: #fff;
+}
 
 
 @media only screen and (max-width: 425px) {

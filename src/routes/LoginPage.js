@@ -12,6 +12,10 @@ export default class LoginPage extends Component {
     },
   }
 
+  state = {
+    error: [],
+  }
+
   static contextType = UserContext;
 
   handleLoginSuccess = () => {
@@ -21,26 +25,34 @@ export default class LoginPage extends Component {
   }
 
   handleSubmit = e => {
-    e.preventDefault()
-    const { email_address, password } = e.target
+    e.preventDefault();
+    this.setState({error: []});
+
+    const { email_address, password } = e.target;
+    
     AuthApiService.postLogin({
       email_address: email_address.value,
       password: password.value, 
     })
     .then(res => {
-      console.log(res)
       email_address.value = ''
       password.value = ''
       this.context.processLogin(res.token)
       this.handleLoginSuccess()
+    })
+    .catch(err => {
+      if(err.errors) {
+        this.setState({error: err.errors[0]});
+      }
     })
   }
 
   render() {
     return(
       <section className="login-form">
+        {this.state.error.length > 0 ? <div className="alert-error">{this.state.error}</div> : ''}
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Username" name="email_address" required/>
+          <input type="text" placeholder="Username" name="email_address" autoComplete="off" required/>
           <input type="password" placeholder="Password" name="password" required/>
           <button type="submit">Log In</button> 
         </form>

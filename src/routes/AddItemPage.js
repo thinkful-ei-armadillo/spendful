@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import config from '../config'
 import TokenService from '../services/token-service'
+
 import AppContext from '../components/AppContext';
+
+
 
 class AddItemPage extends Component {
 
@@ -18,7 +21,11 @@ class AddItemPage extends Component {
       start_date: '',
       categories: {
         income: [],
-        expense: []
+
+        
+
+        expense: [],
+
       },
       recurring_rule: 'MONTHLY',
       income_category: null,
@@ -31,12 +38,12 @@ class AddItemPage extends Component {
   componentDidMount() {
     const validTypes = ['category', 'income', 'expense'];
     const hash = this.props.location.hash.substr(1);
-
     if(validTypes.includes(hash)) {
       this.setState({type: hash});
     }
     this.getCategories()
     document.getElementById('input-category').value = 0;
+
   }
 
   getCategories = () => {
@@ -71,6 +78,8 @@ class AddItemPage extends Component {
         }
       })
     })
+
+
   }
 
   handleIdChange = () => {
@@ -93,6 +102,31 @@ class AddItemPage extends Component {
   handleTypeChange = (event) => {
     this.setState({
       type: event.target.value 
+    });
+
+    document.getElementById('input-category').value = 0;
+  }
+
+  getCategories = () => {
+    fetch(`${config.API_ENDPOINT}/categories`, {
+      headers: {
+        'Authorization': `bearer ${TokenService.getAuthToken()}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(res =>{
+      return (!res.ok) ? res.json().then(e => Promise.reject(e))
+      : res.json()  
+    })
+    .then(data => {
+      let income = data.filter(category => category.type === 'income').map(filtered => filtered.name)
+      let expense = data.filter(category => category.type === 'expense').map(filtered => filtered.name)
+      this.setState({
+        categories: {
+        income, 
+        expense
+        }
+      })
     })
     document.getElementById('input-category').value = 0;
     console.log(this.state.type);
@@ -103,13 +137,16 @@ class AddItemPage extends Component {
     if(e.target.value === -1) {
       const newCategory = prompt('Enter the name for the new category:');
 
+
        // POST to create category
        fetch(`${config.API_ENDPOINT}/categories`, {
+
         headers: {
           'Authorization': `bearer ${TokenService.getAuthToken()}`,
           'Content-Type': 'application/json',
         },
         method: 'POST',
+
         body: JSON.stringify({name: newCategory.name, type: this.state.type})
       })
 
@@ -128,6 +165,8 @@ class AddItemPage extends Component {
         category_id: e.target.value
       })
       console.log(this.state.expense_category)
+
+     
     }
     console.log(this.state.categories[this.state.type])
   }
@@ -199,7 +238,10 @@ class AddItemPage extends Component {
   renderForm = () => {
     return <>
       <label htmlFor="input-category">Category</label>
-      <select id="input-category" onChange={this.handleCategoryChange} value={this.state.value}>
+
+      <select id="input-category" onChange={this.handleCategoryChange}>
+        <option value="0" disabled>Please select a category</option>
+
         {this.state.categories[this.state.type]
           .map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
         <option value="-1">create new category...</option>
