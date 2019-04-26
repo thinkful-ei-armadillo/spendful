@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import AuthApiService from '../services/auth-api-service';
+import UserContext from '../components/UserContext';
 
 export default class LandingPage extends Component {
+  static contextType = UserContext;
 
   static defaultProps = {
     history: {
@@ -14,9 +16,23 @@ export default class LandingPage extends Component {
     error: [],
   }
 
-  handleRegistrationSuccess = () => {
-    const { history } = this.props
-    history.push('/login')
+  handleRegistrationSuccess = (email_address, password) => {
+    AuthApiService.postLogin({
+      email_address,
+      password,
+    })
+    .then(res => {
+      this.context.processLogin(res.token)
+
+      const { location, history } = this.props
+      const destination = (location.state || {}).from || '/dashboard'
+      history.push(destination); 
+    })
+    .catch(err => {
+      if(err.errors) {
+        this.setState({error: err.errors[0]});
+      }
+    })
   }
 
   handleSubmit = e => {
@@ -31,13 +47,15 @@ export default class LandingPage extends Component {
       password: password.value 
     })
     .then(() => {
+      this.handleRegistrationSuccess(email_address.value, password.value);
       email_address.value= ''
       full_name.value= ''
       password.value= ''
-      this.handleRegistrationSuccess(); 
     })
     .catch(err => {
-      this.setState({error: err.errors[0]});
+      if(err.errors) {
+        this.setState({error: err.errors[0]});
+      }
     });
   }
 
