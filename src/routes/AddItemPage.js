@@ -19,9 +19,6 @@ class AddItemPage extends Component {
   componentDidMount() {
     const validTypes = ['category', 'income', 'expense'];
     const hash = this.props.location.hash.substr(1);
-    const { params } = this.props.match.params
-    console.log(params)
-
     if(validTypes.includes(hash)) {
       this.setState({type: hash});
     }
@@ -63,6 +60,7 @@ class AddItemPage extends Component {
   handleCategoryChange = (e) => {
     if(e.target.value == -1) {
       const newCategory = prompt('Enter the name for the new category:');
+      console.log(prompt); 
       fetch(`${config.API_ENDPOINT}/categories`, {
         headers: {
           'Authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -71,6 +69,14 @@ class AddItemPage extends Component {
         method: 'POST',
         body: JSON.stringify({name: newCategory, type: this.state.type})
       })
+      .then(()=> {
+        let categories = this.state.categories;
+        categories[this.state.type] = [...categories[this.state.type], newCategory] 
+        this.setState({
+          categories
+          })
+        document.getElementById('input-category').value = newCategory;  
+        })
     }
   }
 
