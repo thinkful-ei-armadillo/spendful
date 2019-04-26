@@ -82,6 +82,13 @@ article {
 .text-green { color: green }
 .text-red { color: red }
 
+.alert-error {
+  text-align: center;
+  padding: 1.5em 0;
+  color: red;
+}
+
+
 
 @media only screen and (max-width: 425px) {
   .show-mobile { display: block; }
