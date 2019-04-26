@@ -2,26 +2,31 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import config from '../config'
 import TokenService from '../services/token-service'
+import AppContext from '../components/AppContext';
 
 class AddItemPage extends Component {
+
+
   constructor(props) {
     super(props);
 
     this.state = {
-      
+      category_id: '',
       type: 'income',
       amount: null,
       description: '',
       start_date: '',
       categories: {
-        income: ['Paycheck', 'Direct Deposit', 'Royalties'],
-        expense: ['Rent', 'Utilites', 'Groceries', 'Auto']
+        income: [],
+        expense: []
       },
       recurring_rule: 'MONTHLY',
-      income_category: '',
-      expense_category: ''
+      income_category: null,
+      expense_category: null
     }
   }
+
+ static contextType = AppContext;
 
   componentDidMount() {
     const validTypes = ['category', 'income', 'expense'];
@@ -30,39 +35,100 @@ class AddItemPage extends Component {
     if(validTypes.includes(hash)) {
       this.setState({type: hash});
     }
+    this.getCategories()
+    document.getElementById('input-category').value = 0;
   }
 
-  handl
+  getCategories = () => {
+    fetch(`${config.API_ENDPOINT}/categories`, {
+      headers: {
+        'Authorization': `bearer ${TokenService.getAuthToken()}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(res =>{
+      return (!res.ok) ? res.json().then(e => Promise.reject(e))
+      : res.json()  
+    })
+    .then(data => {
+      let income = data.filter(category => category.type === 'income').map(filtered => { 
+        return {
+          id: filtered.id,
+          name: filtered.name 
+        } 
+      }
+      )
+      let expense = data.filter(category => category.type === 'expense').map(filtered => {
+        return {
+          id: filtered.id,
+          name: filtered.name 
+        } 
+      })
+      this.setState({
+        categories: {
+        income, 
+        expense
+        }
+      })
+    })
+  }
+
+  handleIdChange = () => {
+    const expenseId = this.state.expense_category;
+    const incomeId = this.state.income_category;
+
+    if(!expenseId){
+      this.setState({
+        id: incomeId
+      })
+    } else {
+      this.setState({
+        id: expenseId
+      })
+    }
+
+  }
+  
 
   handleTypeChange = (event) => {
     this.setState({
       type: event.target.value 
     })
-    console.log(this.state.type)
+    document.getElementById('input-category').value = 0;
+    console.log(this.state.type);
+    console.log(`${config.API_ENDPOINT}/${this.state.type}s`);
   }
 
   handleCategoryChange = (e) => {
     if(e.target.value === -1) {
       const newCategory = prompt('Enter the name for the new category:');
+
        // POST to create category
+       fetch(`${config.API_ENDPOINT}/categories`, {
+        headers: {
+          'Authorization': `bearer ${TokenService.getAuthToken()}`,
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({name: newCategory.name, type: this.state.type})
+      })
+
+
     }
-    let select = e.target.value;
-    console.log(select);
-    this.setState({
-      income_category: select
-    })
-    console.log('income', this.state.income_category);
-    // if (this.state.type === 'income') {
-    //   this.setState({
-    //    income_category: e.target.value
-    //   })
-    //   console.log(this.state.income_category)
-    // } else {
-    //   this.setState({
-    //     expense_category: e.target.value
-    //   })
-    //   console.log(this.state.expense_category)
-    // }
+    
+    if (this.state.type === 'income') {
+      this.setState({
+       income_category: e.target.value,
+       category_id: e.target.value
+      })
+      console.log(this.state.income_category)
+    } else {
+      this.setState({
+        expense_category: e.target.value,
+        category_id: e.target.value
+      })
+      console.log(this.state.expense_category)
+    }
     console.log(this.state.categories[this.state.type])
   }
 
@@ -96,19 +162,37 @@ class AddItemPage extends Component {
   }
 
   addNewItem = () => {
+    this.handleIdChange();
+    const { history } = this.props;
+    
     const addCategory = {
-      name: test,
-      type: test,
-      monthly_budget: test
-    }
-    fetch(`${config.API_ENDPOINT}/categories`, {
+      category_id: this.state.category_id,
+      description: this.state.description,
+      amount: this.state.amount,
+      start_date: this.state.start_date,
+      recurring_rule: this.state.recurring_rule
+    };
+    console.log(addCategory);
+    const type = this.state.type;
+
+    fetch(`${config.API_ENDPOINT}/${type}s/`, {
       method: 'POST',
       headers: {
         "Authorization": `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       },
       body: JSON.stringify(addCategory)
-    }) 
+    })
+    .then(res =>{
+      return (!res.ok) ? res.json().then(e => Promise.reject(e))
+      : res.json()  
+    })
+    .then(resJson => {
+      console.log('Item Added');
+    })
+    .then(
+      history.push(`./${type}s`)
+    ) 
 
   }
 
@@ -117,7 +201,7 @@ class AddItemPage extends Component {
       <label htmlFor="input-category">Category</label>
       <select id="input-category" onChange={this.handleCategoryChange} value={this.state.value}>
         {this.state.categories[this.state.type]
-          .map(category => <option key={category} value={category}>{category}</option>)}
+          .map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
         <option value="-1">create new category...</option>
       </select>
 
@@ -143,7 +227,7 @@ class AddItemPage extends Component {
   render() {
     return (
       <main className="flex-main">
-        <form className="flex-form" onSubmit={this.addNewItem}>
+        <form className="flex-form" onSubmit={() => this.addNewItem()}>
           <label htmlFor="input-type">I want to add...</label>
           <select id="input-type" onChange={this.handleTypeChange} value={this.state.type}>
             {Object.keys(this.state.categories).map(type => 
