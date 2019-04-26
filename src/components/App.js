@@ -72,7 +72,7 @@ class App extends Component {
         <Switch>
           <PublicOnlyRoute exact path={'/'} component={LandingPage} />
           <PublicOnlyRoute path={'/login'} component={LoginPage} />
-          <PrivateRoute path={'/income'} component={IncomePage} />
+          <PrivateRoute path={'/incomes'} component={IncomePage} />
           <PrivateRoute path={'/expenses'} component={ExpensesPage} />
           <PrivateRoute path={'/dashboard'} component={DashboardPage} />
           <PrivateRoute path={'/add'} component={AddItemPage} />
