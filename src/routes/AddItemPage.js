@@ -10,8 +10,8 @@ class AddItemPage extends Component {
     this.state = {
       type: 'income',
       categories: {
-        income: ['paycheck', 'personal'],
-        expense: ['groceries', 'clothing', 'recreation'],
+        income: [],
+        expense: [],
       },
     }
   }
@@ -19,15 +19,41 @@ class AddItemPage extends Component {
   componentDidMount() {
     const validTypes = ['category', 'income', 'expense'];
     const hash = this.props.location.hash.substr(1);
+    const { params } = this.props.match.params
+    console.log(params)
 
     if(validTypes.includes(hash)) {
       this.setState({type: hash});
     }
+    this.getCategories()
   }
 
   handleTypeChange = (event) => {
     this.setState({
       type: event.target.value 
+    })
+  }
+
+  getCategories = () => {
+    fetch(`${config.API_ENDPOINT}/categories`, {
+      headers: {
+        'Authorization': `bearer ${TokenService.getAuthToken()}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(res =>{
+      return (!res.ok) ? res.json().then(e => Promise.reject(e))
+      : res.json()  
+    })
+    .then(data => {
+      let income = data.filter(category => category.type === 'income').map(filtered => filtered.name)
+      let expense = data.filter(category => category.type === 'expense').map(filtered => filtered.name)
+      this.setState({
+        categories: {
+        income, 
+        expense
+        }
+      })
     })
   }
 
