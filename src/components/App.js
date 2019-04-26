@@ -13,6 +13,7 @@ import NotFoundPage from '../routes/NotFoundPage'
 import Navbar from './Navbar';
 import './App.css';
 import UserContext from './UserContext';
+import TokenService from '../services/token-service';
 
 class App extends Component {
   static contextType = UserContext;
@@ -44,15 +45,19 @@ class App extends Component {
 
   componentDidMount() {
     this.checkIfLoggedIn();
+
+    if(TokenService.hasAuthToken()) {
+      TokenService.queueCallbackAfterExpiry(() => {
+        this.checkIfLoggedIn();
+      });
+    }
   }
 
   checkIfLoggedIn() {
     let isLoggedIn = false;
 
-    if(typeof this.context.user === 'object') {
-      if(Object.keys(this.context.user).length > 0) {
-        isLoggedIn = true;
-      }
+    if(TokenService.hasAuthToken()) {
+      isLoggedIn = true;
     }
 
     this.setState({isLoggedIn});
