@@ -8,7 +8,7 @@ class AddItemPage extends Component {
     super(props);
 
     this.state = {
-      name: null,
+      
       type: 'income',
       amount: null,
       description: '',
@@ -17,7 +17,9 @@ class AddItemPage extends Component {
         income: ['Paycheck', 'Direct Deposit', 'Royalties'],
         expense: ['Rent', 'Utilites', 'Groceries', 'Auto']
       },
-      recurring_rule: ''
+      recurring_rule: 'MONTHLY',
+      income_category: '',
+      expense_category: ''
     }
   }
 
@@ -44,10 +46,24 @@ class AddItemPage extends Component {
       const newCategory = prompt('Enter the name for the new category:');
        // POST to create category
     }
-    // this.setState({
-    //   categories: e.target.value
-    // })
-    console.log(this.state.categories)
+    let select = e.target.value;
+    console.log(select);
+    this.setState({
+      income_category: select
+    })
+    console.log('income', this.state.income_category);
+    // if (this.state.type === 'income') {
+    //   this.setState({
+    //    income_category: e.target.value
+    //   })
+    //   console.log(this.state.income_category)
+    // } else {
+    //   this.setState({
+    //     expense_category: e.target.value
+    //   })
+    //   console.log(this.state.expense_category)
+    // }
+    console.log(this.state.categories[this.state.type])
   }
 
   handleAmountChange = (e) => {
@@ -72,8 +88,9 @@ class AddItemPage extends Component {
   }
 
   handleFreqChange = (e) => {
+    let time = e.target.value;
     this.setState({
-      recurring_rule: e.target.value
+      recurring_rule: time
     })
     console.log(this.state.recurring_rule)
   }
@@ -98,9 +115,9 @@ class AddItemPage extends Component {
   renderForm = () => {
     return <>
       <label htmlFor="input-category">Category</label>
-      <select id="input-category" onChange={this.handleCategoryChange}>
+      <select id="input-category" onChange={this.handleCategoryChange} value={this.state.value}>
         {this.state.categories[this.state.type]
-          .map(category => <option key={category}>{category}</option>)}
+          .map(category => <option key={category} value={category}>{category}</option>)}
         <option value="-1">create new category...</option>
       </select>
 
@@ -115,8 +132,8 @@ class AddItemPage extends Component {
 
       <label htmlFor="input-freq">Frequency</label>
       <select id="input-freq" onChange={this.handleFreqChange}>
-        <option>Bi-weekly</option>
-        <option>Monthly</option>
+        <option value='BI-WEEKLY'>Bi-weekly</option>
+        <option value='MONTHLY'>Monthly</option>
       </select>
 
       <button type="submit">Create</button>
