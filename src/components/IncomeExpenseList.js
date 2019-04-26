@@ -46,24 +46,16 @@ export default class IncomeExpenseList extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if(this.props.type === 'income') {
-  //     // fetch call goes here (GET /api/income/etc...)
-  //     this.setState({data:['testincome1', 'testincome2', 'testincome3', 'testincome4']});
-  //   } else if(this.props.type === 'expenses') {
-  //     // fetch call goes here (GET /api/expenses/etc...)
-  //     this.setState({data:['testexpense1', 'testexpense2', 'testexpense3', 'testexpense4', 'test5']});
-  //   }
-  // }
-
   render() {
-    //<ul className={this.props.onlyShowRecent ? 'item-list-recent' : 'item-list'}>
+    let data = this.props.onlyShowRecent ? this.props.data.slice(0, 5) : this.props.data;
+
     return <>
       <article className={this.props.onlyShowRecent ? 'item-list-dash' : ''}>
         {this.props.onlyShowRecent ? <h4>{this.props.type}</h4> : ''}
 
         <ul className="item-list">
-          {this.props.data.map((item, i) => <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+          {data.map((item, i) => 
+            <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
         </ul>
 
         {this.props.onlyShowRecent ? <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
