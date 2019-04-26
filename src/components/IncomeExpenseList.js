@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './IncomeExpenseList.css';
 
 function ListItem(props) {
-  // in the future, props.item will probably be an object
   let classname = '';
   let prefix = '';
   let extras = '';
@@ -19,9 +18,9 @@ function ListItem(props) {
   // only show extras if list is NOT recent only
   if(! props.recentOnly) {
     extras = <>
-      <p>(date)</p>
-      <p>(category)</p>
-      <p>(recurring)</p>
+      <p>{props.item.start_date}</p>
+      <p>{props.item.category_id}</p>
+      <p>{props.item.recurring_rule || 'never'}</p>
     </>;
   }
 
