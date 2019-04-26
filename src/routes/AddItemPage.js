@@ -26,12 +26,15 @@ class AddItemPage extends Component {
       this.setState({type: hash});
     }
     this.getCategories()
+    document.getElementById('input-category').value = 0;
   }
 
   handleTypeChange = (event) => {
     this.setState({
       type: event.target.value 
-    })
+    });
+
+    document.getElementById('input-category').value = 0;
   }
 
   getCategories = () => {
@@ -75,6 +78,7 @@ class AddItemPage extends Component {
     return <>
       <label htmlFor="input-category">Category</label>
       <select id="input-category" onChange={this.handleCategoryChange}>
+        <option value="0" disabled>Please select a category</option>
         {this.state.categories[this.state.type]
           .map(category => <option key={category}>{category}</option>)}
         <option value="-1">create new category...</option>
