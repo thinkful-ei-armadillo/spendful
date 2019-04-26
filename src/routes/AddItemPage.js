@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import config from '../config'
+import TokenService from '../services/token-service'
 
 class AddItemPage extends Component {
   constructor(props) {
@@ -32,8 +34,14 @@ class AddItemPage extends Component {
   handleCategoryChange = (e) => {
     if(e.target.value == -1) {
       const newCategory = prompt('Enter the name for the new category:');
-
-      // POST to create category
+      fetch(`${config.API_ENDPOINT}/categories`, {
+        headers: {
+          'Authorization': `bearer ${TokenService.getAuthToken()}`,
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({name: newCategory, type: this.state.type})
+      })
     }
   }
 
