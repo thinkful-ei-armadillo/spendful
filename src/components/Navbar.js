@@ -43,7 +43,7 @@ export default class Navbar extends Component {
     const isLoggedIn = this.props.isLoggedIn;
     const navLinks = <>
       <Link className={this.getNavBtnClass('dashboard')} to="/dashboard">Dashboard</Link>
-      <Link className={this.getNavBtnClass('income')} to="/income">Income</Link>
+      <Link className={this.getNavBtnClass('incomes')} to="/incomes">Income</Link>
       <Link className={this.getNavBtnClass('expenses')} to="/expenses">Expenses</Link>
     </>;
 
