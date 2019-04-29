@@ -8,7 +8,7 @@ export default class LandingPage extends Component {
 
   static defaultProps = {
     history: {
-      push: () => {}, 
+      push: () => {},
     },
   }
 
@@ -26,7 +26,7 @@ export default class LandingPage extends Component {
 
       const { location, history } = this.props
       const destination = (location.state || {}).from || '/dashboard'
-      history.push(destination); 
+      history.push(destination);
     })
     .catch(err => {
       if(err.errors) {
@@ -44,7 +44,7 @@ export default class LandingPage extends Component {
     AuthApiService.postUser({
       email_address: email_address.value,
       full_name: full_name.value,
-      password: password.value 
+      password: password.value
     })
     .then(() => {
       this.handleRegistrationSuccess(email_address.value, password.value);
@@ -65,7 +65,7 @@ export default class LandingPage extends Component {
       <header>
         <div className="landing-header">
           <div className="landing-header-left">
-            <h2>Spendful is the newest way to prevent yourself from becoming broke.</h2>          
+            <h2>Spendful is the newest way to prevent yourself from becoming broke.</h2>
           </div>
 
           <div className="landing-header-right">
@@ -83,7 +83,6 @@ export default class LandingPage extends Component {
       </header>
 
       <main>
-        <p>Landing page</p>
       </main>
     </>;
   }
