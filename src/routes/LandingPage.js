@@ -83,7 +83,25 @@ export default class LandingPage extends Component {
       </header>
 
       <main>
-        <p>Landing page</p>
+        <h3>How does it work?</h3>
+
+        <section className="feature-list">
+          <figure>
+            <img src="https://via.placeholder.com/150" alt="placeholder"></img>
+            <figcaption>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
+            condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://via.placeholder.com/150" alt="placeholder"></img>
+            <figcaption>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
+            condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
+            </figcaption>
+          </figure>
+        </section>
       </main>
     </>;
   }
