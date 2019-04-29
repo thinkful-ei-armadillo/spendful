@@ -52,7 +52,7 @@ export default class LoginPage extends Component {
       <section className="login-form">
         {this.state.error.length > 0 ? <div className="alert-error">{this.state.error}</div> : ''}
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Username" name="email_address" autoComplete="off" required/>
+          <input type="text" placeholder="Email" name="email_address" autoComplete="off" required/>
           <input type="password" placeholder="Password" name="password" required/>
           <button type="submit">Log In</button> 
         </form>

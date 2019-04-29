@@ -17,8 +17,10 @@ function ListItem(props) {
 
   // only show extras if list is NOT recent only
   if(! props.recentOnly) {
+    let date = new Date(props.item.start_date).toDateString();
+
     extras = <>
-      <p>{props.item.start_date}</p>
+      <p>{date}</p>
       <p>{props.item.category_id}</p>
       <p>{props.item.recurring_rule || 'never'}</p>
     </>;
@@ -35,7 +37,6 @@ function ListItem(props) {
 }
 
 
-// TODO: onlyShowRecents = true should limit # of items
 export default class IncomeExpenseList extends Component {
   constructor(props) {
     super(props);
@@ -46,6 +47,7 @@ export default class IncomeExpenseList extends Component {
   }
 
   render() {
+    // limit the number of items if onlyShowRecent = true
     let data = this.props.onlyShowRecent ? this.props.data.slice(0, 5) : this.props.data;
 
     return <>
