@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './IncomeExpenseList.css';
 
 function ListItem(props) {
-  // in the future, props.item will probably be an object
   let classname = '';
   let prefix = '';
   let extras = '';
@@ -18,10 +17,12 @@ function ListItem(props) {
 
   // only show extras if list is NOT recent only
   if(! props.recentOnly) {
+    let date = new Date(props.item.start_date).toDateString();
+
     extras = <>
-      <p>(date)</p>
-      <p>(category)</p>
-      <p>(recurring)</p>
+      <p>{date}</p>
+      <p>{props.item.category_id}</p>
+      <p>{props.item.recurring_rule || 'never'}</p>
     </>;
   }
 
@@ -36,7 +37,6 @@ function ListItem(props) {
 }
 
 
-// TODO: onlyShowRecents = true should limit # of items
 export default class IncomeExpenseList extends Component {
   constructor(props) {
     super(props);
@@ -46,24 +46,17 @@ export default class IncomeExpenseList extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if(this.props.type === 'income') {
-  //     // fetch call goes here (GET /api/income/etc...)
-  //     this.setState({data:['testincome1', 'testincome2', 'testincome3', 'testincome4']});
-  //   } else if(this.props.type === 'expenses') {
-  //     // fetch call goes here (GET /api/expenses/etc...)
-  //     this.setState({data:['testexpense1', 'testexpense2', 'testexpense3', 'testexpense4', 'test5']});
-  //   }
-  // }
-
   render() {
-    //<ul className={this.props.onlyShowRecent ? 'item-list-recent' : 'item-list'}>
+    // limit the number of items if onlyShowRecent = true
+    let data = this.props.onlyShowRecent ? this.props.data.slice(0, 5) : this.props.data;
+
     return <>
       <article className={this.props.onlyShowRecent ? 'item-list-dash' : ''}>
         {this.props.onlyShowRecent ? <h4>{this.props.type}</h4> : ''}
 
         <ul className="item-list">
-          {this.props.data.map((item, i) => <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+          {data.map((item, i) => 
+            <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
         </ul>
 
         {this.props.onlyShowRecent ? <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}

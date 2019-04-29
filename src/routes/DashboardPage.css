@@ -29,6 +29,8 @@ canvas {
 
 
 
-@media only screen and (min-width: 944px) {
-  
+@media only screen and (max-width: 425px) {
+  .page-chart {
+    padding: 0.5em;
+  }
 }

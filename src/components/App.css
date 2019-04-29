@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 body {
   margin: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 main {
@@ -10,6 +13,10 @@ main {
 
 header {
   background-color: #ececec;
+}
+
+h3 {
+  text-align: center;
 }
 
 h4 {
@@ -24,6 +31,13 @@ article {
   flex-basis: 17em;
   background: #ececec;
   padding: 1.25em;
+}
+
+label {
+  text-align: left;
+  font-size: 0.8em;
+  padding: 0 0 0.25em;
+  font-weight: bold;
 }
 
 .flex-main {
@@ -81,6 +95,18 @@ article {
 
 .text-green { color: green }
 .text-red { color: red }
+
+.alert-error {
+  text-align: center;
+  padding: 1.5em 0;
+  color: red;
+}
+.alert-error-lg {
+  padding: 1em;
+  text-align: center;
+  background-color: #ff5f5f;
+  color: #fff;
+}
 
 
 @media only screen and (max-width: 425px) {
