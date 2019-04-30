@@ -4,9 +4,14 @@ import IncomeExpenseList from '../IncomeExpenseList';
 import './DashboardPage.css';
 import config from '../../config'
 import TokenService from '../../services/token-service'
+import DataContext from '../../contexts/DataContext';
+import { getAllCategories } from '../../services/categories-service';
+import { getMonthlyReport } from '../../services/reports-service';
 
 
 export default class DashboardPage extends Component {
+  static contextType = DataContext;
+
   state = {
     categoryColors: {
       0: '#f04511',
@@ -43,29 +48,14 @@ export default class DashboardPage extends Component {
   }
 
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/categories`, {
-      headers: {
-        'Authorization': `bearer ${TokenService.getAuthToken()}`,
-        'Content-Type': 'application/json',
-      }
-    })
-    .then(res => res.json())
-    .then(json => {
-      // get report info first
-      this.handleReports(2019, 4)
-        .then(report => {
-          this.setState({
-            incomes: report.incomes,
-            expenses: report.expenses
-          });
-
-          // only update chart after we have info
-          this.updateChart(json);          
-        })
-    })
+    getAllCategories()
+      .then(categories => {
+        this.setState({categories});
+        this.handleReports(2019, 4)
+      })
   }
 
-  updateChart = (categories) => {
+  updateChart = () => {
     let chart = this.state.chart;
     let data = [];
     let labels = [];
@@ -73,9 +63,10 @@ export default class DashboardPage extends Component {
 
     console.log(this.state.expenses);
 
+    // this is why the chart doesnt render the data properly
     this.state.expenses.forEach(item => {
       data.push(parseInt(item.amount));
-      labels.push(categories.find(c => c.id === item.category_id).name);
+      labels.push(this.state.categories.find(c => c.id === item.category_id).name);
       backgroundColor.push(this.state.categoryColors[item.category_id] || this.state.categoryColors[0]);
     });
 
@@ -96,16 +87,11 @@ export default class DashboardPage extends Component {
       month = new Date().getMonth() + 1;
     }
 
-    return fetch(`${config.API_ENDPOINT}/reports/${year}/${month}`, {
-      headers: {
-        "Authorization": `bearer ${TokenService.getAuthToken()}`,
-        "content-type": "application/json"
-      }
-    })
-    .then(res =>{
-      return (!res.ok) ? res.json().then(e => Promise.reject(e))
-      : res.json()  
-    })
+    getMonthlyReport(year, month)
+      .then(report => {
+        this.setState({incomes: report.incomes, expenses: report.expenses});
+        this.updateChart();
+      })
   }
 
   render() {
