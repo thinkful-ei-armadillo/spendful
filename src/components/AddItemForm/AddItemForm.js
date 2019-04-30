@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as IncomesService from '../../services/incomes-service'
 import * as ExpensesService from '../../services/expenses-service'
+import CategorySelect from '../CategorySelect/CategorySelect';
 
 
 export default class AddItemForm extends Component{
@@ -92,13 +93,15 @@ export default class AddItemForm extends Component{
       <h2>Add {this.props.itemType}</h2>
       <label htmlFor="input-category">Category</label>
 
-      <select id="input-category">
+      {/* <select id="input-category">
         <option value="0" disabled>Please select a category</option>
 
         {this.state.categories[this.props.itemType]
           .map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
         <option value="-1">create new category...</option>
-      </select>
+      </select> */}
+
+      <CategorySelect type={this.props.itemType} />
 
       <label htmlFor="start_date">Date</label>
       <input type="date" id="start_date"/>
