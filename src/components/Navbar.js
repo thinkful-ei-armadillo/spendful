@@ -9,13 +9,9 @@ export default class Navbar extends Component {
   
   constructor(props) {
     super(props);
-
     this.state = {
       menuVisible: this.props.menuVisible,
     }
-    
-    this.menuToggle = this.menuToggle.bind(this);
-    this.menuOff = this.menuOff.bind(this);
   }
 
   // this will reset mobile navbar when route is changed
@@ -23,8 +19,13 @@ export default class Navbar extends Component {
     this.setState({menuVisible: this.props.menuVisible});
   }
 
-  menuToggle() { this.setState({menuVisible: !this.state.menuVisible}) }
-  menuOff() { this.setState({menuVisible: false}) }
+  menuToggle = () => { 
+    this.setState({menuVisible: !this.state.menuVisible}) 
+  }
+
+  menuOff = () => { 
+    this.setState({menuVisible: false}) 
+  }
 
   getNavBtnClass(href) {
     let location = this.props.location;
@@ -38,6 +39,10 @@ export default class Navbar extends Component {
     }
 
     return 'nav-link';
+  }
+
+  handleLogout = () => {
+    this.context.processLogout();
   }
 
   render() {
@@ -61,7 +66,7 @@ export default class Navbar extends Component {
 
           <div className="nav-right nav-hide-mobile">
             {isLoggedIn
-              ? <Link className="nav-link" to="/">Logout</Link>
+              ? <Link className="nav-link" to="/" onClick={this.handleLogout}>Logout</Link>
               : <Link className="nav-link" to="/login">Login</Link>}
           </div>
           <div className="nav-right nav-show-mobile">
@@ -73,7 +78,7 @@ export default class Navbar extends Component {
 
         <div className={this.state.menuVisible ? 'nav-mobile-menu expanded' : 'nav-mobile-menu'}>
           {isLoggedIn
-            ? <>{navLinks} <Link className="nav-link" to="/logout">Logout</Link></>
+            ? <>{navLinks} <Link className="nav-link" to="/" onClick={this.handleLogout}>Logout</Link></>
             : <Link className="nav-link" to="/login">Login</Link>}
         </div>
       </nav>
