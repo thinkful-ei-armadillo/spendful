@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserContext from '../../contexts/UserContext';
-import RegistrationForm from '../RegistrationForm';
+import RegistrationForm from '../ResgistrationForm/RegistrationForm';
 import './LandingPage.css';
 
 export default class LandingPage extends Component {
