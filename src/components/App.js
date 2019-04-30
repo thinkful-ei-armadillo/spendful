@@ -9,7 +9,7 @@ import AddItemPage from '../routes/AddItemPage';
 import PublicOnlyRoute from '../routes/PublicOnlyRoute'
 import PrivateRoute from '../routes/PrivateRoute'
 import NotFoundPage from '../routes/NotFoundPage'
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import './App.css';
 
 class App extends Component {
