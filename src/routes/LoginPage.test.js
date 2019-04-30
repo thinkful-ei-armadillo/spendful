@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-
+// import { shallow } from enzyme;
+// q
 import LoginPage from './LoginPage';
+import { exportAllDeclaration } from '@babel/types';
 
 
 describe('Login Page component', () => {
@@ -21,6 +23,7 @@ describe('Login Page component', () => {
         ReactDOM.unmountComponentAtNode(div);
       });
 
+    // q
     // context ('Given invalid credentials')  
 
     it('display error if no username is provided', () => {
