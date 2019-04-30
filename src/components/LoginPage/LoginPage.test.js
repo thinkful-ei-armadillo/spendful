@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 // import { shallow } from enzyme;
 // q
 import LoginPage from './LoginPage';
-import { exportAllDeclaration } from '@babel/types';
 
 
 describe('Login Page component', () => {
