@@ -1,12 +1,12 @@
 import React, { Component } from 'react'; 
 import {Doughnut} from 'react-chartjs-2'; 
-import IncomeExpenseList from '../components/IncomeExpenseList';
+import IncomeExpenseList from '../IncomeExpenseList';
 import './DashboardPage.css';
-import config from '../config'
-import TokenService from '../services/token-service'
+import config from '../../config'
+import TokenService from '../../services/token-service'
 
 
-export default class Dashboard extends Component {
+export default class DashboardPage extends Component {
   state = {
     categoryColors: {
       0: '#f04511',

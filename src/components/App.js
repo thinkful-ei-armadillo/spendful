@@ -4,7 +4,7 @@ import LandingPage from '../routes/LandingPage';
 import LoginRoute from '../routes/LoginRoute';
 import IncomePage from '../routes/IncomePage';
 import ExpensesPage from '../routes/ExpensesPage';
-import DashboardPage from '../routes/DashboardPage';
+import DashboardRoute from '../routes/DashboardRoute';
 import AddItemPage from '../routes/AddItemPage';
 import PublicOnlyRoute from '../routes/PublicOnlyRoute'
 import PrivateRoute from '../routes/PrivateRoute'
@@ -24,7 +24,7 @@ class App extends Component {
           <PublicOnlyRoute path={'/login'} component={LoginRoute} />
           <PrivateRoute path={'/incomes'} component={IncomePage} />
           <PrivateRoute path={'/expenses'} component={ExpensesPage} />
-          <PrivateRoute path={'/dashboard'} component={DashboardPage} />
+          <PrivateRoute path={'/dashboard'} component={DashboardRoute} />
           <PrivateRoute path={'/add'} component={AddItemPage} />
           <Route component={NotFoundPage} />
         </Switch>
