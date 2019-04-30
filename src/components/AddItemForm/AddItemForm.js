@@ -56,10 +56,10 @@ export default class AddItemForm extends Component{
   onSubmit = (ev) => {
     ev.preventDefault();
 
-    const { description, amount, start_date, recurring_rule } = ev.target
+    const { category, description, amount, start_date, recurring_rule } = ev.target
 
     const newItem = {
-      category_id: 1,
+      category_id: category.value,
       description: description.value,
       amount: amount.value,
       start_date: start_date.value,

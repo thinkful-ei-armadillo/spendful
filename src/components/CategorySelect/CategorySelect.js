@@ -73,7 +73,7 @@ class CategorySelect extends React.Component {
     // }
 
     return (
-      <select>
+      <select id="category" name="category">
         <option value=''></option>
         {this.createOptions()}
         {/* <option value='create'>Create new category...</option> */}
