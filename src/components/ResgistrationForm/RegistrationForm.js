@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AuthApiService from '../services/auth-api-service';
-import UserContext from '../contexts/UserContext';
+import AuthApiService from '../../services/auth-api-service';
+import UserContext from '../../contexts/UserContext';
 
 export default class RegistrationForm extends Component {
   static contextType = UserContext;

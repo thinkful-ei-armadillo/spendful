@@ -70,7 +70,7 @@ const deleteIncome = function (id) {
   });
 };
 
-export default {
+export {
   getAllIncomes,
   getIncome,
   createIncome,

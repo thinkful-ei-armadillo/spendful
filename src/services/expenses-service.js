@@ -70,7 +70,7 @@ const deleteExpense = function (id) {
   });
 };
 
-export default {
+export {
   getAllExpenses,
   getExpense,
   createExpense,
