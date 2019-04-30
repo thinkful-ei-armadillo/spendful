@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , withRouter} from 'react-router-dom';
 import './Navbar.css';
 import UserContext from '../contexts/UserContext';
 import TokenService from '../services/token-service';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   static contextType = UserContext;
   
   constructor(props) {
     super(props);
     this.state = {
-      menuVisible: this.props.menuVisible,
+      menuVisible: false,
     }
   }
 
   // this will reset mobile navbar when route is changed
   componentWillReceiveProps() {
     this.setState({
-      menuVisible: this.props.menuVisible
+      menuVisible: false
     })
   }
 
@@ -27,12 +27,9 @@ export default class Navbar extends Component {
     }) 
   }
 
-  menuOff = () => { 
-    this.setState({menuVisible: false}) 
-  }
-
+ 
   getNavBtnClass(href) {
-    let location = this.props.location;
+    let location = this.props.history.location.pathname;
 
     if(TokenService.hasAuthToken()) {
       if(location === '/') location = 'dashboard';
@@ -52,13 +49,13 @@ export default class Navbar extends Component {
   render() {
     const isLoggedIn = TokenService.hasAuthToken();
     const navLinks = <>
-      <Link className={this.getNavBtnClass('dashboard')} to="/dashboard">Dashboard</Link>
-      <Link className={this.getNavBtnClass('incomes')} to="/incomes">Income</Link>
-      <Link className={this.getNavBtnClass('expenses')} to="/expenses">Expenses</Link>
+      <Link className={this.getNavBtnClass('/dashboard')} to="/dashboard">Dashboard</Link>
+      <Link className={this.getNavBtnClass('/incomes')} to="/incomes">Income</Link>
+      <Link className={this.getNavBtnClass('/expenses')} to="/expenses">Expenses</Link>
     </>;
 
     return (
-      <nav onClick={this.onRouteChange}>
+      <nav>
         <div className="nav-main">
           <div className="nav-left">
             <Link to="/">
@@ -89,3 +86,5 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export default withRouter(Navbar)

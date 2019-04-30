@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
 import LoginPage from '../routes/LoginPage'; 
 import IncomePage from '../routes/IncomePage';
@@ -13,22 +13,10 @@ import Navbar from './Navbar';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuVisible: false,
-      location: '/',
-    }
-
-    this.props.history.listen((location, action) => {
-      location = location.pathname.substr(1);
-      this.setState({menuVisible: false, location});
-    });
-  }
 
   render() {
     return <>
-      <Navbar menuVisible={this.state.menuVisible} location={this.state.location} />
+      <Navbar />
 
       <div id="app-container">
         <Switch>
