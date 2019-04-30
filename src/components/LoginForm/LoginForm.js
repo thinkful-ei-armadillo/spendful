@@ -19,7 +19,6 @@ class LoginForm extends React.Component {
       this.props.onSuccess(res.token);
     })
     .catch(err => {
-
       this.props.onFailure(err.errors)
     })
   }
