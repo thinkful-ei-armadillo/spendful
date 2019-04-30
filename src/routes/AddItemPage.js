@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import config from '../config'
 import TokenService from '../services/token-service'
-import AppContext from '../components/AppContext';
 
 
 
@@ -38,8 +37,6 @@ class AddItemPage extends Component {
       expense_category: null
     }
   }
-
- static contextType = AppContext;
 
   componentDidMount() {
     const validTypes = ['category', 'income', 'expense'];

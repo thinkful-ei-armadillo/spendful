@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import UserContext from './UserContext';
+import UserContext from '../contexts/UserContext';
 
 export default class Navbar extends Component {
   static contextType = UserContext;
