@@ -16,11 +16,15 @@ export default class Navbar extends Component {
 
   // this will reset mobile navbar when route is changed
   componentWillReceiveProps() {
-    this.setState({menuVisible: this.props.menuVisible});
+    this.setState({
+      menuVisible: this.props.menuVisible
+    })
   }
 
   menuToggle = () => { 
-    this.setState({menuVisible: !this.state.menuVisible}) 
+    this.setState({
+      menuVisible: !this.state.menuVisible
+    }) 
   }
 
   menuOff = () => { 
