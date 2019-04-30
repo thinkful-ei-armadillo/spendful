@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
-import UserContext from '../components/UserContext';
+import UserContext from '../contexts/UserContext';
 import AuthApiService from '../services/auth-api-service';
 
 export default class LoginPage extends Component {

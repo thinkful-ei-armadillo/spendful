@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { UserContextProvider } from './components/UserContext'
-import { AppProvider } from './components/AppContext';
+import { UserContextProvider } from './contexts/UserContext'
+import { DataProvider } from './contexts/DataContext';
 import App from './components/App';
 
 ReactDOM.render(
   <BrowserRouter>
     <UserContextProvider>
-      <AppProvider>
+      <DataProvider>
         <App />
-      </AppProvider>
-      </UserContextProvider>
+      </DataProvider>
+    </UserContextProvider>
   </BrowserRouter>
   , document.getElementById('root')
 );

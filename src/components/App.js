@@ -12,7 +12,7 @@ import PrivateRoute from '../routes/PrivateRoute'
 import NotFoundPage from '../routes/NotFoundPage'
 import Navbar from './Navbar';
 import './App.css';
-import UserContext from './UserContext';
+import UserContext from '../contexts/UserContext';
 import TokenService from '../services/token-service';
 
 class App extends Component {
