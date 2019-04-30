@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import IncomesService from '../../services/incomes-service'
-import ExpensesService from '../../services/expenses-service'
+import * as IncomesService from '../../services/incomes-service'
+import * as ExpensesService from '../../services/expenses-service'
 
 
 export default class AddItemForm extends Component{
@@ -53,7 +53,7 @@ export default class AddItemForm extends Component{
   // }
 
   onSubmit = (ev) => {
-    ev.preventDefault(); 
+    ev.preventDefault();
 
     const { description, amount, start_date, recurring_rule } = ev.target
 
@@ -79,7 +79,7 @@ export default class AddItemForm extends Component{
         ExpensesService.createExpense(newItem)
         .then(() => {
           this.props.onSuccess('/expenses')
-        }) 
+        })
         .catch(err => {
           this.props.onFailure(err.errors)
         })
@@ -117,6 +117,6 @@ export default class AddItemForm extends Component{
 
       <button type="submit">Create</button>
     </form>
-    ) 
+    )
   }
 }
