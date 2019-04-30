@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
-import UserContext from '../contexts/UserContext';
+import { Switch, Route } from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
 import LoginPage from '../routes/LoginPage'; 
 import IncomePage from '../routes/IncomePage';
 import ExpensesPage from '../routes/ExpensesPage';
 import DashboardPage from '../routes/DashboardPage';
 import AddItemPage from '../routes/AddItemPage';
-//import PrivateRoute from '../routes/PrivateRoute';
 import PublicOnlyRoute from '../routes/PublicOnlyRoute'
 import PrivateRoute from '../routes/PrivateRoute'
 import NotFoundPage from '../routes/NotFoundPage'
@@ -15,11 +13,8 @@ import Navbar from './Navbar';
 import './App.css';
 
 class App extends Component {
-  static contextType = UserContext;
-
   constructor(props) {
     super(props);
-
     this.state = {
       menuVisible: false,
       location: '/',
@@ -50,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;
