@@ -70,7 +70,7 @@ const deleteCategory = function (id) {
   });
 };
 
-export default {
+export {
   getAllCategories,
   getCategory,
   createCategory,
