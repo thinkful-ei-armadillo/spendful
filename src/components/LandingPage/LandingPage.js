@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
-import UserContext from '../contexts/UserContext';
-import RegistrationForm from '../components/RegistrationForm';
+import UserContext from '../../contexts/UserContext';
+import RegistrationForm from '../RegistrationForm';
 import './LandingPage.css';
 
 export default class LandingPage extends Component {
   static contextType = UserContext;
-
-  static defaultProps = {
-    history: {
-      push: () => {}, 
-    },
-  }
-
-  handleRegistrationSuccess = () => {
-    const { location, history } = this.props
-    const destination = (location.state || {}).from || '/dashboard'
-    history.push(destination);
-  }
 
 
   render() {
@@ -30,7 +18,7 @@ export default class LandingPage extends Component {
           </div>
 
           <div className="landing-header-right">
-            <RegistrationForm handleRegistrationSuccess={this.handleRegistrationSuccess} />
+            <RegistrationForm handleRegistrationSuccess={this.props.handleRegistrationSuccess} />
           </div>
         </div>
       </header>

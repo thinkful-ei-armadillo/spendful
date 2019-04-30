@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
-import LandingPage from '../../routes/LandingPage';
+import LandingPage from '../LandingPage/LandingPage';
 import LoginRoute from '../../routes/LoginRoute';
 import IncomePage from '../../routes/IncomePage';
 import ExpensesPage from '../../routes/ExpensesPage';
