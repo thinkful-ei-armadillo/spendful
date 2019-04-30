@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "chart.js": "^2.8.0",
+    "jest": "^24.7.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
@@ -20,6 +21,7 @@
     "deploy": "now ./build",
     "postdeploy": "now alias -A ./build/now.json"
   },
+  "jest": {},
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -34,5 +36,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.3.5",
+    "jest-enzyme": "^7.0.2"
   }
 }
