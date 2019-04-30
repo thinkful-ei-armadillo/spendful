@@ -15,14 +15,10 @@ class LoginForm extends React.Component {
     .then(res => {
       email_address.value = ''
       password.value = ''
-      // this.context.processLogin(res.token)
-      // this.handleLoginSuccess()
+
       this.props.onSuccess(res.token);
     })
     .catch(err => {
-      // if(err.errors) {
-      //   this.setState({error: err.errors[0]});
-      // }
 
       this.props.onFailure(err.errors)
     })
