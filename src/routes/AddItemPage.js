@@ -247,6 +247,7 @@ class AddItemPage extends Component {
       start_date: this.state.start_date,
       recurring_rule: this.state.recurring_rule
     };
+    
     console.log(addCategory);
     const type = this.state.type;
 
