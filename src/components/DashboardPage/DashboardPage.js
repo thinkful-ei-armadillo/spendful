@@ -56,7 +56,7 @@ export default class DashboardPage extends Component {
         <Chart data={this.state} />
 
         <section className="page-summaries">
-          <IncomeExpenseList type="income" data={this.state.incomes} onlyShowRecent />
+          <IncomeExpenseList type="incomes" data={this.state.incomes} onlyShowRecent />
           <IncomeExpenseList type="expenses" data={this.state.expenses} onlyShowRecent />
         </section>
       </main>

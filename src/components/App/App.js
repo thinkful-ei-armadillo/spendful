@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginRoute from '../../routes/LoginRoute';
-import IncomePage from '../../routes/IncomePage';
-import ExpensesPage from '../../routes/ExpensesPage';
+import IncomesRoute from '../../routes/IncomesRoute';
+import ExpensesRoute from '../../routes/ExpensesRoute';
 import DashboardRoute from '../../routes/DashboardRoute';
 import AddItemPage from '../../routes/AddItemPage';
 import PublicOnlyRoute from '../../routes/PublicOnlyRoute'
@@ -22,8 +22,8 @@ class App extends Component {
         <Switch>
           <PublicOnlyRoute exact path={'/'} component={LandingPage} />
           <PublicOnlyRoute path={'/login'} component={LoginRoute} />
-          <PrivateRoute path={'/incomes'} component={IncomePage} />
-          <PrivateRoute path={'/expenses'} component={ExpensesPage} />
+          <PrivateRoute path={'/incomes'} component={IncomesRoute} />
+          <PrivateRoute path={'/expenses'} component={ExpensesRoute} />
           <PrivateRoute path={'/dashboard'} component={DashboardRoute} />
           <PrivateRoute path={'/add'} component={AddItemPage} />
           <Route component={NotFoundPage} />
