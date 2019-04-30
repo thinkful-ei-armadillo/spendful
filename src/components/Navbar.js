@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import UserContext from '../contexts/UserContext';
+import TokenService from '../services/token-service';
 
 export default class Navbar extends Component {
   static contextType = UserContext;
@@ -28,7 +29,7 @@ export default class Navbar extends Component {
   getNavBtnClass(href) {
     let location = this.props.location;
 
-    if(this.props.isLoggedIn) {
+    if(TokenService.hasAuthToken()) {
       if(location === '/') location = 'dashboard';
     }
 
@@ -40,7 +41,7 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const isLoggedIn = this.props.isLoggedIn;
+    const isLoggedIn = TokenService.hasAuthToken();
     const navLinks = <>
       <Link className={this.getNavBtnClass('dashboard')} to="/dashboard">Dashboard</Link>
       <Link className={this.getNavBtnClass('incomes')} to="/incomes">Income</Link>

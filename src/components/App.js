@@ -39,18 +39,18 @@ class App extends Component {
       }
 
       this.setState({menuVisible: false, location});
-      this.checkIfLoggedIn();
+      // this.checkIfLoggedIn();
     });
   }
 
   componentDidMount() {
     this.checkIfLoggedIn();
 
-    if(TokenService.hasAuthToken()) {
-      TokenService.queueCallbackAfterExpiry(() => {
-        this.checkIfLoggedIn();
-      });
-    }
+    // if(TokenService.hasAuthToken()) {
+    //   TokenService.queueCallbackAfterExpiry(() => {
+    //     this.checkIfLoggedIn();
+    //   });
+    // }
   }
 
   checkIfLoggedIn() {
