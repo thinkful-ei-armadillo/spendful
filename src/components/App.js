@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import LandingPage from '../routes/LandingPage';
-import LoginPage from '../routes/LoginPage'; 
+import LoginRoute from '../routes/LoginRoute';
 import IncomePage from '../routes/IncomePage';
 import ExpensesPage from '../routes/ExpensesPage';
 import DashboardPage from '../routes/DashboardPage';
@@ -65,13 +65,13 @@ class App extends Component {
 
   render() {
     return <>
-      <Navbar menuVisible={this.state.menuVisible} 
+      <Navbar menuVisible={this.state.menuVisible}
         isLoggedIn={this.state.isLoggedIn} location={this.state.location} />
 
       <div id="app-container">
         <Switch>
           <PublicOnlyRoute exact path={'/'} component={LandingPage} />
-          <PublicOnlyRoute path={'/login'} component={LoginPage} />
+          <PublicOnlyRoute path={'/login'} component={LoginRoute} />
           <PrivateRoute path={'/incomes'} component={IncomePage} />
           <PrivateRoute path={'/expenses'} component={ExpensesPage} />
           <PrivateRoute path={'/dashboard'} component={DashboardPage} />
