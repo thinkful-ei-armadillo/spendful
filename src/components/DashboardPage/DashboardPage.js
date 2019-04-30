@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import IncomeExpenseList from '../IncomeExpenseList';
+import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 import Chart from '../Chart/Chart';
 import DataContext from '../../contexts/DataContext';
 import { getAllCategories } from '../../services/categories-service';

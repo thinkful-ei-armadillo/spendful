@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
-import LandingPage from '../routes/LandingPage';
-import LoginRoute from '../routes/LoginRoute';
-import IncomePage from '../routes/IncomePage';
-import ExpensesPage from '../routes/ExpensesPage';
-import DashboardRoute from '../routes/DashboardRoute';
-import AddItemPage from '../routes/AddItemPage';
-import PublicOnlyRoute from '../routes/PublicOnlyRoute'
-import PrivateRoute from '../routes/PrivateRoute'
-import NotFoundPage from '../routes/NotFoundPage'
-import Navbar from '../components/Navbar/Navbar';
+import LandingPage from '../../routes/LandingPage';
+import LoginRoute from '../../routes/LoginRoute';
+import IncomePage from '../../routes/IncomePage';
+import ExpensesPage from '../../routes/ExpensesPage';
+import DashboardRoute from '../../routes/DashboardRoute';
+import AddItemPage from '../../routes/AddItemPage';
+import PublicOnlyRoute from '../../routes/PublicOnlyRoute'
+import PrivateRoute from '../../routes/PrivateRoute'
+import NotFoundPage from '../../routes/NotFoundPage'
+import Navbar from '../Navbar/Navbar';
 import './App.css';
 
 class App extends Component {

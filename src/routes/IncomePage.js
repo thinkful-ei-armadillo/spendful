@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import IncomeExpenseList from '../components/IncomeExpenseList';
+import IncomeExpenseList from '../components/IncomeExpensesList/IncomeExpenseList';
 import config from '../config'
 import TokenService from '../services/token-service'
 export default class IncomePage extends Component {
