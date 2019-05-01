@@ -17,6 +17,6 @@ const getMonthlyReport = function (year, month) {
 };
 
 
-export default {
+export {
   getMonthlyReport,
 }

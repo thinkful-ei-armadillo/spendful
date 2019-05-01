@@ -52,7 +52,7 @@ export class UserContextProvider extends Component {
   }
 
   clearError = () => {
-    this.setState({ error: null })
+    this.setState({ error: [] })
   }
 
   setUser = user => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import config from '../config'
-import TokenService from '../services/token-service'
+// import config from '../config'
+// import TokenService from '../services/token-service'
 
 const DataContext = React.createContext({
   incomes: [],

@@ -29,7 +29,7 @@ function ListItem(props) {
   return (
     <li className={classname}>
       <p>{prefix} {props.item.description}</p>
-      <p className={props.type === 'income' ? 'text-green' : 'text-red'}>${props.item.amount}</p>
+      <p className={props.type === 'incomes' ? 'text-green' : 'text-red'}>${props.item.amount}</p>
       <p className="w-100 show-mobile"></p>
       {extras}
     </li>

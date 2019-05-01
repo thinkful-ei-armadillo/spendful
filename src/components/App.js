@@ -5,8 +5,7 @@ import LoginRoute from '../routes/LoginRoute';
 import IncomePage from '../routes/IncomePage';
 import ExpensesPage from '../routes/ExpensesPage';
 import DashboardPage from '../routes/DashboardPage';
-import AddItemPage from '../routes/AddItemPage';
-//import PrivateRoute from '../routes/PrivateRoute';
+import AddItemRoute from '../routes/AddItemRoute';
 import PublicOnlyRoute from '../routes/PublicOnlyRoute'
 import PrivateRoute from '../routes/PrivateRoute'
 import NotFoundPage from '../routes/NotFoundPage'
@@ -75,7 +74,7 @@ class App extends Component {
           <PrivateRoute path={'/incomes'} component={IncomePage} />
           <PrivateRoute path={'/expenses'} component={ExpensesPage} />
           <PrivateRoute path={'/dashboard'} component={DashboardPage} />
-          <PrivateRoute path={'/add'} component={AddItemPage} />
+          <PrivateRoute path={'/add'} component={AddItemRoute} />
           <Route path={'/logout'} render={() => <Redirect to="/" />} />
           <Route component={NotFoundPage} />
         </Switch>
