@@ -20,7 +20,7 @@ export default class DashboardPage extends Component {
     getAllCategories()
       .then(categories => {
         this.setState({categories});
-        this.handleReports(2019, 4)
+        this.handleReports(2019, 5)
       })
   }
 

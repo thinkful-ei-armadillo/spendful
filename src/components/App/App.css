@@ -42,7 +42,7 @@ label {
 
 .flex-main {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
 }
 
 .flex-form {
@@ -119,4 +119,10 @@ label {
 
 @media only screen and (min-width: 426px) {
   .show-mobile { display: none; }
+}
+
+.flex-add-item {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between
 }

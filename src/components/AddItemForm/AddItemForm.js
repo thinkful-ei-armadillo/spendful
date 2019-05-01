@@ -29,13 +29,14 @@ export default class AddItemForm extends Component{
 
     const { category, description, amount, start_date, recurring_rule } = ev.target
 
-    const newItem = {
-      category_id: category.value,
-      description: description.value,
-      amount: amount.value,
-      start_date: start_date.value,
-      recurring_rule: recurring_rule.value
-    };
+    try {
+      const newItem = {
+        category_id: category.value,
+        description: description.value,
+        amount: amount.value,
+        start_date: start_date.value,
+        recurring_rule: recurring_rule.value
+      };
 
     if (this.props.itemType === "income") {
       IncomesService.createIncome(newItem)
@@ -54,6 +55,9 @@ export default class AddItemForm extends Component{
           this.props.onFailure(err.errors)
         })
       }
+    } catch{
+      this.props.onFailure("Category does not exist")
+    }
   }
 
   render(){
