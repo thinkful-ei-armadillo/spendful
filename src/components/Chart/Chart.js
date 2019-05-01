@@ -37,7 +37,7 @@ export default class Chart extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevProps.data.incomes.length !== this.props.data.incomes.length) {
+    if(prevProps.data.expenses.length !== this.props.data.expenses.length) {
       this.updateChart();
     }
   }
