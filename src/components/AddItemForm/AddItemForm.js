@@ -75,8 +75,11 @@ export default class AddItemForm extends Component{
 
       <label htmlFor="recurring_rule">Frequency</label>
       <select id="recurring_rule">
+        <option value='ONCE'>Once</option>
+        <option value='WEEKLY'>Weekly</option>
         <option value='BI-WEEKLY'>Bi-weekly</option>
         <option value='MONTHLY'>Monthly</option>
+
       </select>
 
       <button id="flex-form-button" type="submit">Create</button>
