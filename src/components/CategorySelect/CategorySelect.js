@@ -8,20 +8,26 @@ class CategorySelect extends React.Component {
 
     this.state = {
       categories: [],
-      // showCreateForm: false,
+      showCreateForm: false,
+      inputValue: '',
+      setCategory:''
     };
 
     this.createOptions = this.createOptions.bind(this);
-    // this.handleCategoryChange = this.handleCategoryChange.bind(this);
-    // this.handleCreateFormSubmit = this.handleCreateFormSubmit.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleCreateFormSubmit = this.handleCreateFormSubmit.bind(this);
   }
 
   componentDidMount() {
+    this.setCategories()
+  }
+
+  setCategories = () => {
     CategoriesService
-      .getAllCategories()
-      .then(categories => {
-        this.setState({ categories });
-      })
+    .getAllCategories()
+    .then(categories => {
+      this.setState({ categories });
+    })
   }
 
   createOptions() {
@@ -37,47 +43,78 @@ class CategorySelect extends React.Component {
     return options;
   }
 
-  // handleCategoryChange(ev) {
+  handleCategoryChange(ev) {
+    this.setState({
+      setCategory: ev.target.value
+    })
+    if (ev.target.value === 'create') {
+      this.setState({showCreateForm: true});
+    }
+  }
 
-  //   if (ev.target.value === 'create') {
-  //     this.setState({showCreateForm: true});
-  //   }
-  // }
+  handleCreateFormSubmit() {
 
-  // handleCreateFormSubmit(ev) {
+    CategoriesService
+      .createCategory({
+        name: this.state.inputValue,
+        type: this.props.type,
+      })
+      .then((resJson) => {
+        this.setNewCategory(resJson.id)
+        this.clearInputValue()
+        this.toggleShowCreate()
+      })
+      .then(() => {
+        this.setCategories();  
+      })
+      .catch(console.log);
+  }
 
-  //   CategoriesService
-  //     .createCategory({
-  //       name: ev.target.newCategoryName.value,
-  //       type: this.props.type,
-  //     })
-  //     .then((category) => {
-  //       // could be better
-  //       this.setState({ categories: [ ...this.state.categories, category ] })
-  //     })
-  //     .catch(console.log);
-  // }
+  updateInputValue = (ev) => {
+    this.setState({
+      inputValue: ev.target.value 
+    })
+  }
+
+  clearInputValue = () => {
+    this.setState({
+      inputValue: ''
+    })
+  }
+
+  toggleShowCreate = () => {
+    this.setState({
+      showCreateForm: !this.state.showCreateForm
+    })
+  }
+
+  setNewCategory = (newCat) => {
+    this.setState({
+      setCategory: newCat
+    })
+  }
+
+  renderCreateCategory = () => {
+    return (
+        <div>
+          <input value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
+          <button onClick={this.handleCreateFormSubmit} type="button">Create</button>
+          <button onClick={this.toggleShowCreate} type="button">Cancel</button>
+        </div>
+    )
+  }
 
   render() {
-
-    // let createForm = null;
-
-    // if (this.state.showCreateForm) {
-    //   createForm = (
-    //     <form onSubmit={this.handleCreateFormSubmit}>
-    //       <input type="text" id="newCategoryName" name="newCategoryName"></input>
-    //       <button type="submit">Create</button>
-    //       <button type="button">Cancel</button>
-    //     </form>
-    //   );
-    // }
-
     return (
-      <select id="category" name="category">
-        <option value=''></option>
-        {this.createOptions()}
-        {/* <option value='create'>Create new category...</option> */}
-      </select>
+      <div>
+        {!this.state.showCreateForm 
+          ? <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
+              <option value=''></option>
+              {this.createOptions()}
+              <option value='create'>Create new category...</option>
+            </select>
+          : this.renderCreateCategory()}
+      </div>
     );
   }
 }
