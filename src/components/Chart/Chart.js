@@ -50,14 +50,29 @@ export default class Chart extends Component {
     let data = [];
     let labels = [];
     let backgroundColor = [];
+    let categories = {}
 
     // this is why the chart doesnt render the data properly
-    this.context.expenses.forEach(item => {
-      data.push(parseInt(item.amount));
-      labels.push(this.context.categories.find(c => c.id === item.category_id).name);
 
-      backgroundColor.push(this.state.categoryColors[item.category_id] || this.state.categoryColors[0]);
-    });
+    this.context.categories.forEach(c => {
+      this.context.expenses.forEach(e => {
+        if(c.id === e.category_id){
+          categories[c.name] = (categories[c.name] || 0) + parseInt(e.amount);
+        }
+      })
+    })
+
+    Object.keys(categories).forEach((cKey, index=0) => {
+      labels.push(cKey)
+      data.push(categories[cKey])
+      backgroundColor.push(this.state.categoryColors[index]);
+    })
+
+    // this.context.expenses.forEach(item => {
+    //   data.push(parseInt(item.amount));
+    //   labels.push(this.context.categories.find(c => c.id === item.category_id).name);
+    //   backgroundColor.push(this.state.categoryColors[item.category_id] || this.state.categoryColors[0]);
+    // });
 
     chart.data.labels = labels;
     chart.data.datasets[0].data = data;
