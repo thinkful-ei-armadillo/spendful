@@ -24,35 +24,6 @@ export default class AddItemForm extends Component{
     }
   }
 
-  // handleAmountChange = (e) => {
-  //   this.setState({
-  //     amount: e.target.value
-  //   })
-  //   console.log(this.state.amount);
-  // }
-
-  // handleDateChange = (e) => {
-  //   this.setState({
-  //     start_date: e.target.value
-  //   })
-  //   console.log(this.state.start_date);
-  // }
-
-  // handleDescriptionChange = (e) => {
-  //   this.setState({
-  //     description: e.target.value
-  //   })
-  //   console.log(this.state.description)
-  // }
-
-  // handleFreqChange = (e) => {
-  //   let time = e.target.value;
-  //   this.setState({
-  //     recurring_rule: time
-  //   })
-  //   console.log(this.state.recurring_rule)
-  // }
-
   onSubmit = (ev) => {
     ev.preventDefault();
 
@@ -69,11 +40,9 @@ export default class AddItemForm extends Component{
     if (this.props.itemType === "income") {
       IncomesService.createIncome(newItem)
         .then(() =>{
-          console.log("I ran")
           this.props.onSuccess('/incomes')
         })
         .catch(err => {
-          console.log("I ran")
           this.props.onFailure(err.errors)
         })
     } else {
@@ -93,15 +62,7 @@ export default class AddItemForm extends Component{
       <h2>Add {this.props.itemType}</h2>
       <label htmlFor="input-category">Category</label>
 
-      {/* <select id="input-category">
-        <option value="0" disabled>Please select a category</option>
-
-        {this.state.categories[this.props.itemType]
-          .map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
-        <option value="-1">create new category...</option>
-      </select> */}
-
-      <CategorySelect type={this.props.itemType} />
+      <CategorySelect id="category" type={this.props.itemType} />
 
       <label htmlFor="start_date">Date</label>
       <input type="date" id="start_date"/>
@@ -114,11 +75,14 @@ export default class AddItemForm extends Component{
 
       <label htmlFor="recurring_rule">Frequency</label>
       <select id="recurring_rule">
+        <option value='ONCE'>Once</option>
+        <option value='WEEKLY'>Weekly</option>
         <option value='BI-WEEKLY'>Bi-weekly</option>
         <option value='MONTHLY'>Monthly</option>
+
       </select>
 
-      <button type="submit">Create</button>
+      <button id="flex-form-button" type="submit">Create</button>
     </form>
     )
   }

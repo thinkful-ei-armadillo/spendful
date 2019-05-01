@@ -9,7 +9,7 @@ import { Doughnut } from 'react-chartjs-2';
 import Dashboard from './DashboardPage';
 
 
-describe('Dashboard component', () => {
+describe.skip('Dashboard component', () => {
      
 
     it('renders without crashing', () => {
