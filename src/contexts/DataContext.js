@@ -37,7 +37,6 @@ export class DataProvider extends Component {
   }
 
   setAllExpenses = (expenses) => {
-    console.log(expenses)
     this.setState({expenses})
   }
 

@@ -51,8 +51,8 @@ export default class DashboardPage extends Component {
   }
 
   handleSetMonth = (month) => {
-    this.handleReports(month.year, month.month)
     this.setState({month})
+    this.handleReports(month.year, month.month)
   }
 
   render() {

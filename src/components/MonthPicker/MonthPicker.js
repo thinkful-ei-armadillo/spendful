@@ -22,11 +22,10 @@ export default class MonthPicker extends Component {
     }
 
     handleAMonthChange = (year, month) => {
-       
-        this.setState({
-            mvalue: {year: year, month: month},
-        })
-        this.props.setMonth(this.state.mvalue)
+      this.setState({
+          mvalue: {year: year, month: month},
+      })
+      this.props.setMonth({year: year, month: month})
     }
 
     handleAMonthDissmis = (value) => {
