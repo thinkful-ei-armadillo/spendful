@@ -22,7 +22,7 @@ export default class DashboardPage extends Component {
     this.context.clearError()
     getAllCategories()
       .then(categories => {
-        this.context.setCategories({categories});
+        this.context.setCategories(categories);
         this.handleReports(this.state.month.year, this.state.month.month)
       })
       .catch(error => {

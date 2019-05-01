@@ -52,6 +52,7 @@ export default class Chart extends Component {
     this.props.data.expenses.forEach(item => {
       data.push(parseInt(item.amount));
       labels.push(this.props.data.categories.find(c => c.id === item.category_id).name);
+
       backgroundColor.push(this.state.categoryColors[item.category_id] || this.state.categoryColors[0]);
     });
 
