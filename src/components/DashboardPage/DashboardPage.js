@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 import Chart from '../Chart/Chart';
 import DataContext from '../../contexts/DataContext';
+import MonthPicker from '../MonthPicker/MonthPicker'
 import { getAllCategories } from '../../services/categories-service';
 import { getMonthlyReport } from '../../services/reports-service';
 import './DashboardPage.css';
@@ -46,9 +47,10 @@ export default class DashboardPage extends Component {
     return (
       <main className="flex-main">
         <section className="page-controls">
-          <select className="select-month">
+          {/* <select className="select-month">
             <option>April 2019</option>
-          </select>
+          </select> */}
+          <MonthPicker />
         </section>
 
         <div className="w-100"></div>
