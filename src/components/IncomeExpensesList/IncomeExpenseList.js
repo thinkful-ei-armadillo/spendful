@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './IncomeExpenseList.css';
+import * as IncomeService from '../../services/incomes-service'
+import * as ExpenseService from '../../services/expenses-service'
 
 function ListItem(props) {
   let classname = '';
@@ -23,6 +25,7 @@ function ListItem(props) {
       <p>{date}</p>
       <p>{props.item.category_id}</p>
       <p>{props.item.recurring_rule || 'never'}</p>
+      <button onClick={() => props.deleteItem(props.item.id)}type="button">Delete</button>
     </>;
   }
 
@@ -46,6 +49,25 @@ export default class IncomeExpenseList extends Component {
     };
   }
 
+  deleteItem = (itemId) => {
+    if (this.props.type === 'income'){
+      IncomeService.deleteIncome(itemId)
+      .then(IncomeService.getAllIncomes)
+      .then(resJson => 
+        this.setState({
+          data: resJson 
+        }))
+    }
+    else{
+      ExpenseService.deleteExpense(itemId)
+      .then(ExpenseService.getAllExpenses)
+      .then(resJson => 
+        this.setState({
+          data: resJson
+        }))
+    }
+  }
+
   render() {
     // limit the number of items if onlyShowRecent = true
     let data = this.props.onlyShowRecent ? this.props.data.slice(0, 5) : this.props.data;
@@ -56,7 +78,7 @@ export default class IncomeExpenseList extends Component {
 
         <ul className="item-list">
           {data.map((item, i) => 
-            <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+            <ListItem deleteItem={this.deleteItem} item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
         </ul>
 
         {this.props.onlyShowRecent ? <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
