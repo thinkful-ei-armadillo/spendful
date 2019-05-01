@@ -28,7 +28,9 @@ export default class AddItemForm extends Component{
     ev.preventDefault();
 
     const { category, description, amount, start_date, recurring_rule } = ev.target
-
+    let date = start_date.value.split('-')
+    console.log(start_date.value)
+    console.log(date)
     const newItem = {
       category_id: category.value,
       description: description.value,
@@ -36,7 +38,7 @@ export default class AddItemForm extends Component{
       start_date: start_date.value,
       recurring_rule: recurring_rule.value
     };
-
+    
     if (this.props.itemType === "income") {
       IncomesService.createIncome(newItem)
         .then(() =>{
