@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {Doughnut} from 'react-chartjs-2'; 
+import DataContext from '../../contexts/DataContext';
 
 
 export default class Chart extends Component {
+  static contextType = DataContext;
+
   state = {
     categoryColors: {
       0: '#f04511',
@@ -36,22 +39,22 @@ export default class Chart extends Component {
     },
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.data.expenses.length !== this.props.data.expenses.length) {
-      this.updateChart();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevProps.data.expenses.length !== this.props.data.expenses.length) {
+  //     this.updateChart();
+  //   }
+  // }
 
-  updateChart = () => {
+  renderChart = () => {
     let chart = this.state.chart;
     let data = [];
     let labels = [];
     let backgroundColor = [];
 
     // this is why the chart doesnt render the data properly
-    this.props.data.expenses.forEach(item => {
+    this.context.expenses.forEach(item => {
       data.push(parseInt(item.amount));
-      labels.push(this.props.data.categories.find(c => c.id === item.category_id).name);
+      labels.push(this.context.categories.find(c => c.id === item.category_id).name);
 
       backgroundColor.push(this.state.categoryColors[item.category_id] || this.state.categoryColors[0]);
     });
@@ -60,13 +63,15 @@ export default class Chart extends Component {
     chart.data.datasets[0].data = data;
     chart.data.datasets[0].backgroundColor = backgroundColor;
 
-    this.setState({chart});
+    //this.setState({chart});
+
+    return <Doughnut data={chart.data} options={chart.options} />;
   }
 
   render() {
     return (
       <section className="page-chart">
-        <Doughnut data={this.state.chart.data} options={this.state.chart.options} />
+        {this.renderChart()}
       </section>
     );
   }
