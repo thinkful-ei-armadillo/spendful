@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import LandingPage from './LandingPage';
 
-describe('LandingPage component', () => {
+describe.skip('LandingPage component', () => {
      
 
     it('renders without crashing', () => {
