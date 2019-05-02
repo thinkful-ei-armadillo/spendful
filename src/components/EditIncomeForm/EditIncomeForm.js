@@ -1,5 +1,5 @@
 import React from 'react';
-import {DateTime} from 'luxon';
+import moment from 'moment-timezone';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import * as IncomesService from '../../services/incomes-service';
 
@@ -51,20 +51,15 @@ class EditIncomeForm extends React.Component {
   onSubmit(ev) {
     ev.preventDefault();
 
-    const pieces = ev.target.startDate.value.split('-');
-
-    const local = DateTime.local(
-      Number.parseInt(pieces[0], 10),
-      Number.parseInt(pieces[1]+1, 10),
-      Number.parseInt(pieces[2], 10)
-    );
-    const utc   = local.setZone('UTC');
+    // Take form input string in YYYY-MM-DD format, create moment object,
+    // translate to UTC, output string in default ISO 8601 format
+    const startDate = moment(ev.target.startDate.value).tz('UTC').format();
 
     const updates = {
       description    : ev.target.description.value,
       amount         : ev.target.amount.value,
       category_id    : ev.target.category.value,
-      start_date     : utc.toISO(),
+      start_date     : startDate,
       recurring_rule : ev.target.frequency.value,
     };
 
