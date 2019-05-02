@@ -27,6 +27,9 @@ class EditIncomeForm extends React.Component {
           income.recurring_rule = 'once';
         }
 
+        // Create local date from input UTC data, format it
+        income.start_date = moment(income.start_date).format('YYYY-MM-DD');
+
         this.setState({ income });
       })
       .catch((err) => {
