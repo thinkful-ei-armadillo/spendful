@@ -58,10 +58,6 @@ export default class ExpensesPage extends Component {
     this.setState({showExpenses})
   }
 
-  renderChart = () => {
-
-  }
-
   render() {
     let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
     return (
@@ -75,7 +71,7 @@ export default class ExpensesPage extends Component {
           <Link to="/add#expense">Add expense</Link>
         </section>
 
-        {this.state.showExpenses !== 'monthly' && <BarChart data={data} />}
+        {this.state.showExpenses === 'all' && <BarChart data={data} />}
         
         <section className="page-content">
           <IncomeExpenseList type="expenses" data={data} />
