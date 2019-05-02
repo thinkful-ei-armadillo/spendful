@@ -28,6 +28,9 @@ export default class AddItemForm extends Component{
     ev.preventDefault();
 
     const { category, description, amount, start_date, recurring_rule } = ev.target
+
+    try {
+      
     let date = start_date.value.split('-')
     let startDateUtc = DateTime.utc(parseInt(date[0]), parseInt(date[1])-1, parseInt(date[2])).toISO()
     const newItem = {
@@ -55,6 +58,9 @@ export default class AddItemForm extends Component{
           this.props.onFailure(err.errors)
         })
       }
+    } catch{
+      this.props.onFailure("Category does not exist")
+    }
   }
 
   render(){

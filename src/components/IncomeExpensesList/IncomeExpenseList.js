@@ -12,6 +12,7 @@ class ListItem extends Component {
     let prefix = '';
     let extras = '';
 
+
     if(this.props.type === 'expenses') {
       classname += 'list-expense';
       prefix = '➖';
@@ -30,6 +31,7 @@ class ListItem extends Component {
         <p>{category ? category.name : 'n/a'}</p>
         <p>{this.props.item.recurring_rule || 'never'}</p>
         <p><Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>Edit</Link></p>
+        <button onClick={() => props.deleteItem(props.item.id)}type="button">Delete</button>
       </>;
     }
 
@@ -56,11 +58,31 @@ export default class IncomeExpenseList extends Component {
     };
   }
 
+
+  deleteItem = (itemId) => {
+    if (this.props.type === 'income'){
+      IncomeService.deleteIncome(itemId)
+      .then(IncomeService.getAllIncomes)
+      .then(resJson => 
+        this.setState({
+          data: resJson 
+        }))
+    }
+    else{
+      ExpenseService.deleteExpense(itemId)
+      .then(ExpenseService.getAllExpenses)
+      .then(resJson => 
+        this.setState({
+          data: resJson
+        }))
+    }
+
   componentDidMount() {
     getAllCategories()
       .then(categories => {
         this.context.setCategories(categories);
       });
+
   }
 
   render() {
@@ -73,8 +95,9 @@ export default class IncomeExpenseList extends Component {
         {this.props.onlyShowRecent && data.length === 0 ? <p>There are no items to display.</p> : ''}
 
         <ul className="item-list">
-          {data.map((item, i) =>
-            <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+          {data.map((item, i) => 
+            <ListItem deleteItem={this.deleteItem} item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+
         </ul>
 
         {this.props.onlyShowRecent ? <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
