@@ -31,7 +31,7 @@ class ListItem extends Component {
         <p>{category ? category.name : 'n/a'}</p>
         <p>{this.props.item.recurring_rule || 'never'}</p>
         <p><Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>Edit</Link></p>
-        <button onClick={() => props.deleteItem(props.item.id)}type="button">Delete</button>
+        <button type="button">Delete</button>
       </>;
     }
 
@@ -57,25 +57,6 @@ export default class IncomeExpenseList extends Component {
       data: this.props.data,
     };
   }
-
-
-  deleteItem = (itemId) => {
-    if (this.props.type === 'income'){
-      IncomeService.deleteIncome(itemId)
-      .then(IncomeService.getAllIncomes)
-      .then(resJson => 
-        this.setState({
-          data: resJson 
-        }))
-    }
-    else{
-      ExpenseService.deleteExpense(itemId)
-      .then(ExpenseService.getAllExpenses)
-      .then(resJson => 
-        this.setState({
-          data: resJson
-        }))
-    }
 
   componentDidMount() {
     getAllCategories()
