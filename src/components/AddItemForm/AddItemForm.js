@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as IncomesService from '../../services/incomes-service'
 import * as ExpensesService from '../../services/expenses-service'
 import CategorySelect from '../CategorySelect/CategorySelect';
-import { DateTime } from 'luxon'
+import moment from 'moment-timezone'
 
 export default class AddItemForm extends Component{
 
@@ -30,14 +30,12 @@ export default class AddItemForm extends Component{
     const { category, description, amount, start_date, recurring_rule } = ev.target
 
     try {
-      
-    let date = start_date.value.split('-')
-    let startDateUtc = DateTime.utc(parseInt(date[0]), parseInt(date[1])-1, parseInt(date[2])).toISO()
+    let startDate = moment(start_date.value).tz('UTC').format()
     const newItem = {
       category_id: category.value,
       description: description.value,
       amount: amount.value,
-      start_date: startDateUtc,
+      start_date: startDate,
       recurring_rule: recurring_rule.value
     };
     
