@@ -7,18 +7,22 @@ export default class ExpensesPage extends Component {
 
   state = {
     expenses: [],
-    error: []
+    error: [],
   }
 
   componentDidMount(){
-      this.setState({error: []})
-     getAllExpenses()
-        .then(expenses => {
-            this.setState({expenses})
-        })
-        .catch(error => {
-            this.setState({error: error.errors})
-        })
+    this.updateExpenses()
+  }
+
+  updateExpenses = () => {
+    this.setState({error: []})
+    getAllExpenses()
+    .then(expenses => {
+        this.setState({expenses})
+    })
+    .catch(error => {
+        this.setState({error: error.errors})
+    })
   }
 
 
@@ -35,7 +39,7 @@ export default class ExpensesPage extends Component {
         </section>
         
         <section className="page-content">
-          <IncomeExpenseList type="expenses" data={this.state.expenses} />
+          <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
         </section>
       </>
     );

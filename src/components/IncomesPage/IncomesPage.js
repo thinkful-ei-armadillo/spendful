@@ -11,16 +11,18 @@ export default class IncomePage extends Component {
     }
 
     componentDidMount(){
-        this.setState({error: []})
-        getAllIncomes()
-            .then(incomes => {
-                this.setState({incomes})
-            })
-            .catch(error => {
-                this.setState({error: error.errors})
-            })
+      this.updateIncomes()
     }
 
+    updateIncomes = () => {
+      getAllIncomes()
+      .then(incomes => {
+          this.setState({incomes})
+      })
+      .catch(error => {
+          this.setState({error: error.errors})
+      })
+    }
 
   render() {
     return (
@@ -34,7 +36,7 @@ export default class IncomePage extends Component {
         </section>
         
         <section className="page-content">
-          <IncomeExpenseList type="incomes" data={this.state.incomes}/>
+          <IncomeExpenseList type="incomes" data={this.state.incomes} updateIncomes={this.updateIncomes}/>
         </section>
       </>
     );
