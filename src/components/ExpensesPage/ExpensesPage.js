@@ -12,6 +12,7 @@ export default class ExpensesPage extends Component {
     month: {},
     expenses: [],
     error: [],
+    showExpenses: '',
   }
 
   componentDidMount(){
@@ -28,7 +29,6 @@ export default class ExpensesPage extends Component {
         .catch(error => {
             this.context.setError(error.errors)
         })
-    showExpenses: '',
   }
   
   handleReports = (year, month) => {

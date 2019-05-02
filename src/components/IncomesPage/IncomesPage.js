@@ -16,7 +16,8 @@ export default class IncomePage extends Component {
 
    componentDidMount(){
       this.updateIncomes()
-
+   }
+   
   handleReports = (year, month) => {
     year = parseInt(year);
     month = parseInt(month);
