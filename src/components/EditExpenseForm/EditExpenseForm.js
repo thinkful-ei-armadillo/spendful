@@ -58,12 +58,17 @@ class EditExpenseForm extends React.Component {
     // translate to UTC, output string in default ISO 8601 format
     const startDate = moment(ev.target.startDate.value).tz('UTC').format();
 
+    let recurring_rule = ev.target.frequency.value;
+    if (recurring_rule === 'once') {
+      recurring_rule = null;
+    }
+
     const updates = {
       description    : ev.target.description.value,
       amount         : ev.target.amount.value,
       category_id    : ev.target.category.value,
       start_date     : startDate,
-      recurring_rule : ev.target.frequency.value,
+      recurring_rule : recurring_rule,
     };
 
     ExpensessService
@@ -78,15 +83,6 @@ class EditExpenseForm extends React.Component {
 
   render() {
 
-    // FIXME bad bad bad
-    let start_date;
-    if (this.state.expense.start_date) {
-      start_date = this.state.expense.start_date.slice(0, 10);
-    } else {
-      start_date = null;
-    }
-
-
     return (
       <form className="flex-form" onSubmit={this.onSubmit}>
 
@@ -96,7 +92,7 @@ class EditExpenseForm extends React.Component {
       <CategorySelect type="expense" id="category" name="category" value={`${this.state.expense.category_id}`} onChange={this.handleCategoryChange} />
 
       <label htmlFor="startDate">Date</label>
-      <input type="date" id="startDate" name="startDate" defaultValue={start_date} />
+      <input type="date" id="startDate" name="startDate" defaultValue={this.state.expense.start_date} />
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
