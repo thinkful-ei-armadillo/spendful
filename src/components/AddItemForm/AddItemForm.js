@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as IncomesService from '../../services/incomes-service'
 import * as ExpensesService from '../../services/expenses-service'
 import CategorySelect from '../CategorySelect/CategorySelect';
-
+import { DateTime } from 'luxon'
 
 export default class AddItemForm extends Component{
 
@@ -30,14 +30,17 @@ export default class AddItemForm extends Component{
     const { category, description, amount, start_date, recurring_rule } = ev.target
 
     try {
-      const newItem = {
-        category_id: category.value,
-        description: description.value,
-        amount: amount.value,
-        start_date: start_date.value,
-        recurring_rule: recurring_rule.value
-      };
-
+      
+    let date = start_date.value.split('-')
+    let startDateUtc = DateTime.utc(parseInt(date[0]), parseInt(date[1])-1, parseInt(date[2])).toISO()
+    const newItem = {
+      category_id: category.value,
+      description: description.value,
+      amount: amount.value,
+      start_date: startDateUtc,
+      recurring_rule: recurring_rule.value
+    };
+    
     if (this.props.itemType === "income") {
       IncomesService.createIncome(newItem)
         .then(() =>{

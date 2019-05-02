@@ -33,6 +33,12 @@ article {
   padding: 1.25em;
 }
 
+article > p {
+  text-align: center;
+  margin: 2em 0;
+  color: gray;
+}
+
 label {
   text-align: left;
   font-size: 0.8em;

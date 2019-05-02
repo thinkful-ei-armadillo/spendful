@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Enzyme from 'enzyme'
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
+// import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 
@@ -45,12 +45,15 @@ describe('Login Page component', () => {
       let wrapper = shallow(<LoginForm />);
 
       expect(wrapper.find(`input[type="text"]`).simulate('change', {target: {name: 'email_address', value: testEmail}}));
-      // expect(wrapper.find('email_address')).contains('test@spendful.com');
+      expect(wrapper.find(`input[type="text"]`).text()).toEqual('');
 
       //.simulate('change', {target: {name: 'email_address', value: testEmail}}));
       //expect(wrapper.state('email_address')).toEqual(testEmail);
 
-      expect(wrapper.find('input[type="password"]'))
+      expect(wrapper.find('input[type="password"]').simulate('change', {target: {name: 'password', value: testPass}}));
+      expect(wrapper.find(`input[type="password"]`).text()).toEqual('');
+
+      expect(wrapper.find('button[type="submit"]').text()).toEqual('Log In');
 
       //.simulate('change', {target: {name: 'password', value: testPass}});
       //expect(wrapper.state('password')).toEqual(testPass);

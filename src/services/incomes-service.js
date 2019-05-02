@@ -53,7 +53,7 @@ const updateIncome = function (id, payload) {
     body: JSON.stringify(payload),
   })
   .then(res =>{
-    return (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json();
+    return (!res.ok) ? res.json().then(e => Promise.reject(e)) : true;
   });
 };
 
