@@ -12,6 +12,7 @@ class ListItem extends Component {
     let prefix = '';
     let extras = '';
 
+
     if(this.props.type === 'expenses') {
       classname += 'list-expense';
       prefix = '➖';
@@ -29,6 +30,8 @@ class ListItem extends Component {
         <p>{date}</p>
         <p>{category ? category.name : 'n/a'}</p>
         <p>{this.props.item.recurring_rule || 'never'}</p>
+        <p><Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>Edit</Link></p>
+        <button type="button">Delete</button>
       </>;
     }
 
@@ -60,6 +63,7 @@ export default class IncomeExpenseList extends Component {
       .then(categories => {
         this.context.setCategories(categories);
       });
+
   }
 
   render() {
@@ -73,7 +77,8 @@ export default class IncomeExpenseList extends Component {
 
         <ul className="item-list">
           {data.map((item, i) => 
-            <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+            <ListItem deleteItem={this.deleteItem} item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
+
         </ul>
 
         {this.props.onlyShowRecent ? <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
