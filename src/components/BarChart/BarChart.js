@@ -64,16 +64,44 @@ export default class BarChart extends Component {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     let chart = this.state.chart;
     let data = [...this.props.data]
-    console.log(data[0])
+    let labels = [];
+
     if(data[0]){
       data.sort((a, b) => Date.parse(b.start_date) - Date.parse(a.start_date))
       let offset = new Date(data[0].start_date).getMonth()
-      console.log(data)
-  
-      // for(let i=0; i < months.length; i++) {
-      //     let pointer = (offset - i) % months.length;
-      //     console.log(months[pointer]);
-      // }
+      console.log('offset:', offset);
+      
+      for(let i=0; i < months.length; i++) {
+        let pointer = (offset - i) % months.length;
+
+        if(pointer < 0) {
+          pointer = months.length + pointer
+        }
+
+        labels.push(months[pointer]);
+      }
+
+      let totals = {};
+      let current = new Date(data[0].start_date)
+
+      // get the totals for each month (for bar chart)
+      data.forEach((expense, i) => {
+        if(data[i + 1]) {
+          let next = new Date(data[i + 1].start_date)
+
+          // compare expense to next expense
+          if(current.getFullYear() !== next.getFullYear()) {
+            current = next;
+          }
+        }
+
+        // increment the total for this month
+        totals[i] = (totals[i] || 0) + parseInt(expense.amount);
+      });
+
+      console.log(totals);
+
+      chart.data.labels = labels;
     }
     return <Bar data={chart.data} options={chart.options} />;
   }
