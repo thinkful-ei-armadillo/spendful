@@ -62,6 +62,22 @@ describe('Login Page component', () => {
 
     });
 
+    it('renders successful login with right data', () => {
+
+      let wrapper = shallow(<LoginForm />);
+
+      wrapper.find(`input[type="text"]`).simulate('change', {target: {name: 'email_address', value: testEmail}});
+
+      wrapper.find('input[type="password"]').simulate('change', {target: {name: 'password', value: testPass}});
+
+      wrapper.find('button').simulate('click');
+
+      
+
+
+
+    })
+
     it('displays error if no password is provided', () => {
 
     });
