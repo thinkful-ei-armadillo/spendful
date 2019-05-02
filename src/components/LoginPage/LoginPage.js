@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
     return(
       <section className="login-form">
 
-        {this.state.errors.length > 0 ? <div className="alert-error">{this.state.errors}</div> : ''}
+        {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
 
         <LoginForm onSuccess={this.handleLoginSuccess} onFailure={this.handleLoginFailure} />
 

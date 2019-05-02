@@ -6,9 +6,11 @@ const DataContext = React.createContext({
   incomes: [],
   expenses: [],
   categories: [],
+  errors: [],
 
   setAllIncomes: () => {},
   setAllExpenses: () => {},
+  setCategories: () => {},
   setReports: () => {},
 
   updateIncome: () => {},
@@ -36,6 +38,10 @@ export class DataProvider extends Component {
 
   setAllExpenses = (expenses) => {
     this.setState({expenses})
+  }
+
+  setCategories = (categories) => {
+    this.setState({categories})
   }
 
   updateIncome = (id, updatedData) => {
@@ -74,8 +80,10 @@ export class DataProvider extends Component {
       incomes: this.state.incomes,
       expenses: this.state.expenses,
       categories: this.state.categories,
+      errors: this.state.errors,
       setAllIncomes: this.setAllIncomes,
       setAllExpenses: this.setAllExpenses,
+      setCategories: this.setCategories,
       setReports: this.setReports,
 
       updateIncome: this.updateIncome,
