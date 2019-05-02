@@ -34,9 +34,9 @@ describe ('LandingPage component', () => {
     it('renders an `landing-header`', () => {
       wrapper = shallow(<LandingPage />);
 
-      expect(wrapper.find('landing-header'));
+      expect(wrapper.contains('header'));
 
-      
+
     });
 
     it('renders a Registration Form component', () => {
