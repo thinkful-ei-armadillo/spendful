@@ -50,7 +50,7 @@ class Navbar extends Component {
     const isLoggedIn = TokenService.hasAuthToken();
     const navLinks = <>
       <Link className={this.getNavBtnClass('/dashboard')} to="/dashboard">Dashboard</Link>
-      <Link className={this.getNavBtnClass('/incomes')} to="/incomes">Income</Link>
+      <Link className={this.getNavBtnClass('/incomes')} to="/incomes">Incomes</Link>
       <Link className={this.getNavBtnClass('/expenses')} to="/expenses">Expenses</Link>
     </>;
 

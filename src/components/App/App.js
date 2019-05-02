@@ -9,6 +9,7 @@ import AddItemRoute from '../../routes/AddItemRoute';
 import PublicOnlyRoute from '../../routes/PublicOnlyRoute'
 import PrivateRoute from '../../routes/PrivateRoute'
 import NotFoundPage from '../../routes/NotFoundPage'
+import EditIncomeRoute from '../../routes/EditIncomeRoute'
 import Navbar from '../Navbar/Navbar';
 import './App.css';
 
@@ -26,6 +27,7 @@ class App extends Component {
           <PrivateRoute path={'/expenses'} component={ExpensesRoute} />
           <PrivateRoute path={'/dashboard'} component={DashboardRoute} />
           <PrivateRoute path={'/add'} component={AddItemRoute} />
+          <PrivateRoute path={'/edit_income/:id'} component={EditIncomeRoute} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

@@ -22,7 +22,7 @@ class AddItemPage extends Component {
 
   render(){
     return( 
-      <main className="flex-main">
+      <main className="flex-add-item">
         {this.state.errors.length > 0 
         ? <div className="alert-error">{this.state.errors}</div>
         : ''}

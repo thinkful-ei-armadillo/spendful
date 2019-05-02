@@ -33,6 +33,12 @@ article {
   padding: 1.25em;
 }
 
+article > p {
+  text-align: center;
+  margin: 2em 0;
+  color: gray;
+}
+
 label {
   text-align: left;
   font-size: 0.8em;
@@ -42,7 +48,7 @@ label {
 
 .flex-main {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
 }
 
 .flex-form {
@@ -119,4 +125,10 @@ label {
 
 @media only screen and (min-width: 426px) {
   .show-mobile { display: none; }
+}
+
+.flex-add-item {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between
 }
