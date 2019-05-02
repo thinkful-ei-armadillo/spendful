@@ -39,8 +39,12 @@ export default class ExpensesPage extends Component {
         </section>
         
         <section className="page-content">
+          {(this.state.expenses.length > 0)
+          ?
           <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
-        </section>
+          : <p>There are no items to display</p> 
+          }
+          </section>
       </>
     );
   }
