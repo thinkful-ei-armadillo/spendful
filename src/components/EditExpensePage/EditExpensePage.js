@@ -1,14 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import EditIncomeForm from '../EditIncomeForm/EditIncomeForm';
+import EditExpenseForm from '../EditExpenseForm/EditExpenseForm';
 
-class EditIncomePage extends React.Component {
+class EditExpensePage extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      income: null,
+      expense: null,
       errors: [],
     };
 
@@ -17,7 +17,7 @@ class EditIncomePage extends React.Component {
   }
 
   onSuccess (updates) {
-    this.props.history.push('/incomes');
+    this.props.history.push('/expenses');
   }
 
   onFailure (err) {
@@ -41,8 +41,8 @@ class EditIncomePage extends React.Component {
             : ''
         }
 
-        <EditIncomeForm
-          incomeId={this.props.incomeId}
+        <EditExpenseForm
+          expenseId={this.props.expenseId}
           onSuccess={this.onSuccess}
           onFailure={this.onFailure}
         />
@@ -51,4 +51,4 @@ class EditIncomePage extends React.Component {
   }
 }
 
-export default withRouter(EditIncomePage);
+export default withRouter(EditExpensePage);

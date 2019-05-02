@@ -1,15 +1,15 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import CategorySelect from '../CategorySelect/CategorySelect';
-import * as IncomesService from '../../services/incomes-service';
+import * as ExpensessService from '../../services/expenses-service';
 
-class EditIncomeForm extends React.Component {
+class EditExpenseForm extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      income: {},
+      expense: {},
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,18 +19,18 @@ class EditIncomeForm extends React.Component {
 
   componentDidMount() {
 
-    IncomesService
-      .getIncome(this.props.incomeId)
-      .then((income) => {
+    ExpensessService
+      .getExpense(this.props.expenseId)
+      .then((expense) => {
 
-        if (income.recurring_rule === null) {
-          income.recurring_rule = 'once';
+        if (expense.recurring_rule === null) {
+          expense.recurring_rule = 'once';
         }
 
         // Create local date from input UTC data, format it
-        income.start_date = moment(income.start_date).format('YYYY-MM-DD');
+        expense.start_date = moment(expense.start_date).format('YYYY-MM-DD');
 
-        this.setState({ income });
+        this.setState({ expense });
       })
       .catch((err) => {
         console.log(err)
@@ -38,17 +38,17 @@ class EditIncomeForm extends React.Component {
   }
 
   handleCategoryChange(ev) {
-    const income = this.state.income;
-    income.category_id = ev.target.value;
+    const expense = this.state.expense;
+    expense.category_id = ev.target.value;
 
-    this.setState({ income });
+    this.setState({ expense });
   }
 
   handleFrequencyChange(ev) {
-    const income = this.state.income;
-    income.recurring_rule = ev.target.value;
+    const expense = this.state.expense;
+    expense.recurring_rule = ev.target.value;
 
-    this.setState({ income });
+    this.setState({ expense });
   }
 
   onSubmit(ev) {
@@ -71,8 +71,8 @@ class EditIncomeForm extends React.Component {
       recurring_rule : recurring_rule,
     };
 
-    IncomesService
-      .updateIncome(this.props.incomeId, updates)
+    ExpensessService
+      .updateExpense(this.props.expenseId, updates)
       .then(() => {
         this.props.onSuccess();
       })
@@ -86,22 +86,22 @@ class EditIncomeForm extends React.Component {
     return (
       <form className="flex-form" onSubmit={this.onSubmit}>
 
-      <h2>Edit income</h2>
+      <h2>Edit expense</h2>
 
       <label htmlFor="input-category">Category</label>
-      <CategorySelect type="income" id="category" name="category" value={`${this.state.income.category_id}`} onChange={this.handleCategoryChange} />
+      <CategorySelect type="expense" id="category" name="category" value={`${this.state.expense.category_id}`} onChange={this.handleCategoryChange} />
 
       <label htmlFor="startDate">Date</label>
-      <input type="date" id="startDate" name="startDate" defaultValue={this.state.income.start_date} />
+      <input type="date" id="startDate" name="startDate" defaultValue={this.state.expense.start_date} />
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
-      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />
+      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
 
       <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" name="amount" defaultValue={this.state.income.amount} />
+      <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} />
 
       <label htmlFor="frequency">Frequency</label>
-      <select id="frequency" name="frequency" value={this.state.income.recurring_rule} onChange={this.handleFrequencyChange} >
+      <select id="frequency" name="frequency" value={this.state.expense.recurring_rule} onChange={this.handleFrequencyChange} >
         <option value=""></option>
         <option value="once">Once</option>
         <option value="yearly">Yearly</option>
@@ -116,4 +116,4 @@ class EditIncomeForm extends React.Component {
   }
 }
 
-export default EditIncomeForm;
+export default EditExpenseForm;
