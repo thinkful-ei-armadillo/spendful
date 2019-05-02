@@ -114,12 +114,20 @@ label {
   color: #fff;
 }
 
+.page-bar-chart {
+  margin: 0 5em;
+}
+
 
 @media only screen and (max-width: 425px) {
   .show-mobile { display: block; }
 
   .flex-form {
     min-width: 100%;
+  }
+
+  .page-bar-chart {
+    margin: 0 0 3em;
   }
 }
 

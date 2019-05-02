@@ -16,25 +16,45 @@ export default class BarChart extends Component {
     },
     chart: {
       data: {
-        labels: [],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
           {
-            label: "Monthly overview",
-            backgroundColor: [],
-            data: [],
+            label: 'Total expenses',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBorderColor: 'rgba(255,99,132,1)',
+            data: [65, 59, 80, 81, 56, 55, 40, 59, 80, 81, 56, 55, 40]
           }
         ],
       },
       options: {
         legend: {
-          position: 'bottom',
+          position: 'top',
           labels: {
             boxWidth: 12,
             padding: 30,
           }
         },
+        scales: {
+          xAxes: [{
+            barPercentage: 0.5,
+            barThickness: 25,
+            maxBarThickness: 25,
+            minBarLength: 2,
+            gridLines: {
+                offsetGridLines: true
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        },
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
       }
     },
   }
@@ -52,30 +72,30 @@ export default class BarChart extends Component {
     let backgroundColor = [];
     let categories = {}
 
-    this.context.categories.forEach(c => {
-      this.context.expenses.forEach(e => {
-        if(c.id === e.category_id){
-          categories[c.name] = (categories[c.name] || 0) + parseInt(e.amount);
-        }
-      })
-    })
+    // this.context.categories.forEach(c => {
+    //   this.context.expenses.forEach(e => {
+    //     if(c.id === e.category_id){
+    //       categories[c.name] = (categories[c.name] || 0) + parseInt(e.amount);
+    //     }
+    //   })
+    // })
 
-    Object.keys(categories).forEach((cKey, index=0) => {
-      labels.push(cKey)
-      data.push(categories[cKey])
-      backgroundColor.push(this.state.categoryColors[index]);
-    })
+    // Object.keys(categories).forEach((cKey, index=0) => {
+    //   labels.push(cKey)
+    //   data.push(categories[cKey])
+    //   backgroundColor.push(this.state.categoryColors[index]);
+    // })
 
-    chart.data.labels = labels;
-    chart.data.datasets[0].data = data;
-    chart.data.datasets[0].backgroundColor = backgroundColor;
+    // chart.data.labels = labels;
+    // chart.data.datasets[0].data = data;
+    // chart.data.datasets[0].backgroundColor = backgroundColor;
 
     return <Bar data={chart.data} options={chart.options} />;
   }
 
   render() {
     return (
-      <section className="page-chart">
+      <section className="page-chart page-bar-chart">
         {this.renderChart()}
       </section>
     );
