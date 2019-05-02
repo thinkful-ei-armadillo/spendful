@@ -38,7 +38,7 @@ export default class AddItemForm extends Component{
       start_date: startDate,
       recurring_rule: recurring_rule.value
     };
-    
+
     if (this.props.itemType === "income") {
       IncomesService.createIncome(newItem)
         .then(() =>{
@@ -80,11 +80,12 @@ export default class AddItemForm extends Component{
 
       <label htmlFor="recurring_rule">Frequency</label>
       <select id="recurring_rule">
-        <option value='ONCE'>Once</option>
-        <option value='WEEKLY'>Weekly</option>
-        <option value='BI-WEEKLY'>Bi-weekly</option>
-        <option value='MONTHLY'>Monthly</option>
-
+        <option value=""></option>
+        <option value="once">Once</option>
+        <option value="yearly">Yearly</option>
+        <option value="monthly">Monthly</option>
+        <option value="biweekly">Biweekly</option>
+        <option value="weekly">Weekly</option>
       </select>
 
       <button id="flex-form-button" type="submit">Create</button>
