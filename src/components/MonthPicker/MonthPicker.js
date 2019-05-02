@@ -7,7 +7,7 @@ export default class MonthPicker extends Component {
     constructor(props, context){
         super(props, context)
         this.state = {
-            mvalue: {year: new Date().getFullYear(), month: new Date().getMonth()},
+            mvalue: {year: new Date().getFullYear(), month: new Date().getMonth()+1},
         }
     }
 

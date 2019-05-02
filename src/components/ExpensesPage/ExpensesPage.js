@@ -36,7 +36,7 @@ export default class ExpensesPage extends Component {
       year = new Date().getFullYear();
       month = new Date().getMonth() + 1;
     }
-
+    this.context.clearError()
     getMonthlyReport(year, month)
       .then(report => {
         this.context.setAllIncomes(report.incomes);
