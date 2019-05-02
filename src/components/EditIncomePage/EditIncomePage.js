@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import * as IncomesService from '../../services/incomes-service';
 import EditIncomeForm from '../EditIncomeForm/EditIncomeForm';
 
 class EditIncomePage extends React.Component {
