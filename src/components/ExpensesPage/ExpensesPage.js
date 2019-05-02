@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
+import BarChart from '../BarChart/BarChart';
 import { getAllExpenses } from '../../services/expenses-service'
 import { getMonthlyReport } from '../../services/reports-service';
 import DataContext from '../../contexts/DataContext'
@@ -57,6 +58,10 @@ export default class ExpensesPage extends Component {
     this.setState({showExpenses})
   }
 
+  renderChart = () => {
+
+  }
+
   render() {
     let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
     return (
@@ -69,6 +74,8 @@ export default class ExpensesPage extends Component {
           {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
           <Link to="/add#expense">Add expense</Link>
         </section>
+
+        <BarChart data={data} />
         
         <section className="page-content">
           <IncomeExpenseList type="expenses" data={data} />
