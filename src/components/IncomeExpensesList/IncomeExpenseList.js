@@ -29,6 +29,7 @@ class ListItem extends Component {
         <p>{date}</p>
         <p>{category ? category.name : 'n/a'}</p>
         <p>{this.props.item.recurring_rule || 'never'}</p>
+        <p><Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>Edit</Link></p>
       </>;
     }
 
