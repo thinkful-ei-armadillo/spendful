@@ -29,6 +29,7 @@ class ListItem extends Component {
         <p>{date}</p>
         <p>{category ? category.name : 'n/a'}</p>
         <p>{this.props.item.recurring_rule || 'never'}</p>
+        <p><Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>Edit</Link></p>
       </>;
     }
 
@@ -72,7 +73,7 @@ export default class IncomeExpenseList extends Component {
         {this.props.onlyShowRecent && data.length === 0 ? <p>There are no items to display.</p> : ''}
 
         <ul className="item-list">
-          {data.map((item, i) => 
+          {data.map((item, i) =>
             <ListItem item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
         </ul>
 
