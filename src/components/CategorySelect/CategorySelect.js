@@ -101,7 +101,12 @@ class CategorySelect extends React.Component {
     })
   }
 
-  toggleShowCreate = () => {
+  toggleShowCreate = (cancel) => {
+    if (cancel) {
+      this.setState({
+        setCategory: ''
+      })
+    }
     this.setState({
       showCreateForm: !this.state.showCreateForm
     })
@@ -112,13 +117,14 @@ class CategorySelect extends React.Component {
       setCategory: newCat
     })
   }
+  
 
   renderCreateCategory = () => {
     return (
         <div>
           <input value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
           <button onClick={this.handleCreateFormSubmit} type="button">Create</button>
-          <button onClick={this.toggleShowCreate} type="button">Cancel</button>
+          <button onClick={() => this.toggleShowCreate('cancel')} type="button">Cancel</button>
         </div>
     )
   }
