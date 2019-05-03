@@ -12,10 +12,15 @@ export default class ExpensesPage extends Component {
   state = {
     month: {},
     expenses: [],
+    error: [],
     showExpenses: '',
   }
 
   componentDidMount(){
+    this.updateExpenses()
+  }
+
+  updateExpenses = () => {
       this.setState({showExpenses: 'all'})
       this.context.clearError()
      getAllExpenses()
@@ -26,8 +31,7 @@ export default class ExpensesPage extends Component {
             this.context.setError(error.errors)
         })
   }
-
-
+  
   handleReports = (year, month) => {
     year = parseInt(year);
     month = parseInt(month);
@@ -74,8 +78,12 @@ export default class ExpensesPage extends Component {
         {this.state.showExpenses === 'all' && <BarChart data={data} type="expenses" />}
         
         <section className="page-content">
-          <IncomeExpenseList type="expenses" data={data} />
-        </section>
+          {(this.state.expenses.length > 0)
+          ?
+          <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
+          : <p>There are no items to display</p> 
+          }
+          </section>
       </>
     );
   }

@@ -27,35 +27,36 @@ export default class AddItemForm extends Component{
   onSubmit = (ev) => {
     ev.preventDefault();
 
-    const { category, description, amount, start_date, recurring_rule } = ev.target
+    const { category, description, amount, start_date, end_date, recurring_rule } = ev.target
 
     try {
     let startDate = moment(start_date.value).tz('UTC').format()
+    let endDate   = (end_date.value) ? moment(end_date.value).tz('UTC').format() : null;
     const newItem = {
       category_id: category.value,
       description: description.value,
       amount: amount.value,
       start_date: startDate,
+      end_date: endDate,
       recurring_rule: recurring_rule.value
     };
-    
-    if (this.props.itemType === "income") {
-      IncomesService.createIncome(newItem)
-        .then(() =>{
-          this.props.onSuccess('/incomes')
-        })
-        .catch(err => {
-          this.props.onFailure(err.errors)
-        })
-    } else {
-        ExpensesService.createExpense(newItem)
-        .then(() => {
-          this.props.onSuccess('/expenses')
-        })
-        .catch(err => {
-          this.props.onFailure(err.errors)
-        })
-      }
+      if (this.props.itemType === "income") {
+        IncomesService.createIncome(newItem)
+          .then(() =>{
+            this.props.onSuccess('/incomes')
+          })
+          .catch(err => {
+            this.props.onFailure(err.errors)
+          })
+      } else {
+          ExpensesService.createExpense(newItem)
+          .then(() => {
+            this.props.onSuccess('/expenses')
+          })
+          .catch(err => {
+            this.props.onFailure(err.errors)
+          })
+        }
     } catch{
       this.props.onFailure("Category does not exist")
     }
@@ -69,8 +70,11 @@ export default class AddItemForm extends Component{
 
       <CategorySelect id="category" type={this.props.itemType} />
 
-      <label htmlFor="start_date">Date</label>
+      <label htmlFor="start_date">Start Date</label>
       <input type="date" id="start_date"/>
+
+      <label htmlFor="end_date">End Date (Optional)</label>
+      <input type="date" id="end_date"/>
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" maxLength="50" />
@@ -80,11 +84,12 @@ export default class AddItemForm extends Component{
 
       <label htmlFor="recurring_rule">Frequency</label>
       <select id="recurring_rule">
-        <option value='ONCE'>Once</option>
-        <option value='WEEKLY'>Weekly</option>
-        <option value='BI-WEEKLY'>Bi-weekly</option>
-        <option value='MONTHLY'>Monthly</option>
-
+        <option value=""></option>
+        <option value="once">Once</option>
+        <option value="yearly">Yearly</option>
+        <option value="monthly">Monthly</option>
+        <option value="biweekly">Biweekly</option>
+        <option value="weekly">Weekly</option>
       </select>
 
       <button id="flex-form-button" type="submit">Create</button>

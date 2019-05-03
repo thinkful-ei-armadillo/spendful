@@ -70,6 +70,25 @@ class CategorySelect extends React.Component {
       .catch(console.log);
   }
 
+  handleDeleteCategory = (id) => {
+    try{
+      if (!id){
+        throw new Error('No category selected to delete')
+      }
+      CategoriesService
+        .deleteCategory(id)
+      .then(() => {
+        let updatedCategories = this.state.categories.filter(category => category.id !== id)
+        this.setState({
+          categories: updatedCategories
+        })
+      })
+    }
+        catch(error){
+        (console.log(error))
+      }
+    }
+
   updateInputValue = (ev) => {
     this.setState({
       inputValue: ev.target.value 
@@ -82,7 +101,12 @@ class CategorySelect extends React.Component {
     })
   }
 
-  toggleShowCreate = () => {
+  toggleShowCreate = (cancel) => {
+    if (cancel) {
+      this.setState({
+        setCategory: ''
+      })
+    }
     this.setState({
       showCreateForm: !this.state.showCreateForm
     })
@@ -93,13 +117,14 @@ class CategorySelect extends React.Component {
       setCategory: newCat
     })
   }
+  
 
   renderCreateCategory = () => {
     return (
         <div>
           <input value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
           <button onClick={this.handleCreateFormSubmit} type="button">Create</button>
-          <button onClick={this.toggleShowCreate} type="button">Cancel</button>
+          <button onClick={() => this.toggleShowCreate('cancel')} type="button">Cancel</button>
         </div>
     )
   }
@@ -108,11 +133,14 @@ class CategorySelect extends React.Component {
     return (
       <div>
         {!this.state.showCreateForm 
-          ? <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
+          ? <div>
+            <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
               <option value=''></option>
               {this.createOptions()}
               <option value='create'>Create new category...</option>
             </select>
+            <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button">Delete This Category</button>
+            </div>
           : this.renderCreateCategory()}
       </div>
     );

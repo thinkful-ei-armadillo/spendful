@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './IncomeExpenseList.css';
 import DataContext from '../../contexts/DataContext';
 import { getAllCategories } from '../../services/categories-service';
+import { deleteExpense } from '../../services/expenses-service';
+import { deleteIncome } from '../../services/incomes-service'
 
 class ListItem extends Component {
   static contextType = DataContext;
@@ -38,7 +40,7 @@ class ListItem extends Component {
         <Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>
           <i className="fas fa-edit"></i>
         </Link>
-        <a href="#"><i className="fas fa-trash"></i></a>
+        <a href={`/${this.props.type}`} onClick={() => this.props.deleteItem(this.props.item.id)}><i className="fas fa-trash"></i></a>
       </>;
     }
 
@@ -61,20 +63,23 @@ class ListItem extends Component {
 export default class IncomeExpenseList extends Component {
   static contextType = DataContext;
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: this.props.data,
-    };
-  }
-
   componentDidMount() {
     getAllCategories()
       .then(categories => {
         this.context.setCategories(categories);
       });
 
+  }
+
+  deleteItem = (itemId) => {
+    if (this.props.type === 'incomes'){
+      deleteIncome(itemId)
+      .then(() => {this.props.updateIncomes()})
+    }
+    else{
+      deleteExpense(itemId)
+      .then(() => {this.props.updateExpenses()}) 
+    }
   }
 
   render() {
@@ -99,8 +104,8 @@ export default class IncomeExpenseList extends Component {
   }
 }
 
-IncomeExpenseList.defaultProps = {
-  type: 'income',
-  onlyShowRecent: false,
-  data: [],
-}
+// IncomeExpenseList.defaultProps = {
+//   type: 'income',
+//   onlyShowRecent: false,
+//   data: [],
+// }

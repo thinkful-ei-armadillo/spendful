@@ -29,6 +29,7 @@ class EditIncomeForm extends React.Component {
 
         // Create local date from input UTC data, format it
         income.start_date = moment(income.start_date).format('YYYY-MM-DD');
+        income.end_date   = moment(income.end_date).format('YYYY-MM-DD');
 
         this.setState({ income });
       })
@@ -57,13 +58,20 @@ class EditIncomeForm extends React.Component {
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
     const startDate = moment(ev.target.startDate.value).tz('UTC').format();
+    const endDate   = (ev.target.endDate.value) ? moment(ev.target.endDate.value).tz('UTC').format() : null;
+
+    let recurring_rule = ev.target.frequency.value;
+    if (recurring_rule === 'once') {
+      recurring_rule = null;
+    }
 
     const updates = {
       description    : ev.target.description.value,
       amount         : ev.target.amount.value,
       category_id    : ev.target.category.value,
       start_date     : startDate,
-      recurring_rule : ev.target.frequency.value,
+      end_date       : endDate,
+      recurring_rule : recurring_rule,
     };
 
     IncomesService
@@ -78,15 +86,6 @@ class EditIncomeForm extends React.Component {
 
   render() {
 
-    // FIXME bad bad bad
-    let start_date;
-    if (this.state.income.start_date) {
-      start_date = this.state.income.start_date.slice(0, 10);
-    } else {
-      start_date = null;
-    }
-
-
     return (
       <form className="flex-form" onSubmit={this.onSubmit}>
 
@@ -95,8 +94,11 @@ class EditIncomeForm extends React.Component {
       <label htmlFor="input-category">Category</label>
       <CategorySelect type="income" id="category" name="category" value={`${this.state.income.category_id}`} onChange={this.handleCategoryChange} />
 
-      <label htmlFor="startDate">Date</label>
-      <input type="date" id="startDate" name="startDate" defaultValue={start_date} />
+      <label htmlFor="startDate">Start Date</label>
+      <input type="date" id="startDate" name="startDate" defaultValue={this.state.income.start_date} />
+
+      <label htmlFor="endDate">End Date (Optional)</label>
+      <input type="date" id="endDate" name="endDate" defaultValue={this.state.income.end_date} />
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />

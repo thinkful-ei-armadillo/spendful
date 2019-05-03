@@ -52,7 +52,7 @@ export default class LandingPage extends Component {
             <ul>
               <li><a href="https://github.com/thinkful-ei-armadillo/spendful-client" target="_blank" rel="noopener noreferrer">Github Client</a></li>
               <li><a href="https://github.com/thinkful-ei-armadillo/spendful-server" target="_blank" rel="noopener noreferrer">Github Server</a></li>
-              <li><a href="#" >Register</a></li>
+              <li>Register</li>
               <li><Link to="/login">Login</Link></li>
             </ul>
           </div>
