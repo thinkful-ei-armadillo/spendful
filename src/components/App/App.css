@@ -53,24 +53,41 @@ label {
   flex-wrap: wrap; 
 }
 
+.flex-form-container {
+  min-width: 25em;  
+  max-width: 40em;
+  margin: 4em auto 0;
+  padding: 2em;
+  background-color: #e8e8e8;
+  border-radius: 6px;
+  border-bottom: 7px solid #bbbbbb;
+}
+
 .flex-form {
   display: flex;
   flex-direction: column;
-  min-width: 25em;
-  margin: 4em auto 0;
+  width: 100%;
 }
 
-.flex-form > input,
-.flex-form > select,
-.flex-form > button {
-  margin: 0.5em 1px;
-  padding: 0.4em 0.5em;
+.flex-form h2 {
+  margin: 0 0 1.5em;
+}
+
+.flex-form input,
+.flex-form > select {
+  width: 100%;
+  margin: .5em auto;
+  padding: 0.5em 0.75em;
+  border-radius: 3px;
+  border: 2px solid #d2d2d2;
+  box-sizing: border-box;
 }
 
 .flex-form label {
   margin: .5em 0 0 0;
   font-size: .8em;
   font-weight: bold;
+  color: gray;
 }
 
 #flex-form-button {
@@ -109,8 +126,17 @@ label {
 .text-green { color: green }
 .text-red { color: red }
 
+.link-sm:link,
+.link-sm:visited {
+  margin: 3px 0;
+  font-size: .75em;
+  color: gray;
+}
+
 .form-control {
-  padding: 10px;
+  padding: 0.5em 0.75em;
+  border-radius: 3px;
+  border: 2px solid #d2d2d2;
 }
 
 .alert-error {
@@ -126,10 +152,12 @@ label {
 }
 
 
+.btn,
 .btn:link,
 .btn:visited {
   padding: 10px 15px;
   border-radius: 5px;
+  border: 0;
   text-decoration: none;
   background-color: #6697ff;
   color: #fff;

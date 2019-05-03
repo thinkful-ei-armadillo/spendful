@@ -92,7 +92,7 @@ export default class AddItemForm extends Component{
         <option value="weekly">Weekly</option>
       </select>
 
-      <button id="flex-form-button" type="submit">Create</button>
+      <button id="flex-form-button" className="btn" type="submit">Create</button>
     </form>
     )
   }
