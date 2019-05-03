@@ -96,7 +96,7 @@ export default class IncomeExpenseList extends Component {
     let data = this.props.onlyShowRecent ? this.props.data.slice(0, 5) : this.props.data;
 
     return <>
-      <article className={this.props.onlyShowRecent ? 'item-list-dash' : ''}>
+      <article className={this.props.onlyShowRecent ? 'item-list-dash' : 'item-list-details'}>
         {this.props.onlyShowRecent ? <h4>{this.props.type}</h4> : ''}
         {this.props.onlyShowRecent && data.length === 0 ? <p>There are no items to display.</p> : ''}
 

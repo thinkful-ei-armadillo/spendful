@@ -49,7 +49,7 @@ class LoginPage extends React.Component {
 
         <LoginForm onSuccess={this.handleLoginSuccess} onFailure={this.handleLoginFailure} />
 
-        <Link to="/">Don't have an account?</Link>
+        <Link className="link-sm" to="/">Don't have an account?</Link>
 
       </section>
     )

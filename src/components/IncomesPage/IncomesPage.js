@@ -79,28 +79,27 @@ export default class IncomePage extends Component {
 
   render() {
     let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
-    return (
-      <>
-        <section className="page-controls">
-        <select onChange={this.handleChangeIncomes}>
-            <option value='all'>All Incomes</option>
-            <option value='monthly'>Monthly</option>
-          </select>
-          {this.state.showIncomes === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
-          <Link to="/add#income">Add income</Link>
-        </section>
-        {this.state.showIncomes === 'all' && <BarChart data={data} type="incomes" />}
-        <section className="page-content">
+    
+    return <>
+      <section className="page-controls">
+        <select className="form-control" onChange={this.handleChangeIncomes}>
+          <option value='all'>All Incomes</option>
+          <option value='monthly'>Monthly</option>
+        </select>
 
-        {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
+        {this.state.showIncomes === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
+        <Link className="btn" to="/add#income">Add income</Link>
+      </section>
 
+      {this.state.showIncomes === 'all' && <BarChart data={data} type="incomes" />}
+      
+      <section className="page-content">
         {(this.state.incomes.length > 0)
           ? <IncomeExpenseList type="incomes" data={this.state.incomes} updateIncomes={this.updateIncomes}/>
           : 
            <p>There are no items to display</p> 
           }
-        </section>
-      </>
-    );
+      </section>
+    </>;
   }
 }
