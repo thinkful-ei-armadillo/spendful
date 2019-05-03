@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+main {
+  margin: 0 auto;
+  padding: 7em 2em 0;
+  max-width: 60em;
+}
+
+header {
+  background-color: #ececec;
+  background-image: 
+    linear-gradient(0deg, rgba(255, 255, 255, 0.71), rgba(255, 255, 255, 0)),
+    url(../../images/coffee-contemporary-data-6307.jpg); 
+  background-repeat: no-repeat; 
+  background-position: top; 
+  background-size: cover;
+}
+
+h3 {
+  text-align: center;
+}
+
+h4 {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+article {
+  max-width: 40em;
+  margin: 0 auto 4em;
+  padding: 1.25em;
+  position: relative;
+  flex-basis: 22em;
+  background: #ececec;
+  border: 1px solid #dadada;
+  border-radius: 6px;
+}
+
+article > p {
+  text-align: center;
+  margin: 2em 0;
+  color: gray;
+}
+
+form > input {
+  box-sizing: border-box;
+}
+
+label {
+  text-align: left;
+  font-size: 0.8em;
+  padding: 0 0 0.25em;
+  font-weight: bold;
+}
+
+.flex-main {
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+.flex-form-container {
+  min-width: 25em;  
+  max-width: 40em;
+  margin: 4em auto 0;
+  padding: 2em;
+  background-color: #e8e8e8;
+  border-radius: 6px;
+  border-bottom: 7px solid #bbbbbb;
+}
+
+.flex-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flex-form h2 {
+  margin: 0 0 1.5em;
+}
+
+.flex-form input,
+.flex-form > select {
+  width: 100%;
+  margin: .5em auto;
+  padding: 0.5em 0.75em;
+  border-radius: 3px;
+  border: 2px solid #d2d2d2;
+  box-sizing: border-box;
+}
+
+.flex-form label {
+  margin: .5em 0 0 0;
+  font-size: .8em;
+  font-weight: bold;
+  color: gray;
+}
+
+#flex-form-button {
+  margin-top: 3em;
+}
+
+
+.page-bar-chart {
+  margin: 0 5em;
+}
+
+.page-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 1.5em;
+  max-width: 42.5em;
+}
+.flex-main .page-controls {
+  padding: 0 3.5em;
+}
+
+.select-month-lg {
+  font-size: 1.5em;
+  padding: 0.25em .5em;
+  border: 0;
+  border-bottom: 1px solid gray;
+}
+.select-month-lg option {
+  font-size: .6em;
+}
+
+
+.w-100 { width: 100%; height: 0 }
+
+.text-green { color: green }
+.text-red { color: red }
+
+.link-sm:link,
+.link-sm:visited {
+  margin: 3px 0;
+  font-size: .75em;
+  color: gray;
+}
+
+.form-control {
+  padding: 0.5em 0.75em;
+  border-radius: 3px;
+  border: 2px solid #d2d2d2;
+}
+
+.alert-error {
+  text-align: center;
+  padding: 1.5em 0;
+  color: red;
+}
+.alert-error-lg {
+  padding: 1em;
+  text-align: center;
+  background-color: #ff5f5f;
+  color: #fff;
+}
+
+
+.btn,
+.btn:link,
+.btn:visited {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 0;
+  text-decoration: none;
+  background-color: #6697ff;
+  color: #fff;
+}
+
+
+@media only screen and (max-width: 425px) {
+  .show-mobile { display: block; }
+
+  .flex-form {
+    min-width: 100%;
+  }
+
+  .page-bar-chart {
+    margin: 0 0 3em;
+  }
+}
+
+@media only screen and (min-width: 426px) {
+  .show-mobile { display: none; }
+}
+
+.flex-add-item {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between
+}

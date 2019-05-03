@@ -1,0 +1,108 @@
+
+
+.landing-header {
+  max-width: 60em;
+  height: 75vh;
+  margin: 0 auto;
+  padding: 2em 15%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.landing-header-left {
+  max-height: 9em;
+  display: flex;
+  align-items: center;
+  flex: 3;
+  flex-basis: 12em;
+  font-size: 1.25em;
+}
+
+.landing-header-left h2 {
+  max-width: 12em;
+  margin: 0 1em;
+}
+
+.landing-header-right {
+  max-height: 16em;
+  padding: 0 21px;
+  max-width: 15em;
+  display: flex;
+  align-items: center;
+  flex: 8;
+  flex-basis: 15em;
+}
+
+.landing-header-right form {
+  width: 15em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.landing-header-right form input {
+  width: 100%;
+  max-width: 20em;
+  margin: 0 0 1em 0;
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10%;
+}
+
+.feature-list figure {
+  display: flex;
+  align-items: center;
+}
+
+.feature-list figure:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.feature-list figure img {
+  margin: 0 1em 0;
+}
+
+.feature-list figure:nth-child(even) img {
+  margin: 0 0 0 1em;
+}
+
+.feature-list figure figcaption {
+  margin: 2em;
+}
+
+footer {
+  background: #3e3e3e1c;;
+}
+.footer-wrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 0 15px 0;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+}
+
+
+hr {
+  border: 0;
+  margin: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0));
+}
+
+@media only screen and (max-width: 425px) {
+  .feature-list figure,
+  .feature-list figure:nth-child(even) {
+    margin: 0 0 2em 0;
+    flex-direction: column;
+  }
+}
