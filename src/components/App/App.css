@@ -12,7 +12,10 @@ main {
 }
 
 header {
-  background-color: #ececec;
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.71), rgba(255, 255, 255, 0)), url(/static/media/coffee-contemporary-data-6307.c600ab22.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
 }
 
 h3 {
@@ -30,7 +33,7 @@ article {
   padding: 1.25em;
   position: relative;
   flex-basis: 22em;
-  background: #ececec;
+  /* background: #ececec; */
   border: 1px solid #dadada;
   border-radius: 6px;
 }
