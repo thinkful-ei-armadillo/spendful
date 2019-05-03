@@ -36,6 +36,26 @@
 
 .item-list li p:nth-child(2) { text-align: center }
 
+/* money amount */
+.item-list-dash li p:nth-child(2) {
+  text-align: right;
+}
+
+.item-list-details li p:nth-child(2) {
+  text-align: left;
+}
+
+.item-list-dash .list-data {
+  flex-wrap: nowrap;
+}
+
+.item-list-dash li {
+  padding: 0 1em;
+}
+
+.item-list-dash .list-controls {
+  display: none;
+}
 
 .recent-link {
   bottom: -25px;
@@ -48,14 +68,6 @@
   text-align: center;
   border-bottom: 7px solid #4e4e4e;
   border-radius: 0 0 5px 5px;
-}
-
-.item-list-dash li p:nth-child(2) {
-  text-align: right;
-}
-
-.item-list-dash .list-data {
-  flex-wrap: nowrap;
 }
 
 .list-data {
@@ -73,7 +85,6 @@
   flex: 1;
 }
 
-
 .list-controls a:link,
 .list-controls a:visited {
   margin: 0.25em;
@@ -89,12 +100,9 @@
 .list-controls a:nth-child(2) { background-color: #ff6868 }
 
 
-
 @media only screen and (max-width: 425px) {
   .item-list li {
     margin: 2em 0;
     flex-direction: column;
   }
-
-  .item-list li p:nth-child(2) { text-align: right }
 }
