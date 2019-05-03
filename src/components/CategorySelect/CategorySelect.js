@@ -47,19 +47,19 @@ class CategorySelect extends React.Component {
   handleCategoryChange(ev) {
     this.setState({
       setCategory: ev.target.value,
-      errors: [],
+      // errors: [],
     })
     if (ev.target.value === 'create') {
       this.setState({
         showCreateForm: true,
-        errors: [],
+        // errors: [],
       });
     }
   }
 
   handleCreateFormSubmit() {
 
-    this.setState({ errors: [] });
+    // this.setState({ errors: [] });
 
     CategoriesService
       .createCategory({
@@ -149,7 +149,7 @@ class CategorySelect extends React.Component {
   render() {
     return (
       <div>
-        {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
+        {this.state.errors.length > 0 ? <div className="alert-error">{this.state.errors}</div> : ''}
 
         {!this.state.showCreateForm
           ? <div>
