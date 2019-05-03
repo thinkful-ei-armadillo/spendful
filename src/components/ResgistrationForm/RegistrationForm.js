@@ -50,12 +50,12 @@ export default class RegistrationForm extends Component {
     return (
       <form onSubmit={this.handleRegistrationSubmit}>
         <label htmlFor="input_email">Email</label>
-        <input type="text" id="input_email" name="email_address" autoComplete="off" required></input>
+        <input type="text" id="input_email" className="form-control" name="email_address" autoComplete="off" required></input>
         <label htmlFor="input_name">Full name</label>
-        <input type="text" id="input_name" name="full_name" autoComplete="off" required></input>
+        <input type="text" id="input_name" className="form-control" name="full_name" autoComplete="off" required></input>
         <label htmlFor="input_password">Password</label>
-        <input type="password" id="input_password" name="password" autoComplete="off" required></input>
-        <button type="submit">Create an account!</button>
+        <input type="password" id="input_password" className="form-control" name="password" autoComplete="off" required></input>
+        <button type="submit" className="btn">Create an account!</button>
       </form>
     );
   }

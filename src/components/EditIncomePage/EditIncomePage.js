@@ -41,11 +41,13 @@ class EditIncomePage extends React.Component {
             : ''
         }
 
-        <EditIncomeForm
-          incomeId={this.props.incomeId}
-          onSuccess={this.onSuccess}
-          onFailure={this.onFailure}
-        />
+        <div className="flex-form-container">
+          <EditIncomeForm
+            incomeId={this.props.incomeId}
+            onSuccess={this.onSuccess}
+            onFailure={this.onFailure}
+          />
+        </div>
       </main>
     )
   }
