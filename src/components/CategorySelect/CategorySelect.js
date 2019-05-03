@@ -47,19 +47,19 @@ class CategorySelect extends React.Component {
   handleCategoryChange(ev) {
     this.setState({
       setCategory: ev.target.value,
-      // errors: [],
+      errors: [],
     })
     if (ev.target.value === 'create') {
       this.setState({
         showCreateForm: true,
-        // errors: [],
+        errors: [],
       });
     }
   }
 
   handleCreateFormSubmit() {
 
-    // this.setState({ errors: [] });
+    this.clearError(); 
 
     CategoriesService
       .createCategory({
@@ -80,12 +80,14 @@ class CategorySelect extends React.Component {
   }
 
   handleDeleteCategory = (id) => {
+    this.clearError(); 
+
     try{
       if (!id){
         throw new Error('No category selected to delete')
       }
       CategoriesService
-        .deleteCategory(id)
+      .deleteCategory(id)
       .then(() => {
         let updatedCategories = this.state.categories.filter(category => category.id !== id)
         this.setState({
@@ -121,7 +123,9 @@ class CategorySelect extends React.Component {
   toggleShowCreate = (cancel) => {
     if (cancel) {
       this.setState({
-        setCategory: ''
+        setCategory: '',
+        inputValue:'', 
+        errors:[]
       })
     }
     this.setState({
@@ -133,6 +137,10 @@ class CategorySelect extends React.Component {
     this.setState({
       setCategory: newCat
     })
+  }
+
+  clearError = () => {
+    this.setState({ errors: [] });
   }
 
 

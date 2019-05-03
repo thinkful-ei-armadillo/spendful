@@ -58,7 +58,7 @@ export default class AddItemForm extends Component{
           })
         }
     } catch{
-      this.props.onFailure("Category does not exist")
+      this.props.onFailure("Category not entered.")
     }
   }
 
