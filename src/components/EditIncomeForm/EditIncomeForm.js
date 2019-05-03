@@ -58,7 +58,7 @@ class EditIncomeForm extends React.Component {
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
     const startDate = moment(ev.target.startDate.value).tz('UTC').format();
-    const endDate   = moment(ev.target.endDate.value).tz('UTC').format();
+    const endDate   = (ev.target.endDate.value) ? moment(ev.target.endDate.value).tz('UTC').format() : null;
 
     let recurring_rule = ev.target.frequency.value;
     if (recurring_rule === 'once') {

@@ -58,7 +58,7 @@ class EditExpenseForm extends React.Component {
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
     const startDate = moment(ev.target.startDate.value).tz('UTC').format();
-    const endDate   = moment(ev.target.endDate.value).tz('UTC').format();
+    const endDate   = (ev.target.endDate.value) ? moment(ev.target.endDate.value).tz('UTC').format() : null;
 
     let recurring_rule = ev.target.frequency.value;
     if (recurring_rule === 'once') {
@@ -98,7 +98,7 @@ class EditExpenseForm extends React.Component {
       <input type="date" id="startDate" name="startDate" defaultValue={this.state.expense.start_date} />
 
       <label htmlFor="endDate">End Date (Optional)</label>
-      <input type="date" id="endDate" name="endDate" defaultValue={this.state.income.end_date} />
+      <input type="date" id="endDate" name="endDate" defaultValue={this.state.expense.end_date} />
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
