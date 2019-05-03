@@ -71,7 +71,7 @@ export default class ExpensesPage extends Component {
           <Link to="/add#expense">Add expense</Link>
         </section>
 
-        {this.state.showExpenses === 'all' && <BarChart data={data} />}
+        {this.state.showExpenses === 'all' && <BarChart data={data} type="expenses" />}
         
         <section className="page-content">
           <IncomeExpenseList type="expenses" data={data} />

@@ -5,58 +5,68 @@ import DataContext from '../../contexts/DataContext';
 
 export default class BarChart extends Component {
   static contextType = DataContext;
-
-  state = {
-    categoryColors: {
-      0: '#f04511',
-      1: '#5501d0',
-      2: '#ff01fa',
-      3: '#508fe4',
-      4: '#0fa931',
-    },
-    chart: {
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [
-          {
-            label: 'Total expenses',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-            hoverBorderColor: 'rgba(255,99,132,1)',
-            data: [65, 59, 80, 81, 56, 55, 40, 59, 80, 81, 56, 55, 40]
-          }
-        ],
+  constructor(props){
+    super(props)
+    let color = this.props.type === 'incomes' ? '93, 204, 132': '255,99,132';
+    this.state = {
+      categoryColors: {
+        0: '#f04511',
+        1: '#5501d0',
+        2: '#ff01fa',
+        3: '#508fe4',
+        4: '#0fa931',
       },
-      options: {
-        legend: {
-          position: 'top',
-          labels: {
-            boxWidth: 12,
-            padding: 30,
-          }
-        },
-        scales: {
-          xAxes: [{
-            barPercentage: 0.5,
-            barThickness: 25,
-            maxBarThickness: 25,
-            minBarLength: 2,
-            gridLines: {
-                offsetGridLines: true
+      chart: {
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: '',
+              backgroundColor: `rgba(${color},0.2)`,
+              borderColor: `rgba(${color},1)`,
+              borderWidth: 1,
+              hoverBackgroundColor: `rgba(${color},0.4)`,
+              hoverBorderColor: `rgba(${color},1)`,
+              data: []
             }
-          }],
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
-            }
-          }]
+          ],
         },
-        responsive: true,
-        maintainAspectRatio: true,
-      }
-    },
+        options: {
+          legend: {
+            position: 'top',
+            labels: {
+              boxWidth: 12,
+              padding: 30,
+            }
+          },
+          scales: {
+            xAxes: [{
+              barPercentage: 0.5,
+              barThickness: 25,
+              maxBarThickness: 25,
+              minBarLength: 2,
+              gridLines: {
+                  offsetGridLines: true
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                beginAtZero:true,
+                callback: function(value, index, values) {
+                  if(parseInt(value) >= 1000){
+                    return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  } else {
+                    return '$' + value;
+                  }
+                }
+              }
+            }]
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+        }
+      },
+    }
   }
 
 
@@ -64,43 +74,50 @@ export default class BarChart extends Component {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     let chart = this.state.chart;
     let data = [...this.props.data]
+    let years = []
     let labels = [];
 
     if(data[0]){
       data.sort((a, b) => Date.parse(b.start_date) - Date.parse(a.start_date))
-      let offset = new Date(data[0].start_date).getMonth()
-      console.log('offset:', offset);
+      let offset = new Date().getMonth()
+      let offsetYear = new Date(data[0].start_date).getFullYear()
       
       for(let i=0; i < months.length; i++) {
         let pointer = (offset - i) % months.length;
-
+        let year = offsetYear
         if(pointer < 0) {
           pointer = months.length + pointer
-        }
+          year = offsetYear - 1
+        } 
 
-        labels.push(months[pointer]);
+        labels.push(months[pointer])
+        years.push(year)
       }
 
-      let totals = {};
-      let current = new Date(data[0].start_date)
+      console.log(years, labels)
+      let totals = [];
+      for(let i=0; i<labels.length; i++){
+        let total = 0;
+        data.forEach(d => {
+          let m = new Date(d.start_date).getMonth()
+          let y = new Date(d.start_date).getFullYear()
+          let amount = parseInt(d.amount)
+          if(months[m] === labels[i] && y === years[i] && d.recurring_rule === null){
+            total = total + amount
 
-      // get the totals for each month (for bar chart)
-      data.forEach((expense, i) => {
-        if(data[i + 1]) {
-          let next = new Date(data[i + 1].start_date)
-
-          // compare expense to next expense
-          if(current.getFullYear() !== next.getFullYear()) {
-            current = next;
+          } else if (months[m] === labels[i] && y === years[i] && d.recurring_rule.toLowerCase() === 'monthly'){
+            total = total + amount
+            for(let i=0; i<totals.length; i++){
+              totals[i]+=amount
+            }
           }
-        }
+        })
+        totals.push(total)
+      }
 
-        // increment the total for this month
-        totals[i] = (totals[i] || 0) + parseInt(expense.amount);
-      });
-
-      console.log(totals);
-
+      console.log(totals)
+      chart.data.datasets[0].data = totals
+      chart.data.datasets[0].label = `Total ${this.props.type} by month`
       chart.data.labels = labels;
     }
     return <Bar data={chart.data} options={chart.options} />;
