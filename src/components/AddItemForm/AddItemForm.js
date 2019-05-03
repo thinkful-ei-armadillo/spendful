@@ -72,7 +72,7 @@ This is not true for 500 level-errors
           })
         }
     } catch{
-      this.props.onFailure("Category does not exist")
+      this.props.onFailure("Category not entered.")
     }
   }
 
