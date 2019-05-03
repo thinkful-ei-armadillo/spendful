@@ -352,6 +352,16 @@
 
 .month-picker>.box {
   cursor: pointer;
+  position: relative;
+}
+
+.month-picker > .box:after {
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 0;
+  content: '⯆';
+  font-size: .75em
 }
 
 @media screen and (max-width: 767px) {
@@ -366,7 +376,7 @@
 
 @media screen and (min-width: 768px) {
   .month-picker>.box {
-    width: 120px;
+    width: 145px;
     border: 1px solid #e0e0e0;
     background-color: #f6f6f6;
     padding-left: 0.9rem;
