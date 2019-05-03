@@ -59,7 +59,7 @@ class CategorySelect extends React.Component {
 
   handleCreateFormSubmit() {
 
-    this.clearError(); 
+    this.clearError();
 
     CategoriesService
       .createCategory({
@@ -80,7 +80,7 @@ class CategorySelect extends React.Component {
   }
 
   handleDeleteCategory = (id) => {
-    this.clearError(); 
+    this.clearError();
 
     try{
       if (!id){
@@ -89,10 +89,14 @@ class CategorySelect extends React.Component {
       CategoriesService
       .deleteCategory(id)
       .then(() => {
-        let updatedCategories = this.state.categories.filter(category => category.id !== id)
-        this.setState({
-          categories: updatedCategories
-        })
+        // let updatedCategories = this.state.categories.filter(category => category.id !== id)
+        this.setCategories();
+        // this.setState({
+        //   categories: updatedCategories
+        // })
+      })
+      .catch((err) => {
+        this.setState({errors: err.errors});
       })
     }
       catch(error){
@@ -124,7 +128,7 @@ class CategorySelect extends React.Component {
     if (cancel) {
       this.setState({
         setCategory: '',
-        inputValue:'', 
+        inputValue:'',
         errors:[]
       })
     }
