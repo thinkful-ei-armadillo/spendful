@@ -7,14 +7,17 @@ body {
 
 main {
   margin: 0 auto;
-  padding: 2em;
+  padding: 7em 2em 0;
   max-width: 60em;
 }
 
 header {
-  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.71), rgba(255, 255, 255, 0)), url(/static/media/coffee-contemporary-data-6307.c600ab22.jpg);
-  background-repeat: no-repeat;
-  background-position: top;
+  background-color: #ececec;
+  background-image: 
+    linear-gradient(0deg, rgba(255, 255, 255, 0.71), rgba(255, 255, 255, 0)),
+    url(../../images/coffee-contemporary-data-6307.jpg); 
+  background-repeat: no-repeat; 
+  background-position: top; 
   background-size: cover;
 }
 
@@ -33,7 +36,7 @@ article {
   padding: 1.25em;
   position: relative;
   flex-basis: 22em;
-  /* background: #ececec; */
+  background: #ececec;
   border: 1px solid #dadada;
   border-radius: 6px;
 }
@@ -42,6 +45,10 @@ article > p {
   text-align: center;
   margin: 2em 0;
   color: gray;
+}
+
+form > input {
+  box-sizing: border-box;
 }
 
 label {
