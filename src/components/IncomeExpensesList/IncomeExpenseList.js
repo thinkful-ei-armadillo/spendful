@@ -12,7 +12,8 @@ class ListItem extends Component {
   render() {
     let classname = '';
     let prefix = '';
-    let extras = '';
+    let extraInfo = '';
+    let controls = '';
 
 
     if(this.props.type === 'expenses') {
@@ -23,26 +24,36 @@ class ListItem extends Component {
       prefix = '💵';
     }
 
-    // only show extras if list is NOT recent only
+    // only show extraInfo if list is NOT recent only
     if(! this.props.recentOnly) {
-      let date = new Date(this.props.item.start_date).toDateString();
+      let date = new Date(this.props.item.start_date).toLocaleDateString();
       let category = this.context.categories.find(c => c.id === this.props.item.category_id);
 
-      extras = <>
+      extraInfo = <>
         <p>{date}</p>
+        <div className="w-100"></div>
         <p>{category ? category.name : 'n/a'}</p>
-        <p>{this.props.item.recurring_rule || 'never'}</p>
-        <p><Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>Edit</Link></p>
-        <button onClick={() => this.props.deleteItem(this.props.item.id)} type="button">Delete</button>
+        <p>{this.props.item.recurring_rule || 'once'}</p>
+      </>;
+
+      controls = <>
+        <Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>
+          <i className="fas fa-edit"></i>
+        </Link>
+        <a href={`/${this.props.type}`} onClick={() => this.props.deleteItem(this.props.item.id)}><i className="fas fa-trash"></i></a>
       </>;
     }
 
     return (
       <li className={classname}>
-        <p>{prefix} {this.props.item.description}</p>
-        <p className={this.props.type === 'incomes' ? 'text-green' : 'text-red'}>${this.props.item.amount}</p>
-        <p className="w-100 show-mobile"></p>
-        {extras}
+        <div className="list-data">
+          <p>{prefix} {this.props.item.description}</p>
+          <p className={this.props.type === 'incomes' ? 'text-green' : 'text-red'}>${this.props.item.amount}</p>
+          {extraInfo}
+        </div>
+        <div className="list-controls">
+          {controls}
+        </div>
       </li>
     );
   }
