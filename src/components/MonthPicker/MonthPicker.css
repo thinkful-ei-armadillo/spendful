@@ -353,6 +353,7 @@
 .month-picker>.box {
   cursor: pointer;
   position: relative;
+  border-radius: 5px;
 }
 
 .month-picker > .box:after {
@@ -386,7 +387,7 @@
     color: #525252;
   }
   .month-picker>.box>label {
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: #525252;
   }
 }
