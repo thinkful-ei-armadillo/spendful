@@ -81,7 +81,7 @@ export default class IncomePage extends Component {
         </select>
 
         {this.state.showIncomes === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
-        <Link to="/add#income">Add income</Link>
+        <Link className="btn" to="/add#income">Add income</Link>
       </section>
 
       {this.state.showIncomes === 'all' && <BarChart data={data} type="incomes" />}

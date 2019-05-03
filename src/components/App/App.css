@@ -78,9 +78,14 @@ label {
 }
 
 
+.page-bar-chart {
+  margin: 0 5em;
+}
+
 .page-controls {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0 auto 1.5em;
   max-width: 42.5em;
 }
@@ -105,7 +110,7 @@ label {
 .text-red { color: red }
 
 .form-control {
-  padding: 5px;
+  padding: 10px;
 }
 
 .alert-error {
@@ -120,8 +125,14 @@ label {
   color: #fff;
 }
 
-.page-bar-chart {
-  margin: 0 5em;
+
+.btn:link,
+.btn:visited {
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #6697ff;
+  color: #fff;
 }
 
 

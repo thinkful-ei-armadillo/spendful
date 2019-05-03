@@ -67,12 +67,12 @@ export default class ExpensesPage extends Component {
     return (
       <>
         <section className="page-controls">
-          <select onChange={this.handleChangeExpenses}>
+          <select className="form-control" onChange={this.handleChangeExpenses}>
             <option value='all'>All Expenses</option>
             <option value='monthly'>Monthly</option>
           </select>
           {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
-          <Link to="/add#expense">Add expense</Link>
+          <Link className="btn" to="/add#expense">Add expense</Link>
         </section>
 
         {this.state.showExpenses === 'all' && <BarChart data={data} type="expenses" />}
