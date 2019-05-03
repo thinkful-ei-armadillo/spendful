@@ -27,15 +27,17 @@ export default class AddItemForm extends Component{
   onSubmit = (ev) => {
     ev.preventDefault();
 
-    const { category, description, amount, start_date, recurring_rule } = ev.target
+    const { category, description, amount, start_date, end_date, recurring_rule } = ev.target
 
     try {
     let startDate = moment(start_date.value).tz('UTC').format()
+    let endDate   = (end_date.value) ? moment(end_date.value).tz('UTC').format() : null;
     const newItem = {
       category_id: category.value,
       description: description.value,
       amount: amount.value,
       start_date: startDate,
+      end_date: endDate,
       recurring_rule: recurring_rule.value
     };
 
@@ -69,8 +71,11 @@ export default class AddItemForm extends Component{
 
       <CategorySelect id="category" type={this.props.itemType} />
 
-      <label htmlFor="start_date">Date</label>
+      <label htmlFor="start_date">Start Date</label>
       <input type="date" id="start_date"/>
+
+      <label htmlFor="end_date">End Date (Optional)</label>
+      <input type="date" id="end_date"/>
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" maxLength="50" />
