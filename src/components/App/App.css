@@ -104,6 +104,10 @@ label {
 .text-green { color: green }
 .text-red { color: red }
 
+.form-control {
+  padding: 5px;
+}
+
 .alert-error {
   text-align: center;
   padding: 1.5em 0;
