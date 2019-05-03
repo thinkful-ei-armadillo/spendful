@@ -26,11 +26,13 @@ h4 {
 
 article {
   max-width: 40em;
-  margin: 0 auto 3em;
-  position: relative;
-  flex-basis: 17em;
-  background: #ececec;
+  margin: 0 auto 4em;
   padding: 1.25em;
+  position: relative;
+  flex-basis: 22em;
+  background: #ececec;
+  border: 1px solid #dadada;
+  border-radius: 6px;
 }
 
 article > p {
