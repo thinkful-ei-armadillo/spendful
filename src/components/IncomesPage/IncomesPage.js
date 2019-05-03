@@ -12,6 +12,7 @@ export default class IncomePage extends Component {
     month: {},
     incomes: [],
     showIncomes: '',
+    errors: []
   }
 
    componentDidMount(){
@@ -56,6 +57,9 @@ export default class IncomePage extends Component {
         })
         .catch(error => {
             this.context.setError(error.errors)
+            this.setState({
+              errors: this.context.errors
+            })
         })
     }
 
@@ -73,9 +77,13 @@ export default class IncomePage extends Component {
         </section>
         
         <section className="page-content">
+
+        {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
+
         {(this.state.incomes.length > 0)
           ? <IncomeExpenseList type="incomes" data={this.state.incomes} updateIncomes={this.updateIncomes}/>
-          : <p>There are no items to display</p> 
+          : 
+           <p>There are no items to display</p> 
           }
         </section>
       </>

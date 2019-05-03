@@ -24,6 +24,20 @@ export default class AddItemForm extends Component{
     }
   }
 
+  /* 
+  
+Assumption all error response bodies look like this
+  application/json
+  {
+    errors: [
+      'error message 1',
+      'possibly another error message'
+    ]
+  }
+
+This is not true for 500 level-errors
+  */
+
   onSubmit = (ev) => {
     ev.preventDefault();
 

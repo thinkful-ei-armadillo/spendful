@@ -10,7 +10,8 @@ class CategorySelect extends React.Component {
       categories: [],
       showCreateForm: false,
       inputValue: '',
-      setCategory:''
+      setCategory:'',
+      errors: []
     };
 
     this.createOptions = this.createOptions.bind(this);

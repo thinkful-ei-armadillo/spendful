@@ -16,7 +16,7 @@ class AddItemPage extends Component {
 
   onFailure = (errors) => {
     this.setState({
-      errors 
+      errors: this.context.errors 
     })
   }
 

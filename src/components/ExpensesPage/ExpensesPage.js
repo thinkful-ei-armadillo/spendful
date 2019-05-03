@@ -11,7 +11,7 @@ export default class ExpensesPage extends Component {
   state = {
     month: {},
     expenses: [],
-    error: [],
+    errors: [],
     showExpenses: '',
   }
 
@@ -28,6 +28,9 @@ export default class ExpensesPage extends Component {
         })
         .catch(error => {
             this.context.setError(error.errors)
+            this.setState({
+              errors: this.context.errors
+            })
         })
   }
   
@@ -75,6 +78,9 @@ export default class ExpensesPage extends Component {
         </section>
         
         <section className="page-content">
+
+        {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
+
           {(this.state.expenses.length > 0)
           ?
           <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
