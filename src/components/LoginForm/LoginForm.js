@@ -27,9 +27,9 @@ class LoginForm extends React.Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input type="text" placeholder="Email" name="email_address" autoComplete="off" required/>
-        <input type="password" placeholder="Password" name="password" required/>
-        <button type="submit">Log In</button>
+        <input type="text" className="form-control" placeholder="Email" name="email_address" autoComplete="off" required/>
+        <input type="password" className="form-control" placeholder="Password" name="password" required/>
+        <button type="submit" className="btn">Log In</button>
       </form>
     );
   }

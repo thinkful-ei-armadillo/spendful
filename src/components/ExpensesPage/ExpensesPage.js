@@ -12,7 +12,7 @@ export default class ExpensesPage extends Component {
   state = {
     month: {},
     expenses: [],
-    error: [],
+    errors: [],
     showExpenses: '',
   }
 
@@ -29,6 +29,9 @@ export default class ExpensesPage extends Component {
         })
         .catch(error => {
             this.context.setError(error.errors)
+            this.setState({
+              errors: this.context.errors
+            })
         })
   }
   
@@ -64,27 +67,23 @@ export default class ExpensesPage extends Component {
 
   render() {
     let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
-    return (
-      <>
-        <section className="page-controls">
-          <select onChange={this.handleChangeExpenses}>
-            <option value='all'>All Expenses</option>
-            <option value='monthly'>Monthly</option>
-          </select>
-          {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
-          <Link to="/add#expense">Add expense</Link>
-        </section>
+    return <>
+      <section className="page-controls">
+        <select className="form-control" onChange={this.handleChangeExpenses}>
+          <option value='all'>All Expenses</option>
+          <option value='monthly'>Monthly</option>
+        </select>
+        {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
+        <Link className="btn" to="/add#expense">Add expense</Link>
+      </section>
 
-        {this.state.showExpenses === 'all' && <BarChart data={data} type="expenses" />}
+      {this.state.showExpenses === 'all' && <BarChart data={data} type="expenses" />}
         
-        <section className="page-content">
-          {(this.state.expenses.length > 0)
-          ?
-          <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
-          : <p>There are no items to display</p> 
-          }
-          </section>
-      </>
-    );
+      <section className="page-content">
+        { this.state.expenses.length > 0
+        ? <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
+        : <p>There are no items to display</p> }
+      </section>
+    </>;
   }
 }

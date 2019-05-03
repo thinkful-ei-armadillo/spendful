@@ -11,7 +11,7 @@ class CategorySelect extends React.Component {
       showCreateForm: false,
       inputValue: '',
       setCategory:'',
-      errors: [],
+      errors: []
     };
 
     this.createOptions = this.createOptions.bind(this);
@@ -89,11 +89,7 @@ class CategorySelect extends React.Component {
       CategoriesService
       .deleteCategory(id)
       .then(() => {
-        // let updatedCategories = this.state.categories.filter(category => category.id !== id)
         this.setCategories();
-        // this.setState({
-        //   categories: updatedCategories
-        // })
       })
       .catch((err) => {
         this.setState({errors: err.errors});
@@ -165,12 +161,15 @@ class CategorySelect extends React.Component {
 
         {!this.state.showCreateForm
           ? <div>
-            <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
+            <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category" {...this.props}>
               <option value=''></option>
               {this.createOptions()}
               <option value='create'>Create new category...</option>
             </select>
-            <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button">Delete This Category</button>
+
+            <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button" className="btn">
+              <i className="fas fa-trash"></i>
+            </button>
             </div>
           : this.renderCreateCategory()}
       </div>

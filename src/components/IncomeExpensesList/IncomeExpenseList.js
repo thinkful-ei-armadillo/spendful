@@ -63,12 +63,21 @@ class ListItem extends Component {
 export default class IncomeExpenseList extends Component {
   static contextType = DataContext;
 
+  state = {
+    errors: []
+  }
+
   componentDidMount() {
     getAllCategories()
       .then(categories => {
         this.context.setCategories(categories);
+      })
+      .catch(error => {
+        this.context.setError(error)
+        this.setState({
+          errors: this.context.errors
+        })
       });
-
   }
 
   deleteItem = (itemId) => {
@@ -87,7 +96,7 @@ export default class IncomeExpenseList extends Component {
     let data = this.props.onlyShowRecent ? this.props.data.slice(0, 5) : this.props.data;
 
     return <>
-      <article className={this.props.onlyShowRecent ? 'item-list-dash' : ''}>
+      <article className={this.props.onlyShowRecent ? 'item-list-dash' : 'item-list-details'}>
         {this.props.onlyShowRecent ? <h4>{this.props.type}</h4> : ''}
         {this.props.onlyShowRecent && data.length === 0 ? <p>There are no items to display.</p> : ''}
 

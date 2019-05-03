@@ -1,14 +1,19 @@
+
+
 .landing-header {
   max-width: 60em;
-  height: 35vh;
+  height: 75vh;
   margin: 0 auto;
   padding: 2em 15%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .landing-header-left {
+  max-height: 9em;
   display: flex;
   align-items: center;
   flex: 3;
@@ -22,6 +27,8 @@
 }
 
 .landing-header-right {
+  max-height: 16em;
+  padding: 0 21px;
   max-width: 15em;
   display: flex;
   align-items: center;
@@ -71,7 +78,7 @@
 }
 
 footer {
-  background: #ffead0;
+  background: #3e3e3e1c;;
 }
 .footer-wrapper {
   display: flex;
