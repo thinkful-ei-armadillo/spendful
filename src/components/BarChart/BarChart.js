@@ -5,39 +5,32 @@ import DataContext from '../../contexts/DataContext';
 
 export default class BarChart extends Component {
   static contextType = DataContext;
-  constructor(props){
-    super(props)
-    let color = this.props.type === 'incomes' ? '93, 204, 132': '255,99,132';
+
+  constructor(props) {
+    super(props);
+
+    const barColor = this.props.type === 'incomes' ? '93, 204, 132': '255,99,132';
+    const gridLineColor = '0, 0, 0';
+
     this.state = {
-      categoryColors: {
-        0: '#f04511',
-        1: '#5501d0',
-        2: '#ff01fa',
-        3: '#508fe4',
-        4: '#0fa931',
-      },
       chart: {
         data: {
           labels: [],
           datasets: [
             {
               label: '',
-              backgroundColor: `rgba(${color},0.2)`,
-              borderColor: `rgba(${color},1)`,
+              backgroundColor: `rgba(${barColor},0.2)`,
+              borderColor: `rgba(${barColor},1)`,
               borderWidth: 1,
-              hoverBackgroundColor: `rgba(${color},0.4)`,
-              hoverBorderColor: `rgba(${color},1)`,
+              hoverBackgroundColor: `rgba(${barColor},0.4)`,
+              hoverBorderColor: `rgba(${barColor},1)`,
               data: []
             }
           ],
         },
         options: {
           legend: {
-            position: 'top',
-            labels: {
-              boxWidth: 12,
-              padding: 30,
-            }
+            display: false,
           },
           scales: {
             xAxes: [{
@@ -46,10 +39,14 @@ export default class BarChart extends Component {
               maxBarThickness: 25,
               minBarLength: 2,
               gridLines: {
-                  offsetGridLines: true
+                offsetGridLines: true,
+                color: `rgb(${gridLineColor}, .1)`,
               }
             }],
             yAxes: [{
+              gridLines: {
+                color: `rgb(${gridLineColor}, .1)`,
+              },
               ticks: {
                 beginAtZero:true,
                 callback: function(value, index, values) {
