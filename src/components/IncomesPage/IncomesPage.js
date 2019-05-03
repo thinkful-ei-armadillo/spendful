@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
+import BarChart from '../BarChart/BarChart';
 import { getAllIncomes } from '../../services/incomes-service'
 import { getMonthlyReport } from '../../services/reports-service';
 import DataContext from '../../contexts/DataContext'
@@ -14,10 +15,20 @@ export default class IncomePage extends Component {
     showIncomes: '',
   }
 
-   componentDidMount(){
-      this.updateIncomes()
-   }
-   
+
+  componentDidMount(){
+    this.setState({showIncomes: 'all'})
+    this.context.clearError()
+    getAllIncomes()
+        .then(incomes => {
+            this.setState({incomes})
+        })
+        .catch(error => {
+            this.context.setError(error.errors)
+        })
+  }
+
+
   handleReports = (year, month) => {
     year = parseInt(year);
     month = parseInt(month);
@@ -60,7 +71,7 @@ export default class IncomePage extends Component {
     }
 
   render() {
-    // let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
+    let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
     return (
       <>
         <section className="page-controls">
@@ -71,7 +82,7 @@ export default class IncomePage extends Component {
           {this.state.showIncomes === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
           <Link to="/add#income">Add income</Link>
         </section>
-        
+        {this.state.showIncomes === 'all' && <BarChart data={data} type="incomes" />}
         <section className="page-content">
         {(this.state.incomes.length > 0)
           ? <IncomeExpenseList type="incomes" data={this.state.incomes} updateIncomes={this.updateIncomes}/>
