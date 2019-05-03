@@ -70,6 +70,25 @@ class CategorySelect extends React.Component {
       .catch(console.log);
   }
 
+  handleDeleteCategory = (id) => {
+    try{
+      if (!id){
+        throw new Error('No category selected to delete')
+      }
+      CategoriesService
+        .deleteCategory(id)
+      .then(() => {
+        let updatedCategories = this.state.categories.filter(category => category.id !== id)
+        this.setState({
+          categories: updatedCategories
+        })
+      })
+    }
+        catch(error){
+        (console.log(error))
+      }
+    }
+
   updateInputValue = (ev) => {
     this.setState({
       inputValue: ev.target.value 
@@ -108,11 +127,14 @@ class CategorySelect extends React.Component {
     return (
       <div>
         {!this.state.showCreateForm 
-          ? <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
+          ? <div>
+            <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
               <option value=''></option>
               {this.createOptions()}
               <option value='create'>Create new category...</option>
             </select>
+            <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button">Delete This Category</button>
+            </div>
           : this.renderCreateCategory()}
       </div>
     );
