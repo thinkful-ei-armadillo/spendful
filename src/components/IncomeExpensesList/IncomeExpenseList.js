@@ -63,12 +63,21 @@ class ListItem extends Component {
 export default class IncomeExpenseList extends Component {
   static contextType = DataContext;
 
+  state = {
+    errors: []
+  }
+
   componentDidMount() {
     getAllCategories()
       .then(categories => {
         this.context.setCategories(categories);
+      })
+      .catch(error => {
+        this.context.setError(error)
+        this.setState({
+          errors: this.context.errors
+        })
       });
-
   }
 
   deleteItem = (itemId) => {

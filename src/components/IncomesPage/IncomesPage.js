@@ -13,6 +13,7 @@ export default class IncomePage extends Component {
     month: {},
     incomes: [],
     showIncomes: '',
+    errors: []
   }
 
 
@@ -46,6 +47,9 @@ export default class IncomePage extends Component {
       })
       .catch(error => {
         this.context.setError(error)
+        this.setState({
+          errors: this.context.errors
+        })
       })
   }
 
@@ -67,12 +71,15 @@ export default class IncomePage extends Component {
         })
         .catch(error => {
             this.context.setError(error.errors)
+            this.setState({
+              errors: this.context.errors
+            })
         })
     }
 
   render() {
     let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
-
+    
     return <>
       <section className="page-controls">
         <select className="form-control" onChange={this.handleChangeIncomes}>
@@ -89,7 +96,8 @@ export default class IncomePage extends Component {
       <section className="page-content">
         {(this.state.incomes.length > 0)
           ? <IncomeExpenseList type="incomes" data={this.state.incomes} updateIncomes={this.updateIncomes}/>
-          : <p>There are no items to display</p> 
+          : 
+           <p>There are no items to display</p> 
           }
       </section>
     </>;

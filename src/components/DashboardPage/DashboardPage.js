@@ -16,6 +16,7 @@ export default class DashboardPage extends Component {
         year: new Date().getFullYear(), 
         month: new Date().getMonth()
       },
+      errors: []
   }
 
   componentDidMount() {
@@ -27,6 +28,7 @@ export default class DashboardPage extends Component {
       })
       .catch(error => {
         this.context.setError(error)
+        
       })
   }
 
@@ -66,6 +68,7 @@ export default class DashboardPage extends Component {
     // console.log(data)
     return (
       <main className="flex-main">
+        {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
         <section className="page-controls">
           <MonthPicker setMonth={this.handleSetMonth} />
         </section>
