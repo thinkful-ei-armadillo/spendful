@@ -62,7 +62,7 @@ export default class ExpensesPage extends Component {
   }
 
   render() {
-    let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
+    // let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
     return (
       <>
         <section className="page-controls">

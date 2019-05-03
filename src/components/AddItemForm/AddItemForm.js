@@ -30,32 +30,32 @@ export default class AddItemForm extends Component{
     const { category, description, amount, start_date, recurring_rule } = ev.target
 
     try {
-    let startDate = moment(start_date.value).tz('UTC').format()
-    const newItem = {
-      category_id: category.value,
-      description: description.value,
-      amount: amount.value,
-      start_date: startDate,
-      recurring_rule: recurring_rule.value
-    };
+      let startDate = moment(start_date.value).tz('UTC').format()
+      const newItem = {
+        category_id: category.value,
+        description: description.value,
+        amount: amount.value,
+        start_date: startDate,
+        recurring_rule: recurring_rule.value
+      };
 
-    if (this.props.itemType === "income") {
-      IncomesService.createIncome(newItem)
-        .then(() =>{
-          this.props.onSuccess('/incomes')
-        })
-        .catch(err => {
-          this.props.onFailure(err.errors)
-        })
-    } else {
-        ExpensesService.createExpense(newItem)
-        .then(() => {
-          this.props.onSuccess('/expenses')
-        })
-        .catch(err => {
-          this.props.onFailure(err.errors)
-        })
-      }
+      if (this.props.itemType === "income") {
+        IncomesService.createIncome(newItem)
+          .then(() =>{
+            this.props.onSuccess('/incomes')
+          })
+          .catch(err => {
+            this.props.onFailure(err.errors)
+          })
+      } else {
+          ExpensesService.createExpense(newItem)
+          .then(() => {
+            this.props.onSuccess('/expenses')
+          })
+          .catch(err => {
+            this.props.onFailure(err.errors)
+          })
+        }
     } catch{
       this.props.onFailure("Category does not exist")
     }

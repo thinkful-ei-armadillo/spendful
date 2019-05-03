@@ -60,7 +60,7 @@ export default class IncomePage extends Component {
     }
 
   render() {
-    let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
+    // let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
     return (
       <>
         <section className="page-controls">
