@@ -10,7 +10,8 @@ class CategorySelect extends React.Component {
       categories: [],
       showCreateForm: false,
       inputValue: '',
-      setCategory:''
+      setCategory:'',
+      errors: [],
     };
 
     this.createOptions = this.createOptions.bind(this);
@@ -65,9 +66,11 @@ class CategorySelect extends React.Component {
         this.toggleShowCreate()
       })
       .then(() => {
-        this.setCategories();  
+        this.setCategories();
       })
-      .catch(console.log);
+      .catch(err => {
+        this.setState({errors: [err.errors]});
+      });
   }
 
   handleDeleteCategory = (id) => {
@@ -84,14 +87,22 @@ class CategorySelect extends React.Component {
         })
       })
     }
-        catch(error){
-        (console.log(error))
+      catch(error){
+        if (error.errors) {
+          this.setState({errors: error.errors});
+        }
+        else if (error.message) {
+          this.setState({errors: [error.message]});
+        }
+        else {
+          this.setState({errors: error});
+        }
       }
     }
 
   updateInputValue = (ev) => {
     this.setState({
-      inputValue: ev.target.value 
+      inputValue: ev.target.value
     })
   }
 
@@ -117,7 +128,7 @@ class CategorySelect extends React.Component {
       setCategory: newCat
     })
   }
-  
+
 
   renderCreateCategory = () => {
     return (
@@ -132,7 +143,9 @@ class CategorySelect extends React.Component {
   render() {
     return (
       <div>
-        {!this.state.showCreateForm 
+        {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
+
+        {!this.state.showCreateForm
           ? <div>
             <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
               <option value=''></option>
