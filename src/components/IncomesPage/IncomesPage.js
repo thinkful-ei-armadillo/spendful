@@ -36,6 +36,9 @@ export default class IncomePage extends Component {
       })
       .catch(error => {
         this.context.setError(error)
+        this.setState({
+          errors: this.context.errors
+        })
       })
   }
 
