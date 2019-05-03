@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import UserContext from '../../contexts/UserContext';
 import RegistrationForm from '../ResgistrationForm/RegistrationForm';
 import './LandingPage.css';
@@ -44,6 +45,33 @@ export default class LandingPage extends Component {
           </figure>
         </section>
       </main>
+      <footer>
+        <div className='footer-wrapper'>
+          <div className="project">
+            <h3>Project</h3>
+            <ul>
+              <li><a href="https://github.com/thinkful-ei-armadillo/spendful-client" target="_blank" rel="noopener noreferrer">Github Client</a></li>
+              <li><a href="https://github.com/thinkful-ei-armadillo/spendful-server" target="_blank" rel="noopener noreferrer">Github Server</a></li>
+              <li><a href="#" >Register</a></li>
+              <li><Link to="/login">Login</Link></li>
+            </ul>
+          </div>
+          <div className="about-us">
+            <h3>About us</h3>
+            <ul>
+              <li>Andre</li>
+              <li>Chris</li>
+              <li>Ethan</li>
+              <li>Michael</li>
+              <li>Zoljargal</li>
+            </ul>
+          </div>
+        </div>
+        <hr/>
+        <div className="copyright">
+          <p>Copyright 2019</p>
+        </div>
+      </footer>
     </>;
   }
 }
