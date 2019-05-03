@@ -77,11 +77,8 @@ class CategorySelect extends React.Component {
       }
       CategoriesService
         .deleteCategory(id)
-      .then(() => {
-        let updatedCategories = this.state.categories.filter(category => category.id !== id)
-        this.setState({
-          categories: updatedCategories
-        })
+        .then(() => {
+          this.setCategories(); 
       })
     }
         catch(error){
