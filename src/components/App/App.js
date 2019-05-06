@@ -16,12 +16,22 @@ import Navbar from '../Navbar/Navbar';
 import './App.css';
 
 class App extends Component {
+  state = { hasError: false }
+
+  static getDerivedStateFromError(error) {
+    console.error(error)
+    return { hasError: true }
+  }
 
   render() {
+    const { hasError } = this.state
     return <>
       <Navbar />
 
       <div id="app-container">
+        {hasError && (
+            <p>There was an error! Oh no!</p>
+          )}
         <Switch>
           <PublicOnlyRoute exact path={'/'} component={LandingPage} />
           <PublicOnlyRoute path={'/login'} component={LoginRoute} />
