@@ -24,15 +24,16 @@ export default class ExpensesPage extends Component {
   }
 
   updateExpenses = () => {
-      this.setState({month: {}, showExpenses: 'all'})
-      this.context.clearError()
+    this.setState({month: {}, showExpenses: 'all'})
+    this.context.clearError()
+    this.handleReports(
+        this.state.month.year, 
+        this.state.month.month + 1 
+        )
+        
      getAllExpenses()
         .then(expenses => {
             this.setState({expenses})
-            this.handleReports(
-              this.state.month.year, 
-              this.state.month.month + 1 
-              )
         })
         .catch(error => {
             this.context.setError(error.errors)

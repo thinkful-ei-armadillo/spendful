@@ -23,13 +23,13 @@ export default class IncomePage extends Component {
   componentDidMount(){
     this.setState({month: {}, showIncomes: 'all'})
     this.context.clearError()
+    this.handleReports(
+      this.state.month.year, 
+      this.state.month.month + 1 
+      )
     getAllIncomes()
         .then(incomes => {
             this.setState({incomes})
-            this.handleReports(
-              this.state.month.year, 
-              this.state.month.month + 1 
-              )
         })
         .catch(error => {
             this.context.setError(error.errors)
