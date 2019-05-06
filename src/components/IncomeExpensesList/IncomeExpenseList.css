@@ -110,13 +110,13 @@
 }
 
 /* edit/delete btns */
-.list-controls a:nth-child(1) { background-color: #f1ea98; color: #b78f18; }
+.list-controls a:nth-child(1) { background-color: #d2d2d2; color: #696969; }
 .list-controls a:nth-child(2) { background-color: #ff6868 }
 
 
 @media only screen and (max-width: 425px) {
   .item-list li {
-    margin: 2em 0;
+    margin: 0 0 2em;
     flex-direction: column;
   }
 }

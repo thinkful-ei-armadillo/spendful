@@ -4,6 +4,7 @@ nav {
   width: 100vw;
   top: 0;
   z-index: 5;
+  border-bottom: 4px solid #e2e2e2;
 }
 
 nav div {
@@ -85,7 +86,7 @@ nav a {
 
 
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 675px) {
   nav .nav-hide-mobile {
     display: none;
   }
@@ -94,7 +95,7 @@ nav a {
 }
 
 /* hide mobile menu on big screens */
-@media only screen and (min-width: 426px) {
+@media only screen and (min-width: 675px) {
   .nav-mobile-menu,
   .nav-mobile-menu.expanded,
   .nav-show-mobile {
