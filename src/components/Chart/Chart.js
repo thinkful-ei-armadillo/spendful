@@ -8,11 +8,11 @@ export default class Chart extends Component {
 
   state = {
     categoryColors: {
-      0: '#f04511',
-      1: '#5501d0',
-      2: '#ff01fa',
-      3: '#508fe4',
-      4: '#0fa931',
+      0: 'rgba(8, 95, 99, 0.5)',
+      1: 'rgba(73, 190, 183, 0.5)',
+      2: 'rgba(250, 207, 90, 0.5)',
+      3: 'rgba(255, 89, 89, 0.5)',
+      4: 'rgba(15, 169, 49, 0.5)',
     },
     chart: {
       data: {

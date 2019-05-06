@@ -86,6 +86,7 @@ export default class IncomePage extends Component {
 
   render() {
     let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
+    let chart = this.state.showIncomes === 'all' ? <BarChart data={data} type="incomes" /> : '';
     
     return <>
       <section className="page-controls">
@@ -98,13 +99,13 @@ export default class IncomePage extends Component {
         <Link className="btn" to="/add#income">Add income</Link>
       </section>
 
-      {this.state.showIncomes === 'all' && <BarChart data={data} type="incomes" />}
+      {this.state.incomes.length > 0 && chart}
       
       <section className="page-content">
         {(this.state.incomes.length > 0)
           ? <IncomeExpenseList type="incomes" data={data} updateIncomes={this.updateIncomes}/>
           : 
-           <p>There are no items to display</p> 
+           <p className="alert">There are no items to display</p> 
           }
       </section>
     </>;

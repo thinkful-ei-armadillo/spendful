@@ -79,7 +79,7 @@ export default class DashboardPage extends Component {
 
         <div className="w-100"></div>
 
-        <Chart data={data} key={date}/>
+        {this.context.expenses.length > 0 && <Chart data={data} key={date}/>}
 
         <section className="page-summaries">
           <IncomeExpenseList type="incomes" data={this.context.incomes} key={'incomes' + date} onlyShowRecent />
