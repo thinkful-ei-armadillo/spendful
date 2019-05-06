@@ -75,7 +75,7 @@ This is not true for 500 level-errors
   render(){
     return(
     <form className="flex-form" onSubmit={this.onSubmit}>
-      <h2>Add {this.props.itemType}</h2>
+      <h2>Create new item</h2>
       <label htmlFor="input-category">Category</label>
 
       <CategorySelect id="category" type={this.props.itemType} />
@@ -102,7 +102,7 @@ This is not true for 500 level-errors
         <option value="weekly">Weekly</option>
       </select>
 
-      <button id="flex-form-button" className="btn" type="submit">Create</button>
+      <button id="flex-form-button" className="btn btn-submit" type="submit">Create</button>
     </form>
     )
   }

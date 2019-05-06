@@ -7,6 +7,24 @@ import './LandingPage.css';
 export default class LandingPage extends Component {
   static contextType = UserContext;
 
+  constructor(props) {
+    super(props)
+    this.myRef = React.createRef()   
+  }
+
+     // Scroll to ref function 
+  scrollToMyRef = () => {
+    window.scrollTo({
+        top:  this.myRef.current.offsetTop, 
+        behavior: "smooth" 
+    })
+  }
+
+  
+  scrollTo = () => {
+      this.scrollToMyRef()
+  }
+
 
   render() {
     return <>
@@ -25,12 +43,13 @@ export default class LandingPage extends Component {
       </header>
 
       <main>
-        <h3>How does it work?</h3>
+        <h3 onClick={this.scrollTo}>How does it work?</h3>
 
-        <section className="feature-list">
+        <section className="feature-list" ref={this.myRef}>
           <figure>
             <img src="https://via.placeholder.com/150" alt="placeholder"></img>
             <figcaption>
+              Track your earnings and expenses! <br/>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
             condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
             </figcaption>
@@ -39,8 +58,9 @@ export default class LandingPage extends Component {
           <figure>
             <img src="https://via.placeholder.com/150" alt="placeholder"></img>
             <figcaption>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
-            condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
+              Understand where you money goes! <br/>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
+              condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
             </figcaption>
           </figure>
         </section>
