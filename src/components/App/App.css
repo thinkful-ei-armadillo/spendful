@@ -37,8 +37,10 @@ article {
   position: relative;
   flex-basis: 22em;
   background: #ececec;
-  border: 1px solid #dadada;
-  border-radius: 6px;
+
+  padding: 1.25em;
+  padding-bottom: 3em;
+
 }
 
 article > p {
