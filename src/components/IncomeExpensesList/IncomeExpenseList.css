@@ -51,4 +51,21 @@
   .item-list li { margin: 2em 0 }
 
   .item-list li p:nth-child(2) { text-align: right }
+
+  .add-link {
+    
+  }
+}
+
+.add-link {
+  width: 15em;
+  
+  
+  
+  padding: .5em 1em;
+  background: gray;
+  color: #fff;
+  text-align: center;
+  margin-top: -20px; 
+  margin-bottom: 20px;
 }

@@ -31,6 +31,7 @@ article {
   flex-basis: 17em;
   background: #ececec;
   padding: 1.25em;
+  padding-bottom: 3em;
 }
 
 article > p {
