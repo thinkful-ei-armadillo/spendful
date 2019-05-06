@@ -53,11 +53,17 @@ export class DataProvider extends Component {
   }
 
   deleteIncome = (id) => {
-
+    let newIncomesList = this.state.incomes.filter(income => income.id !== id); 
+    this.setState({
+      incomes: newIncomesList
+    })
   }
 
   deleteExpense = (id) => {
-
+    let newExpenseList = this.state.expenses.filter(expense => expense.id !== id); 
+    this.setState({
+      expenses: newExpenseList
+    })
   }
 
   setReports = (report) => {
