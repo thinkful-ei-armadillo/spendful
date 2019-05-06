@@ -36,12 +36,7 @@ const TokenService = {
     )
     _timeoutId = setTimeout(callback, msUntilExpiry - _TEN_SECONDS_IN_MS)
   },
-  queueCallbackAfterExpiry(callback) {
-    const msUntilExpiry = TokenService._getMsUntilExpiry(
-      TokenService.parseAuthToken()
-    )
-    _timeoutId = setTimeout(callback, msUntilExpiry + _TEN_SECONDS_IN_MS)
-  },
+
   clearCallbackBeforeExpiry() {
     clearTimeout(_timeoutId)
   },
