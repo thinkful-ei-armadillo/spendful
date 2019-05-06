@@ -43,7 +43,6 @@ This is not true for 500 level-errors
 
     const { category, description, amount, start_date, end_date, recurring_rule } = ev.target
 
-    try {
     let startDate = moment(start_date.value).tz('UTC').format()
     let endDate   = (end_date.value) ? moment(end_date.value).tz('UTC').format() : null;
     const newItem = {
@@ -71,9 +70,6 @@ This is not true for 500 level-errors
             this.props.onFailure(err.errors)
           })
         }
-    } catch{
-      this.props.onFailure("Category not entered.")
-    }
   }
 
   render(){
@@ -85,19 +81,19 @@ This is not true for 500 level-errors
       <CategorySelect id="category" type={this.props.itemType} />
 
       <label htmlFor="start_date">Start Date</label>
-      <input type="date" id="start_date"/>
+      <input required type="date" id="start_date"/>
 
       <label htmlFor="end_date">End Date (Optional)</label>
       <input type="date" id="end_date"/>
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
-      <input type="text" id="description" maxLength="50" />
+      <input required type="text" id="description" maxLength="50" />
 
       <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" />
+      <input required type="number" id="amount" />
 
       <label htmlFor="recurring_rule">Frequency</label>
-      <select id="recurring_rule">
+      <select required id="recurring_rule">
         <option value=""></option>
         <option value="once">Once</option>
         <option value="yearly">Yearly</option>
