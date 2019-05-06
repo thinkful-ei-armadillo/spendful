@@ -99,12 +99,10 @@
 }
 
 
-  .item-list li p:nth-child(2) { text-align: right }
+  .item-list li p:nth-child(2) { text-align: right } 
 
-  .add-link {
-    
-  }
-}
+  
+
 
 .add-link {
   width: 15em;
