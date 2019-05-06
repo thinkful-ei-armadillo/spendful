@@ -41,7 +41,7 @@ export default class MonthPicker extends Component {
     
         let mvalue = this.state.mvalue
         let makeText = m => {
-            if (m && m.year && m.month) return (pickerLang.months[m.month-1] + '. ' + m.year + '  ▼' )
+            if (m && m.year && m.month) return (pickerLang.months[m.month-1] + '. ' + m.year)
             return '?'
         }
 

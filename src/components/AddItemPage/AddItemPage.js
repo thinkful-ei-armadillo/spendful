@@ -16,7 +16,7 @@ class AddItemPage extends Component {
 
   onFailure = (errors) => {
     this.setState({
-      errors 
+      errors: this.context.errors 
     })
   }
 
@@ -26,11 +26,14 @@ class AddItemPage extends Component {
         {this.state.errors.length > 0 
         ? <div className="alert-error">{this.state.errors}</div>
         : ''}
+
+        <div className="flex-form-container">
           <AddItemForm 
             itemType={this.props.itemType}
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}
             />
+        </div>
       </main>
     )
   }

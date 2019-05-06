@@ -10,7 +10,8 @@ class CategorySelect extends React.Component {
       categories: [],
       showCreateForm: false,
       inputValue: '',
-      setCategory:''
+      setCategory:'',
+      errors: []
     };
 
     this.createOptions = this.createOptions.bind(this);
@@ -45,14 +46,20 @@ class CategorySelect extends React.Component {
 
   handleCategoryChange(ev) {
     this.setState({
-      setCategory: ev.target.value
+      setCategory: ev.target.value,
+      errors: [],
     })
     if (ev.target.value === 'create') {
-      this.setState({showCreateForm: true});
+      this.setState({
+        showCreateForm: true,
+        errors: [],
+      });
     }
   }
 
   handleCreateFormSubmit() {
+
+    this.clearError();
 
     CategoriesService
       .createCategory({
@@ -65,14 +72,45 @@ class CategorySelect extends React.Component {
         this.toggleShowCreate()
       })
       .then(() => {
-        this.setCategories();  
+        this.setCategories();
       })
-      .catch(console.log);
+      .catch(err => {
+        this.setState({errors: [err.errors]});
+      });
   }
+
+  handleDeleteCategory = (id) => {
+    this.clearError();
+
+    try{
+      if (!id){
+        throw new Error('No category selected to delete')
+      }
+      CategoriesService
+      .deleteCategory(id)
+      .then(() => {
+        this.setCategories();
+      })
+      .catch((err) => {
+        this.setState({errors: err.errors});
+      })
+    }
+      catch(error){
+        if (error.errors) {
+          this.setState({errors: error.errors});
+        }
+        else if (error.message) {
+          this.setState({errors: [error.message]});
+        }
+        else {
+          this.setState({errors: error});
+        }
+      }
+    }
 
   updateInputValue = (ev) => {
     this.setState({
-      inputValue: ev.target.value 
+      inputValue: ev.target.value
     })
   }
 
@@ -82,7 +120,14 @@ class CategorySelect extends React.Component {
     })
   }
 
-  toggleShowCreate = () => {
+  toggleShowCreate = (cancel) => {
+    if (cancel) {
+      this.setState({
+        setCategory: '',
+        inputValue:'',
+        errors:[]
+      })
+    }
     this.setState({
       showCreateForm: !this.state.showCreateForm
     })
@@ -94,12 +139,17 @@ class CategorySelect extends React.Component {
     })
   }
 
+  clearError = () => {
+    this.setState({ errors: [] });
+  }
+
+
   renderCreateCategory = () => {
     return (
         <div>
-          <input value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
+          <input required value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
           <button onClick={this.handleCreateFormSubmit} type="button">Create</button>
-          <button onClick={this.toggleShowCreate} type="button">Cancel</button>
+          <button onClick={() => this.toggleShowCreate('cancel')} type="button">Cancel</button>
         </div>
     )
   }
@@ -107,12 +157,20 @@ class CategorySelect extends React.Component {
   render() {
     return (
       <div>
-        {!this.state.showCreateForm 
-          ? <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" name="category" {...this.props}>
+        {this.state.errors.length > 0 ? <div className="alert-error">{this.state.errors}</div> : ''}
+
+        {!this.state.showCreateForm
+          ? <div>
+            <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category" {...this.props}>
               <option value=''></option>
               {this.createOptions()}
               <option value='create'>Create new category...</option>
             </select>
+
+            <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button" className="btn">
+              <i className="fas fa-trash"></i>
+            </button>
+            </div>
           : this.renderCreateCategory()}
       </div>
     );

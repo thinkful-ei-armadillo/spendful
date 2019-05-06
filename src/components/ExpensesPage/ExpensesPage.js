@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
+import BarChart from '../BarChart/BarChart';
 import { getAllExpenses } from '../../services/expenses-service'
 import { getMonthlyReport } from '../../services/reports-service';
 import DataContext from '../../contexts/DataContext'
@@ -11,24 +12,31 @@ export default class ExpensesPage extends Component {
   state = {
     month: {},
     expenses: [],
-    error: [],
+    errors: [],
     showExpenses: '',
   }
 
   componentDidMount(){
-    this.updateExpenses()
+    this.setState({showExpenses: 'all'})
+    this.context.clearError()
+    getAllExpenses()
+      .then(expenses => {
+          this.setState({expenses})
+      })
+      .catch(error => {
+          this.context.setError(error.errors)
+          this.setState({
+            errors: this.context.errors
+          })
+      })
   }
 
-  updateExpenses = () => {
-      this.setState({showExpenses: 'all'})
-      this.context.clearError()
-     getAllExpenses()
-        .then(expenses => {
-            this.setState({expenses})
-        })
-        .catch(error => {
-            this.context.setError(error.errors)
-        })
+  updateExpenses = (id) => {
+    let updatedExpenses = this.state.expenses.filter(expense => expense.id !== id)
+    this.setState({
+      expenses: updatedExpenses 
+    })
+    this.context.deleteExpense(id)
   }
   
   handleReports = (year, month) => {
@@ -63,25 +71,23 @@ export default class ExpensesPage extends Component {
 
   render() {
     let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
-    return (
-      <>
-        <section className="page-controls">
-          <select onChange={this.handleChangeExpenses}>
-            <option value='all'>All Expenses</option>
-            <option value='monthly'>Monthly</option>
-          </select>
-          {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
-          <Link to="/add#expense">Add expense</Link>
-        </section>
+    return <>
+      <section className="page-controls">
+        <select className="form-control" onChange={this.handleChangeExpenses}>
+          <option value='all'>All Expenses</option>
+          <option value='monthly'>Monthly</option>
+        </select>
+        {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
+        <Link className="btn" to="/add#expense">Add expense</Link>
+      </section>
+
+      {this.state.showExpenses === 'all' && <BarChart data={data} type="expenses" />}
         
-        <section className="page-content">
-          {(this.state.expenses.length > 0)
-          ?
-          <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
-          : <p>There are no items to display</p> 
-          }
-          </section>
-      </>
-    );
+      <section className="page-content">
+        { this.state.expenses.length > 0
+        ? <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
+        : <p>There are no items to display</p> }
+      </section>
+    </>;
   }
 }

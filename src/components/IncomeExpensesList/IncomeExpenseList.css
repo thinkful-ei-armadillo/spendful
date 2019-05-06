@@ -3,52 +3,101 @@
   margin: 0 auto;
   padding: 0;
   list-style-type: none;
+  font-size: 1.3em;
 }
 
 .item-list li {
-  margin: .5em 0;
-  padding: 0 1em;
+  margin: 1em 0;
+  padding: 1em 1.5em;
   display: flex;
   align-content: center;
   justify-content: space-between;
-  align-items: baseline;
   flex-wrap: wrap;
-  text-transform: uppercase;
   font-size: 0.75em;
   font-weight: bold;
-  background-color: #efefef;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  border-bottom: 5px solid #d4d4d4;
 }
 
 .item-list li p {
-  flex-basis: 10em;
+  margin: .75em 0;
+  padding: 0 5px;
   font-weight: normal;
+  flex-basis: 8em;
 }
 
 .item-list li p:nth-child(1) {
   min-width: 10em;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
-.item-list li p:nth-child(2) { text-align: center }
+.item-list li p:nth-child(2) {
+  text-align: center;
+  font-weight: bold;
+}
 
+/* money amount */
+.item-list-dash li p:nth-child(2) {
+  text-align: right;
+}
+
+.item-list-details li p:nth-child(2) {
+  text-align: left;
+}
+
+.item-list-dash .list-data {
+  flex-wrap: nowrap;
+}
+
+.item-list-dash li {
+  padding: 0 1em;
+}
+
+.item-list-dash .list-controls {
+  display: none;
+}
 
 .recent-link {
-  width: 15em;
-  bottom: -10px;
+  bottom: -35px;
+  left: -1px;
+  right: -1px;
   position: absolute;
   padding: .5em 1em;
   background: gray;
   color: #fff;
   text-align: center;
+  border-bottom: 7px solid #4e4e4e;
+  border-radius: 0 0 5px 5px;
 }
 
-.item-list-dash li p:nth-child(2) {
-  text-align: right;
+.list-data {
+  width: 100%;
+  margin: 0 1em 0 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 8;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.list-controls {
+  flex: 1;
+}
 
-@media only screen and (max-width: 425px) {
-  .item-list li { margin: 2em 0 }
+.list-controls a:link,
+.list-controls a:visited {
+  margin: 0.25em;
+  padding: 0.5em;
+  display: block;
+  text-align: center;
+  background-color: #d6d6d6;
+  border-radius: 4px;
+  color: #fff;
+}
+
 
   .item-list li p:nth-child(2) { text-align: right }
 
@@ -68,4 +117,5 @@
   text-align: center;
   margin-top: -20px; 
   margin-bottom: 20px;
+
 }
