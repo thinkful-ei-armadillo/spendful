@@ -33,6 +33,7 @@ export default class Chart extends Component {
             padding: 30,
           }
         },
+        cutoutPercentage: 75,
         responsive: true,
         maintainAspectRatio: false,
       }
