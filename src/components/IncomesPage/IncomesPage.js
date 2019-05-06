@@ -70,19 +70,15 @@ export default class IncomePage extends Component {
     this.setState({showIncomes})
   }
 
-  updateIncomes = () => {
-    this.context.clearError()
-    getAllIncomes()
-      .then(incomes => {
-          this.setState({incomes})
-      })
-      .catch(error => {
-          this.context.setError(error.errors)
-          this.setState({
-            errors: this.context.errors
-          })
-      })
+
+  updateIncomes = (id) => {
+    let updatedIncomes = this.state.incomes.filter(income => income.id !== id)
+    this.setState({
+      incomes: updatedIncomes 
+    })
+    this.context.deleteIncome(id)
   }
+
 
   render() {
     let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes

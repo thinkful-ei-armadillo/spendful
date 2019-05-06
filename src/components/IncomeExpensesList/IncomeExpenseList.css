@@ -109,9 +109,28 @@
   color: #fff;
 }
 
+
 /* edit/delete btns */
 .list-controls a:nth-child(1) { background-color: #d2d2d2; color: #696969; }
 .list-controls a:nth-child(2) { background-color: #ff6868 }
+
+
+  .item-list li p:nth-child(2) { text-align: right } 
+
+  
+
+
+.add-link {
+  width: 15em;
+  
+  
+  
+  padding: .5em 1em;
+  background: gray;
+  color: #fff;
+  text-align: center;
+  margin-top: -20px; 
+  margin-bottom: 20px;
 
 
 @media only screen and (max-width: 425px) {
@@ -119,4 +138,5 @@
     margin: 0 0 2em;
     flex-direction: column;
   }
+
 }

@@ -39,6 +39,8 @@ article {
   background: #f7f7f7;
   border: 1px solid #cccccc;
   border-radius: 6px;
+  padding: 1.25em;
+  padding-bottom: 3em;
 }
 
 article > p {

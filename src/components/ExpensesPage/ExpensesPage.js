@@ -20,27 +20,30 @@ export default class ExpensesPage extends Component {
   }
 
   componentDidMount(){
-    this.updateExpenses()
-  }
-
-  updateExpenses = () => {
     this.setState({month: {}, showExpenses: 'all'})
     this.context.clearError()
     this.handleReports(
         this.state.month.year, 
         this.state.month.month + 1 
         )
-        
-     getAllExpenses()
-        .then(expenses => {
-            this.setState({expenses})
-        })
-        .catch(error => {
-            this.context.setError(error.errors)
-            this.setState({
-              errors: this.context.errors
-            })
-        })
+    getAllExpenses()
+      .then(expenses => {
+          this.setState({expenses})
+      })
+      .catch(error => {
+          this.context.setError(error.errors)
+          this.setState({
+            errors: this.context.errors
+          })
+      })
+  }
+
+  updateExpenses = (id) => {
+    let updatedExpenses = this.state.expenses.filter(expense => expense.id !== id)
+    this.setState({
+      expenses: updatedExpenses 
+    })
+    this.context.deleteExpense(id)
   }
   
   handleReports = (year, month) => {

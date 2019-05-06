@@ -147,7 +147,7 @@ class CategorySelect extends React.Component {
   renderCreateCategory = () => {
     return (
         <div>
-          <input value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
+          <input required value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
           <button onClick={this.handleCreateFormSubmit} type="button">Create</button>
           <button onClick={() => this.toggleShowCreate('cancel')} type="button">Cancel</button>
         </div>
@@ -161,7 +161,7 @@ class CategorySelect extends React.Component {
 
         {!this.state.showCreateForm
           ? <div>
-            <select value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category" {...this.props}>
+            <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category" {...this.props}>
               <option value=''></option>
               {this.createOptions()}
               <option value='create'>Create new category...</option>
