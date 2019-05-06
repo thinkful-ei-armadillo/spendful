@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './IncomeExpenseList.css';
 import DataContext from '../../contexts/DataContext';
-import { getAllCategories } from '../../services/categories-service';
+// import { getAllCategories } from '../../services/categories-service';
 import { deleteExpense } from '../../services/expenses-service';
 import { deleteIncome } from '../../services/incomes-service'
 
@@ -67,18 +67,18 @@ export default class IncomeExpenseList extends Component {
     errors: []
   }
 
-  componentDidMount() {
-    getAllCategories()
-      .then(categories => {
-        this.context.setCategories(categories);
-      })
-      .catch(error => {
-        this.context.setError(error)
-        this.setState({
-          errors: this.context.errors
-        })
-      });
-  }
+  // componentDidMount() {
+  //   getAllCategories()
+  //     .then(categories => {
+  //       this.context.setCategories(categories);
+  //     })
+  //     .catch(error => {
+  //       this.context.setError(error)
+  //       this.setState({
+  //         errors: this.context.errors
+  //       })
+  //     });
+  // }
 
   deleteItem = (itemId) => {
     if (this.props.type === 'incomes'){

@@ -10,7 +10,10 @@ import MonthPicker from '../MonthPicker/MonthPicker'
 export default class IncomePage extends Component {
   static contextType = DataContext
   state = {
-    month: {},
+    month: {
+      year: new Date().getFullYear(), 
+      month: new Date().getMonth() 
+    },
     incomes: [],
     showIncomes: '',
     errors: []
@@ -18,11 +21,15 @@ export default class IncomePage extends Component {
 
 
   componentDidMount(){
-    this.setState({showIncomes: 'all'})
+    this.setState({month: {}, showIncomes: 'all'})
     this.context.clearError()
     getAllIncomes()
         .then(incomes => {
             this.setState({incomes})
+            this.handleReports(
+              this.state.month.year, 
+              this.state.month.month + 1 
+              )
         })
         .catch(error => {
             this.context.setError(error.errors)
@@ -63,19 +70,19 @@ export default class IncomePage extends Component {
     this.setState({showIncomes})
   }
 
-    updateIncomes = () => {
+  updateIncomes = () => {
     this.context.clearError()
     getAllIncomes()
-        .then(incomes => {
-            this.setState({incomes})
-        })
-        .catch(error => {
-            this.context.setError(error.errors)
-            this.setState({
-              errors: this.context.errors
-            })
-        })
-    }
+      .then(incomes => {
+          this.setState({incomes})
+      })
+      .catch(error => {
+          this.context.setError(error.errors)
+          this.setState({
+            errors: this.context.errors
+          })
+      })
+  }
 
   render() {
     let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
@@ -95,7 +102,7 @@ export default class IncomePage extends Component {
       
       <section className="page-content">
         {(this.state.incomes.length > 0)
-          ? <IncomeExpenseList type="incomes" data={this.state.incomes} updateIncomes={this.updateIncomes}/>
+          ? <IncomeExpenseList type="incomes" data={data} updateIncomes={this.updateIncomes}/>
           : 
            <p>There are no items to display</p> 
           }
