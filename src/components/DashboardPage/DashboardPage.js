@@ -21,13 +21,13 @@ export default class DashboardPage extends Component {
 
   componentDidMount() {
     this.context.clearError()
+    this.handleReports(
+      this.state.month.year, 
+      this.state.month.month + 1
+      )
     getAllCategories()
       .then(categories => {
         this.context.setCategories(categories);
-        this.handleReports(
-          this.state.month.year, 
-          this.state.month.month + 1
-          )
       })
       .catch(error => {
         this.context.setError(error)
@@ -39,7 +39,6 @@ export default class DashboardPage extends Component {
     year = parseInt(year);
     month = parseInt(month);
 
-    // // set defaults if inputs are invalid
     if(isNaN(year) || isNaN(month)) {
       year = new Date().getFullYear();
       month = new Date().getMonth();
@@ -47,7 +46,6 @@ export default class DashboardPage extends Component {
 
     getMonthlyReport(year, month)
       .then(report => {
-        console.log(report)
         this.context.setAllIncomes(report.incomes);
         this.context.setAllExpenses(report.expenses);
       })
@@ -68,8 +66,7 @@ export default class DashboardPage extends Component {
       expenses: this.context.expenses,
       categories: this.context.categories
     }
-    // console.log(this.state.month)
-    // console.log(data)
+   
     return (
       <main className="flex-main">
         {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}

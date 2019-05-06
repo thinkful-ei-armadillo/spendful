@@ -85,7 +85,6 @@ export class UserContextProvider extends Component {
     TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({ idle: true })
-    console.log('logout due to idle service!!!')
   }
 
   fetchRefreshToken = () => {

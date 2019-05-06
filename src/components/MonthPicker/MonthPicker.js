@@ -25,7 +25,6 @@ export default class MonthPicker extends Component {
       this.setState({
           mvalue: {year: year, month: month},
       })
-      console.log(year, month)
       this.props.setMonth({year: year, month: month})
     }
 
