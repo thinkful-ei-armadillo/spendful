@@ -41,11 +41,13 @@ class EditExpensePage extends React.Component {
             : ''
         }
 
-        <EditExpenseForm
-          expenseId={this.props.expenseId}
-          onSuccess={this.onSuccess}
-          onFailure={this.onFailure}
-        />
+        <div className="flex-form-container">
+          <EditExpenseForm
+            expenseId={this.props.expenseId}
+            onSuccess={this.onSuccess}
+            onFailure={this.onFailure}
+          />
+        </div>
       </main>
     )
   }

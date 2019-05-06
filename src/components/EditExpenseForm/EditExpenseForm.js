@@ -116,7 +116,7 @@ class EditExpenseForm extends React.Component {
         <option value="weekly">Weekly</option>
       </select>
 
-      <button type="submit">Save</button>
+      <button className="btn btn-submit" type="submit">Save</button>
     </form>
     );
   }

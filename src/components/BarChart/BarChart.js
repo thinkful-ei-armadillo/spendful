@@ -91,7 +91,7 @@ export default class BarChart extends Component {
         years.push(year)
       }
 
-      console.log(years, labels)
+      // console.log(years, labels)
       let totals = [];
       for(let i=0; i<labels.length; i++){
         let total = 0;
@@ -112,7 +112,7 @@ export default class BarChart extends Component {
         totals.push(total)
       }
 
-      console.log(totals)
+      // console.log(totals)
       chart.data.datasets[0].data = totals
       chart.data.datasets[0].label = `Total ${this.props.type} by month`
       chart.data.labels = labels;

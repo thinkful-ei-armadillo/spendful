@@ -90,7 +90,7 @@ export class UserContextProvider extends Component {
   fetchRefreshToken = () => {
     AuthApiService.refreshToken()
       .then(res => {
-        TokenService.saveAuthToken(res.authToken)
+        TokenService.saveAuthToken(res.token)
         TokenService.queueCallbackBeforeExpiry(() => {
           this.fetchRefreshToken()
         })
