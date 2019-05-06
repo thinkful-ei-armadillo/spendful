@@ -47,7 +47,7 @@ class ListItem extends Component {
     return (
       <li className={classname}>
         <div className="list-data">
-          <p>{prefix} {this.props.item.description}</p>
+          <p className="item-title">{prefix} {this.props.item.description}</p>
           <p className={this.props.type === 'incomes' ? 'text-green' : 'text-red'}>${this.props.item.amount}</p>
           {extraInfo}
         </div>
