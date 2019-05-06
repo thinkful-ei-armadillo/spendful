@@ -83,11 +83,11 @@ export default class IncomeExpenseList extends Component {
   deleteItem = (itemId) => {
     if (this.props.type === 'incomes'){
       deleteIncome(itemId)
-      .then(() => {this.props.updateIncomes()})
+      .then(() => {this.props.updateIncomes(itemId)})
     }
     else{
       deleteExpense(itemId)
-      .then(() => {this.props.updateExpenses()}) 
+      .then(() => {this.props.updateExpenses(itemId)}) 
     }
   }
 
