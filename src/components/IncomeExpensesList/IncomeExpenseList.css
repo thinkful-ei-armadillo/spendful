@@ -48,6 +48,8 @@
   font-weight: bold;
 }
 
+
+
 /* money amount */
 .item-list-dash li p:nth-child(2) {
   text-align: right;
@@ -69,16 +71,39 @@
   display: none;
 }
 
+.item-list .list-add {
+  margin: 1em 0 0;  
+  padding: 5px 0;
+  display: block;
+  background-color: #dadde2;
+  border: 0;
+}
+
+.list-add:link li,
+.list-add:visited li {
+  margin: auto;
+  font-size: 1.3em;
+  color: #808080;
+  display: block;
+  text-align: center;
+  background-color: #e2e2e2;
+  border: 0;
+}
+
+.list-add:hover li {
+  background-color: #cccccc;
+}
+
 .recent-link {
   bottom: -35px;
   left: -1px;
   right: -1px;
   position: absolute;
   padding: .5em 1em;
-  background: gray;
+  background: #a5a5a5;
   color: #fff;
   text-align: center;
-  border-bottom: 7px solid #4e4e4e;
+  border-bottom: 7px solid #828282;
   border-radius: 0 0 5px 5px;
 }
 
@@ -115,20 +140,7 @@
 .list-controls a:nth-child(2) { background-color: #ff6868 }
 
 
-  .item-list li p:nth-child(2) { text-align: right } 
-
   
-
-
-.add-link {
-  width: 15em;
-  padding: .5em 1em;
-  background: gray;
-  color: #fff;
-  text-align: center;
-  margin-top: -20px; 
-  margin-bottom: 20px;
-}
 
 @media only screen and (max-width: 425px) {
   .item-list li {

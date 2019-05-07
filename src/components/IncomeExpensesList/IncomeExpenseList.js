@@ -97,20 +97,22 @@ export default class IncomeExpenseList extends Component {
 
     return <>
       <article className={this.props.onlyShowRecent ? 'item-list-dash' : 'item-list-details'}>
-        {this.props.onlyShowRecent ? <h4>{this.props.type}</h4> : ''}
+        {this.props.onlyShowRecent && <h4>{this.props.type}</h4>}
        
-        {this.props.onlyShowRecent && data.length === 0 ? <p>There are no items to display.</p> : ''}
+        {(this.props.onlyShowRecent && data.length === 0) && <p>There are no items to display.</p>}
         
         <ul className="item-list">
           {data.map((item, i) => 
             <ListItem deleteItem={this.deleteItem} item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
 
+            <Link className="list-add" to={`/add#${this.props.type.slice(0, -1)}`}>
+              <li><i className="far fa-plus-square"></i></li>
+            </Link>
         </ul>
 
-        {this.props.onlyShowRecent ? <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link> : ''}
-        
+        {this.props.onlyShowRecent && 
+          <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link>}
       </article>
-      <Link className="add-link" to={'/add#' + this.props.type}>Add {this.props.type}</Link>
     </>;
   }
 }
