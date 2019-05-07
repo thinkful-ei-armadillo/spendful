@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 import Chart from '../Chart/Chart';
 import DataContext from '../../contexts/DataContext';
+import BalanceSheet from '../../components/BalanceSheet/BalanceSheet'
 import MonthPicker from '../MonthPicker/MonthPicker'
 import { getAllCategories } from '../../services/categories-service';
 import { getMonthlyReport } from '../../services/reports-service';
@@ -66,18 +67,16 @@ export default class DashboardPage extends Component {
       expenses: this.context.expenses,
       categories: this.context.categories
     }
-   
+
     return (
       <main className="flex-main">
         {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
         <section className="page-controls">
           <MonthPicker setMonth={this.handleSetMonth} />
         </section>
-
         <div className="w-100"></div>
-
+        <Chart data={data} key={date}/>
         {this.context.expenses.length > 0 && <Chart data={data} key={date}/>}
-
         <section className="page-summaries">
           <IncomeExpenseList type="incomes" data={this.context.incomes} key={'incomes' + date} onlyShowRecent />
           <IncomeExpenseList type="expenses" data={this.context.expenses} key={'expenses' + date} onlyShowRecent />
