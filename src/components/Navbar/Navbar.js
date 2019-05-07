@@ -47,6 +47,7 @@ class Navbar extends Component {
   }
 
   render() {
+    console.log(this.context.user)
     const isLoggedIn = TokenService.hasAuthToken();
     const navLinks = <>
       <Link className={this.getNavBtnClass('/dashboard')} to="/dashboard">Dashboard</Link>

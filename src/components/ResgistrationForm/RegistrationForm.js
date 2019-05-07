@@ -68,6 +68,7 @@ export default class RegistrationForm extends Component {
         <input type="text" id="input_name" className="form-control" name="full_name" autoComplete="off" required></input>
         <label htmlFor="input_password">Password</label>
         <input type="password" id="input_password" className="form-control" name="password" autoComplete="off" required></input>
+        <p className="password-instructions">Passwords must be 8-30 characters long and contain a capital letter, number, and symbol.</p>
         <button type="submit" className="btn">Create an account!</button>
       </form>
 

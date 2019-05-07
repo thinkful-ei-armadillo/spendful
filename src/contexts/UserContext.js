@@ -21,7 +21,6 @@ export class UserContextProvider extends Component {
     const state = { user: {}, error: [] }
 
     const jwtPayload = TokenService.parseAuthToken()
-
     if (jwtPayload)
       state.user = {
         id: jwtPayload.user_id,
@@ -62,6 +61,7 @@ export class UserContextProvider extends Component {
   processLogin = authToken => {
     TokenService.saveAuthToken(authToken)
     const jwtPayload = TokenService.parseAuthToken()
+    console.log(jwtPayload)
     this.setUser({
       id: jwtPayload.user_id,
       name: jwtPayload.name,
