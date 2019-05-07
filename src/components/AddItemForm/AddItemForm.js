@@ -76,8 +76,14 @@ This is not true for 500 level-errors
     return(
     <form className="flex-form" onSubmit={this.onSubmit}>
       <h2>Create new item</h2>
-      <label htmlFor="input-category">Category</label>
+      
+      <label htmlFor="description">Short description (max 50 chars.)</label>
+      <input required type="text" id="description" maxLength="50" />
 
+      <label htmlFor="amount">Amount</label>
+      <input required type="number" id="amount" />
+      
+      <label htmlFor="input-category">Category</label>
       <CategorySelect id="category" type={this.props.itemType} />
 
       <label htmlFor="start_date">Start Date</label>
@@ -85,12 +91,6 @@ This is not true for 500 level-errors
 
       <label htmlFor="end_date">End Date (Optional)</label>
       <input type="date" id="end_date"/>
-
-      <label htmlFor="description">Short description (max 50 chars.)</label>
-      <input required type="text" id="description" maxLength="50" />
-
-      <label htmlFor="amount">Amount</label>
-      <input required type="number" id="amount" />
 
       <label htmlFor="recurring_rule">Frequency</label>
       <select required id="recurring_rule">
