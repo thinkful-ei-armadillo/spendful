@@ -72,15 +72,11 @@ export default class DashboardPage extends Component {
         <section className="page-controls">
           <MonthPicker setMonth={this.handleSetMonth} />
         </section>
-
         <div className="w-100"></div>
-
         <Chart data={data} key={date}/>
-
         <section className="page-summaries">
           <IncomeExpenseList type="incomes" data={this.context.incomes} key={'incomes' + date} onlyShowRecent />
           <IncomeExpenseList type="expenses" data={this.context.expenses} key={'expenses' + date} onlyShowRecent />
-          <BalanceSheet expenses={this.context.expenses}/>
         </section>
       </main>
     );

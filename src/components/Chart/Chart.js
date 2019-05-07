@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Doughnut} from 'react-chartjs-2'; 
 import DataContext from '../../contexts/DataContext';
-
+import BalanceSheet from '../BalanceSheet/BalanceSheet'
 
 export default class Chart extends Component {
   static contextType = DataContext;
@@ -87,6 +87,7 @@ export default class Chart extends Component {
     return (
       <section className="page-chart">
         {this.renderChart()}
+        <BalanceSheet />
       </section>
     );
   }
