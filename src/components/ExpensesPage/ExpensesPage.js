@@ -10,15 +10,22 @@ import MonthPicker from '../MonthPicker/MonthPicker'
 export default class ExpensesPage extends Component {
   static contextType = DataContext
   state = {
-    month: {},
+    month: {
+      year: new Date().getFullYear(), 
+      month: new Date().getMonth() 
+    },
     expenses: [],
     errors: [],
     showExpenses: '',
   }
 
   componentDidMount(){
-    this.setState({showExpenses: 'all'})
+    this.setState({month: {}, showExpenses: 'all'})
     this.context.clearError()
+    this.handleReports(
+        this.state.month.year, 
+        this.state.month.month + 1 
+        )
     getAllExpenses()
       .then(expenses => {
           this.setState({expenses})
@@ -46,13 +53,14 @@ export default class ExpensesPage extends Component {
     // set defaults if inputs are invalid
     if(isNaN(year) || isNaN(month)) {
       year = new Date().getFullYear();
-      month = new Date().getMonth() + 1;
+      month = new Date().getMonth();
     }
     this.context.clearError()
     getMonthlyReport(year, month)
       .then(report => {
-        this.context.setAllIncomes(report.incomes);
+        // console.log(report)
         this.context.setAllExpenses(report.expenses);
+        this.context.setAllIncomes(report.incomes);
       })
       .catch(error => {
         this.context.setError(error)
@@ -60,8 +68,8 @@ export default class ExpensesPage extends Component {
   }
 
   handleSetMonth = (month) => {
-    this.setState({month, showExpenses: 'monthly'})
     this.handleReports(month.year, month.month)
+    this.setState({month, showExpenses: 'monthly'})
   }
 
   handleChangeExpenses = (e) => {
@@ -71,6 +79,8 @@ export default class ExpensesPage extends Component {
 
   render() {
     let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
+    let chart = this.state.showExpenses === 'all' ? <BarChart data={data} type="expenses" /> : '';
+
     return <>
       <section className="page-controls">
         <select className="form-control" onChange={this.handleChangeExpenses}>
@@ -81,12 +91,12 @@ export default class ExpensesPage extends Component {
         <Link className="btn" to="/add#expense">Add expense</Link>
       </section>
 
-      {this.state.showExpenses === 'all' && <BarChart data={data} type="expenses" />}
+      {this.state.expenses.length > 0 && chart}
         
       <section className="page-content">
         { this.state.expenses.length > 0
-        ? <IncomeExpenseList type="expenses" data={this.state.expenses} updateExpenses={this.updateExpenses} />
-        : <p>There are no items to display</p> }
+        ? <IncomeExpenseList type="expenses" data={data} updateExpenses={this.updateExpenses} />
+        : <p className="alert">There are no items to display</p> }
       </section>
     </>;
   }

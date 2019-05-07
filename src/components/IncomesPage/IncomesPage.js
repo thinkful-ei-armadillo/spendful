@@ -10,7 +10,10 @@ import MonthPicker from '../MonthPicker/MonthPicker'
 export default class IncomePage extends Component {
   static contextType = DataContext
   state = {
-    month: {},
+    month: {
+      year: new Date().getFullYear(), 
+      month: new Date().getMonth() 
+    },
     incomes: [],
     showIncomes: '',
     errors: []
@@ -18,8 +21,12 @@ export default class IncomePage extends Component {
 
 
   componentDidMount(){
-    this.setState({showIncomes: 'all'})
+    this.setState({month: {}, showIncomes: 'all'})
     this.context.clearError()
+    this.handleReports(
+      this.state.month.year, 
+      this.state.month.month + 1 
+      )
     getAllIncomes()
         .then(incomes => {
             this.setState({incomes})
@@ -63,16 +70,19 @@ export default class IncomePage extends Component {
     this.setState({showIncomes})
   }
 
-    updateIncomes = (id) => {
-      let updatedIncomes = this.state.incomes.filter(income => income.id !== id)
-      this.setState({
-        incomes: updatedIncomes 
-      })
-      this.context.deleteIncome(id)
-    }
+
+  updateIncomes = (id) => {
+    let updatedIncomes = this.state.incomes.filter(income => income.id !== id)
+    this.setState({
+      incomes: updatedIncomes 
+    })
+    this.context.deleteIncome(id)
+  }
+
 
   render() {
     let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
+    let chart = this.state.showIncomes === 'all' ? <BarChart data={data} type="incomes" /> : '';
     
     return <>
       <section className="page-controls">
@@ -85,13 +95,13 @@ export default class IncomePage extends Component {
         <Link className="btn" to="/add#income">Add income</Link>
       </section>
 
-      {this.state.showIncomes === 'all' && <BarChart data={data} type="incomes" />}
+      {this.state.incomes.length > 0 && chart}
       
       <section className="page-content">
         {(this.state.incomes.length > 0)
-          ? <IncomeExpenseList type="incomes" data={this.state.incomes} updateIncomes={this.updateIncomes}/>
+          ? <IncomeExpenseList type="incomes" data={data} updateIncomes={this.updateIncomes}/>
           : 
-           <p>There are no items to display</p> 
+           <p className="alert">There are no items to display</p> 
           }
       </section>
     </>;

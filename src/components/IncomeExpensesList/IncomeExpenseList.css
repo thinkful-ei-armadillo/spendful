@@ -27,10 +27,20 @@
   flex-basis: 8em;
 }
 
+/* item title */
 .item-list li p:nth-child(1) {
-  min-width: 10em;
   font-weight: bold;
   text-transform: uppercase;
+  font-size: 0.8em;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.list-income .item-title {
+  background-color: #52bf88;
+}
+.list-expense .item-title {
+  background-color: #ff4949;
 }
 
 .item-list li p:nth-child(2) {
@@ -95,16 +105,35 @@
   text-align: center;
   background-color: #d6d6d6;
   border-radius: 4px;
+  border-bottom: 3px solid #b1acac;
   color: #fff;
 }
 
-.list-controls a:nth-child(1) { background-color: #c390c3 }
+
+/* edit/delete btns */
+.list-controls a:nth-child(1) { background-color: #d2d2d2; color: #696969; }
 .list-controls a:nth-child(2) { background-color: #ff6868 }
 
 
+  .item-list li p:nth-child(2) { text-align: right } 
+
+  
+
+
+.add-link {
+  width: 15em;
+  padding: .5em 1em;
+  background: gray;
+  color: #fff;
+  text-align: center;
+  margin-top: -20px; 
+  margin-bottom: 20px;
+}
+
 @media only screen and (max-width: 425px) {
   .item-list li {
-    margin: 2em 0;
+    margin: 0 0 2em;
     flex-direction: column;
   }
+
 }
