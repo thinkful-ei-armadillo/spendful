@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../loader/loader'
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 import BarChart from '../BarChart/BarChart';
 import { getAllExpenses } from '../../services/expenses-service'
@@ -17,6 +18,7 @@ export default class ExpensesPage extends Component {
     expenses: [],
     errors: [],
     showExpenses: '',
+    isLoading: true
   }
 
   componentDidMount(){
@@ -29,6 +31,7 @@ export default class ExpensesPage extends Component {
     getAllExpenses()
       .then(expenses => {
           this.setState({expenses})
+          this.setState({isLoading: false})
       })
       .catch(error => {
           this.context.setError(error.errors)
@@ -77,27 +80,33 @@ export default class ExpensesPage extends Component {
     this.setState({showExpenses})
   }
 
+
   render() {
     let data = this.state.showExpenses === 'monthly' ? this.context.expenses : this.state.expenses
     let chart = this.state.showExpenses === 'all' ? <BarChart data={data} type="expenses" /> : '';
 
-    return <>
-      <section className="page-controls">
-        <select className="form-control" onChange={this.handleChangeExpenses}>
-          <option value='all'>All Expenses</option>
-          <option value='monthly'>Monthly</option>
-        </select>
-        {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
-        <Link className="btn" to="/add#expense">Add expense</Link>
-      </section>
+    let content = (
+                    <> 
+                      <section className="page-controls">
+                        <select className="form-control" onChange={this.handleChangeExpenses}>
+                          <option value='all'>All Expenses</option>
+                          <option value='monthly'>Monthly</option>
+                        </select>
+                        {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
+                        <Link className="btn" to="/add#expense">Add expense</Link>
+                      </section>
 
-      {this.state.expenses.length > 0 && chart}
-        
-      <section className="page-content">
-        { this.state.expenses.length > 0
-        ? <IncomeExpenseList type="expenses" data={data} updateExpenses={this.updateExpenses} />
-        : <p className="alert">There are no items to display</p> }
-      </section>
-    </>;
+                      {this.state.expenses.length > 0 && chart}
+                        
+                      <section className="page-content">
+                        { data.length > 0
+                        ? <IncomeExpenseList type="expenses" data={data} updateExpenses={this.updateExpenses} />
+                        : <p className="alert">There are no items to display</p> }
+                      </section>
+                    </>
+                  )
+    return <>
+      {this.state.isLoading ? <Loader /> : content}
+    </>
   }
 }

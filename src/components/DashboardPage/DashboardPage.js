@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 import Chart from '../Chart/Chart';
 import DataContext from '../../contexts/DataContext';
-import BalanceSheet from '../../components/BalanceSheet/BalanceSheet'
 import MonthPicker from '../MonthPicker/MonthPicker'
 import { getAllCategories } from '../../services/categories-service';
 import { getMonthlyReport } from '../../services/reports-service';
 import './DashboardPage.css';
+import Loader from '../loader/loader';
 
 
 export default class DashboardPage extends Component {
@@ -17,6 +17,7 @@ export default class DashboardPage extends Component {
         year: new Date().getFullYear(), 
         month: new Date().getMonth() 
       },
+      isLoading: true,
       errors: []
   }
 
@@ -29,6 +30,7 @@ export default class DashboardPage extends Component {
     getAllCategories()
       .then(categories => {
         this.context.setCategories(categories);
+        this.setState({isLoading: false})
       })
       .catch(error => {
         this.context.setError(error)
@@ -52,6 +54,9 @@ export default class DashboardPage extends Component {
       })
       .catch(error => {
         this.context.setError(error)
+        this.setState({
+          errors: this.context.errors
+        })
       })
   }
 
@@ -68,8 +73,8 @@ export default class DashboardPage extends Component {
       categories: this.context.categories
     }
 
-    return (
-      <main className="flex-main">
+    let content = (
+      <>
         {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
         <section className="page-controls">
           <MonthPicker setMonth={this.handleSetMonth} />
@@ -80,7 +85,13 @@ export default class DashboardPage extends Component {
           <IncomeExpenseList type="incomes" data={this.context.incomes} key={'incomes' + date} onlyShowRecent />
           <IncomeExpenseList type="expenses" data={this.context.expenses} key={'expenses' + date} onlyShowRecent />
         </section>
+      </>
+    )
+
+    return (
+      <main className="flex-main">
+        {this.state.isLoading ? <Loader /> : content}
       </main>
-    );
+    )
   }
 }

@@ -84,8 +84,17 @@ nav a {
   font-size: 1em;
 }
 
+.user-name{
+  font-size: 1.0em; 
+  margin-right: 1em;
+  margin-left: .5em; 
+  font-weight: 700;
+}
 
-
+.user-container{
+  display: flex;
+  align-items: center; 
+}
 @media only screen and (max-width: 675px) {
   nav .nav-hide-mobile {
     display: none;
