@@ -5,6 +5,10 @@ import DataContext from '../../contexts/DataContext';
 class CategorySelect extends React.Component {
   static contextType = DataContext;
 
+  static defaultProps = {
+    handleChange: () => {}
+  }
+
   constructor(props) {
     super(props);
 
@@ -41,16 +45,21 @@ class CategorySelect extends React.Component {
   }
 
   handleCategoryChange = (ev) => {
-    this.setState({
-      setCategory: ev.target.value,
-      errors: [],
-    })
+    this.props.handleChange(ev);
+
     if (ev.target.value === 'create') {
       this.setState({
         showCreateForm: true,
         errors: [],
       });
+
+      return
     }
+
+    this.setState({
+      setCategory: ev.target.value,
+      errors: [],
+    })
   }
 
   handleCreateFormSubmit = () => {
@@ -95,33 +104,6 @@ class CategorySelect extends React.Component {
       .catch(err => {
         this.context.setError(err.errors);        
       })
-
-    // try{
-    //   if (!id){
-    //     throw new Error('No category selected to delete')
-    //   }
-    //   CategoriesService
-    //   .deleteCategory(id)
-    //   .then(() => {
-    //     this.setCategories();
-    //   })
-    //   .catch(err => {
-    //     this.context.setError(err.errors);        
-    //   })
-    // }
-    //   catch(error){
-    //     console.log('ERROR', error)
-
-    //     if (error.errors) {
-    //       this.setState({errors: error.errors});
-    //     }
-    //     else if (error.message) {
-    //       this.setState({errors: [error.message]});
-    //     }
-    //     else {
-    //       this.setState({errors: error});
-    //     }
-    //   }
     }
 
   updateInputValue = (ev) => {
@@ -157,7 +139,7 @@ class CategorySelect extends React.Component {
 
   render() {
     let jsx = <>
-      <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category" {...this.props}>
+      <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category">
         <option value=''>Please select a category...</option>
         {this.createOptions()}
         <option value='create'>Create new category...</option>

@@ -39,10 +39,14 @@ class EditExpenseForm extends React.Component {
   }
 
   handleCategoryChange(ev) {
-    const expense = this.state.expense;
-    expense.category_id = ev.target.value;
+    const id = parseInt(ev.target.value);
 
-    this.setState({ expense });
+    if(! isNaN(id)) {
+      const expense = this.state.expense;
+      expense.category_id = id;
+  
+      this.setState({ expense });
+    }
   }
 
   handleFrequencyChange(ev) {
@@ -92,7 +96,7 @@ class EditExpenseForm extends React.Component {
       <h2>Edit expense</h2>
 
       <label htmlFor="input-category">Category</label>
-      <CategorySelect type="expense" id="category" name="category" value={`${this.state.expense.category_id}`} onChange={this.handleCategoryChange} />
+      <CategorySelect type="expense" id="category" name="category" value={`${this.state.expense.category_id}`} handleChange={this.handleCategoryChange} />
 
       <label htmlFor="startDate">Start Date</label>
       <input type="date" id="startDate" name="startDate" defaultValue={this.state.expense.start_date} />
