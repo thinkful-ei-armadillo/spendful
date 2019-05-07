@@ -57,11 +57,6 @@
   padding: 0 180px;
   border-bottom: 1px solid #d6d5d5;
   border-top: 1px solid #d6d5d5;
-  /* background-image: url(../../images/bank-with-dollar-sign.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-y: bottom; */
-  /* opacity: 0.1; */
 }
 
 .feature {
@@ -73,11 +68,6 @@
   max-width: 320px;
   border-left: 1px solid #d6d5d5;
   border-right: 1px solid #d6d5d5;
-  /* background-image: linear-gradient(rgba(255, 255, 255, 0.71)),url(../../images/bank-with-dollar-sign.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center; */
-  /* background-position-y: bottom; */
   cursor: pointer;
 }
 
@@ -100,13 +90,6 @@
   -webkit-background-size: contain;
   background-size: contain;
 }
-/* .feature h1 {
-  padding: 50px;
-  text-align: center;
-  z-index: 2;
-  position: relative;
-  color: #fff;
-}  */
 
 .feature-wrapper .hidden {
   background-image: url(../../images/77114-200.png);
@@ -132,6 +115,10 @@
   margin: 0;
   z-index: 2;
   position: relative;
+}
+
+.landing-page-main {
+  padding: 3.5em 0;
 }
 
 

@@ -69,7 +69,7 @@ export default class LandingPage extends Component {
           </div>
         </div>
 
-        <main ref={this.featuresRef}>
+        <main ref={this.featuresRef} className="landing-page-main">
 
           <section className="feature-list" >
             <figure>
