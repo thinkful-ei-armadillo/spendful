@@ -50,6 +50,91 @@
   margin: 0 0 1em 0;
 }
 
+.feature-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 180px;
+  border-bottom: 1px solid #d6d5d5;
+  border-top: 1px solid #d6d5d5;
+  /* background-image: url(../../images/bank-with-dollar-sign.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: bottom; */
+  /* opacity: 0.1; */
+}
+
+.feature {
+  position: relative;
+  background: white;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 15px 45px;
+  max-width: 320px;
+  border-left: 1px solid #d6d5d5;
+  border-right: 1px solid #d6d5d5;
+  /* background-image: linear-gradient(rgba(255, 255, 255, 0.71)),url(../../images/bank-with-dollar-sign.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; */
+  /* background-position-y: bottom; */
+  cursor: pointer;
+}
+
+.feature:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+  background-image: url('../../images/bank-with-dollar-sign.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  -ms-background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+/* .feature h1 {
+  padding: 50px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  color: #fff;
+}  */
+
+.feature-wrapper .hidden {
+  background-image: url(../../images/77114-200.png);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  width: 30%;
+  opacity: 0.1;
+} 
+.feature:hover,
+.feature:focus {
+  background: #88888824;
+  transition: 0.5s;
+}
+
+.feature h3 {
+  margin: 0 0 10px 0;
+  z-index: 2;
+  position: relative;
+}
+
+.feature p {
+  margin: 0;
+  z-index: 2;
+  position: relative;
+}
+
+
 .feature-list {
   display: flex;
   flex-direction: column;
@@ -90,6 +175,17 @@ footer {
   display: flex;
   justify-content: center;
 }
+
+.footer-wrapper li {
+  list-style-type: none;
+}
+
+.footer-wrapper ul,
+.footer-wrapper h3 {
+  padding: 0;
+  text-align: left;
+}
+
 
 
 hr {
