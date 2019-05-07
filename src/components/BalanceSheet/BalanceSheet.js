@@ -13,10 +13,10 @@ export default class BalanceSheet extends Component {
 
     return (
       <ul className="balance-sheet">
-        <li><strong>Expenses:</strong> ${totalExpenses}</li>
-        <li><strong>Incomes:</strong>  ${totalIncomes}</li>
+        <li><strong>Incomes:</strong>  <span>${totalIncomes}</span></li>
+        <li><strong>Expenses:</strong> <span>-${totalExpenses}</span></li>
         <hr />
-        <li><strong>Balance:</strong> ${totalIncomes - totalExpenses}</li>
+        <li><strong>Balance:</strong> <span>${totalIncomes - totalExpenses}</span></li>
       </ul>
     )
   }

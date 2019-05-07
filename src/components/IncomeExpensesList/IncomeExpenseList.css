@@ -28,7 +28,7 @@
 }
 
 /* item title */
-.item-list li p:nth-child(1) {
+.item-list .item-title {
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.8em;
@@ -36,6 +36,8 @@
   padding: 5px 10px;
   border-radius: 4px;
 }
+.item-title i { font-size: 1.25em; margin-right: 5px }
+
 .list-income .item-title {
   background-color: #52bf88;
 }
@@ -47,6 +49,8 @@
   text-align: center;
   font-weight: bold;
 }
+
+
 
 /* money amount */
 .item-list-dash li p:nth-child(2) {
@@ -69,16 +73,37 @@
   display: none;
 }
 
+.item-list .list-add {
+  margin: 1em 0 0;  
+  display: block;
+  border: 0;
+}
+
+.list-add:link li,
+.list-add:visited li {
+  margin: auto;
+  padding: 2px 0;
+  font-size: 1.3em;
+  color: #969696;
+  display: block;
+  text-align: center;
+  border: 2px solid #cecece;
+}
+
+.list-add:hover li {
+  background-color: #cccccc;
+}
+
 .recent-link {
   bottom: -35px;
   left: -1px;
   right: -1px;
   position: absolute;
   padding: .5em 1em;
-  background: gray;
+  background: #a5a5a5;
   color: #fff;
   text-align: center;
-  border-bottom: 7px solid #4e4e4e;
+  border-bottom: 7px solid #828282;
   border-radius: 0 0 5px 5px;
 }
 
@@ -111,24 +136,11 @@
 
 
 /* edit/delete btns */
-.list-controls a:nth-child(1) { background-color: #d2d2d2; color: #696969; }
-.list-controls a:nth-child(2) { background-color: #ff6868 }
+.list-controls a:nth-child(1) { color: #696969 }
+.list-controls a:nth-child(2) { color: #ff6868 }
 
-
-  .item-list li p:nth-child(2) { text-align: right } 
 
   
-
-
-.add-link {
-  width: 15em;
-  padding: .5em 1em;
-  background: gray;
-  color: #fff;
-  text-align: center;
-  margin-top: -20px; 
-  margin-bottom: 20px;
-}
 
 @media only screen and (max-width: 425px) {
   .item-list li {
