@@ -1,7 +1,13 @@
 import React from 'react';
 import * as CategoriesService from '../../services/categories-service';
+import DataContext from '../../contexts/DataContext';
 
 class CategorySelect extends React.Component {
+  static contextType = DataContext;
+
+  static defaultProps = {
+    handleChange: () => {}
+  }
 
   constructor(props) {
     super(props);
@@ -11,12 +17,7 @@ class CategorySelect extends React.Component {
       showCreateForm: false,
       inputValue: '',
       setCategory:'',
-      errors: []
     };
-
-    this.createOptions = this.createOptions.bind(this);
-    this.handleCategoryChange = this.handleCategoryChange.bind(this);
-    this.handleCreateFormSubmit = this.handleCreateFormSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -31,8 +32,7 @@ class CategorySelect extends React.Component {
     })
   }
 
-  createOptions() {
-
+  createOptions = () => {
     const filtered = this.state.categories.filter((c) => {
       return c.type === this.props.type
     })
@@ -44,22 +44,31 @@ class CategorySelect extends React.Component {
     return options;
   }
 
-  handleCategoryChange(ev) {
-    this.setState({
-      setCategory: ev.target.value,
-      errors: [],
-    })
+  handleCategoryChange = (ev) => {
+    this.props.handleChange(ev);
+
     if (ev.target.value === 'create') {
       this.setState({
         showCreateForm: true,
         errors: [],
       });
+
+      return
     }
+
+    this.setState({
+      setCategory: ev.target.value,
+      errors: [],
+    })
   }
 
-  handleCreateFormSubmit() {
+  handleCreateFormSubmit = () => {
+    this.context.clearError();
 
-    this.clearError();
+    if(! ['income', 'expense'].includes(this.props.type)) {
+      this.context.setError(['Error creating category. Try again.'])
+      return
+    }
 
     CategoriesService
       .createCategory({
@@ -75,37 +84,26 @@ class CategorySelect extends React.Component {
         this.setCategories();
       })
       .catch(err => {
-        this.setState({errors: [err.errors]});
+        this.context.setError(['Error creating category. Try again.']);
       });
   }
 
   handleDeleteCategory = (id) => {
-    this.clearError();
+    this.context.clearError();
 
-    try{
-      if (!id){
-        throw new Error('No category selected to delete')
-      }
-      CategoriesService
+    if(! id) {
+      this.context.setError(['No category selected to delete'])
+      return
+    }
+
+    CategoriesService
       .deleteCategory(id)
       .then(() => {
         this.setCategories();
       })
-      .catch((err) => {
-        this.setState({errors: err.errors});
+      .catch(err => {
+        this.context.setError(err.errors);        
       })
-    }
-      catch(error){
-        if (error.errors) {
-          this.setState({errors: error.errors});
-        }
-        else if (error.message) {
-          this.setState({errors: [error.message]});
-        }
-        else {
-          this.setState({errors: error});
-        }
-      }
     }
 
   updateInputValue = (ev) => {
@@ -139,41 +137,39 @@ class CategorySelect extends React.Component {
     })
   }
 
-  clearError = () => {
-    this.setState({ errors: [] });
-  }
-
-
-  renderCreateCategory = () => {
-    return (
-        <div>
-          <input required value={this.state.inputValue} onChange={this.updateInputValue} type="text" id="newCategoryName" name="newCategoryName"></input>
-          <button onClick={this.handleCreateFormSubmit} type="button">Create</button>
-          <button onClick={() => this.toggleShowCreate('cancel')} type="button">Cancel</button>
-        </div>
-    )
-  }
-
   render() {
-    return (
-      <div>
-        {this.state.errors.length > 0 ? <div className="alert-error">{this.state.errors}</div> : ''}
+    let jsx = <>
+      <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category">
+        <option value=''>Please select a category...</option>
+        {this.createOptions()}
+        <option value='create'>Create new category...</option>
+      </select>
 
-        {!this.state.showCreateForm
-          ? <div>
-            <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category" {...this.props}>
-              <option value=''></option>
-              {this.createOptions()}
-              <option value='create'>Create new category...</option>
-            </select>
+      <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button" className="btn">
+        <i className="fas fa-trash"></i>
+      </button>
+    </>;
 
-            <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button" className="btn">
-              <i className="fas fa-trash"></i>
-            </button>
-            </div>
-          : this.renderCreateCategory()}
-      </div>
-    );
+    if(this.state.showCreateForm) {
+      jsx = <>
+        <input 
+          value={this.state.inputValue} 
+          onChange={this.updateInputValue} 
+          type="text" 
+          id="newCategoryName" 
+          name="newCategoryName" 
+          className="form-control"
+          placeholder="Enter a new category name..."
+          required />
+
+        <button onClick={this.handleCreateFormSubmit} type="button" className="btn"><i className="fas fa-check"></i></button>
+        <button onClick={() => this.toggleShowCreate('cancel')} type="button" className="btn"><i className="fas fa-window-close"></i></button>
+      </>;
+    }
+
+    return <>
+      <div className="form-row">{jsx}</div>
+    </>;
   }
 }
 
