@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Doughnut} from 'react-chartjs-2'; 
 import DataContext from '../../contexts/DataContext';
-import BalanceSheet from '../BalanceSheet/BalanceSheet'
+import BalanceSheet from '../BalanceSheet/BalanceSheet.js'
 
 export default class Chart extends Component {
   static contextType = DataContext;
