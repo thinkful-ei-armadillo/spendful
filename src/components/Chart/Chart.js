@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {Doughnut} from 'react-chartjs-2'; 
 import DataContext from '../../contexts/DataContext';
-
+import BalanceSheet from '../BalanceSheet/BalanceSheet.js'
 
 export default class Chart extends Component {
   static contextType = DataContext;
 
   state = {
+    category: {},
     categoryColors: {
       0: 'rgba(8, 95, 99, 0.5)',
       1: 'rgba(73, 190, 183, 0.5)',
@@ -31,7 +32,14 @@ export default class Chart extends Component {
           labels: {
             boxWidth: 12,
             padding: 30,
-          }
+          },
+        //   events: ['click'],
+        //   onClick: (c, i) => {
+        //     let ind = i.index
+        //     let label = i.text
+        //     console.log(i)
+
+        // }
         },
         cutoutPercentage: 75,
         responsive: true,
@@ -45,6 +53,8 @@ export default class Chart extends Component {
   //     this.updateChart();
   //   }
   // }
+
+  
 
   renderChart = () => {
     let chart = this.state.chart;
@@ -88,6 +98,7 @@ export default class Chart extends Component {
     return (
       <section className="page-chart">
         {this.renderChart()}
+        <BalanceSheet />
       </section>
     );
   }

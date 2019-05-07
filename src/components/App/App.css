@@ -7,7 +7,7 @@ body {
 
 main {
   margin: 0 auto;
-  padding: 7em 2em 0;
+  padding: 6em 0;
   max-width: 60em;
 }
 
@@ -85,7 +85,7 @@ label {
   margin: 0 0 1.5em;
 }
 
-.flex-form input,
+.flex-form > input,
 .flex-form > select {
   width: 100%;
   margin: .5em auto;
@@ -104,6 +104,21 @@ label {
 
 #flex-form-button {
   margin-top: 3em;
+}
+
+.form-row {
+  margin: .5em 0;
+  display: flex;
+}
+
+.form-row > select,
+.form-row > input {
+  flex: 4;
+}
+
+.form-row button {
+  margin-left: .5em;
+  background-color: gray;
 }
 
 
@@ -158,8 +173,9 @@ label {
 }
 
 .alert-error {
-  text-align: center;
+  margin: 0 auto;
   padding: 1.5em 0;
+  text-align: center;
   color: red;
 }
 .alert-error-lg {
@@ -167,6 +183,7 @@ label {
   text-align: center;
   background-color: #ff5f5f;
   color: #fff;
+  margin: 5em 0 0 0;
 }
 
 
@@ -183,6 +200,11 @@ label {
 
 .btn-submit { margin: 1.5em 0 0 0 }
 
+.password-instructions{
+  font-size: 10px;
+  margin-top: 0;
+  margin-bottom: 2em; 
+}
 
 @media only screen and (max-width: 425px) {
   .show-mobile { display: block; }
