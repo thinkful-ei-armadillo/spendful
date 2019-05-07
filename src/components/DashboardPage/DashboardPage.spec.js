@@ -7,14 +7,17 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 
-import EditExpensePage from './EditExpensePage';
 
 
-import EditExpenseForm from '../EditExpenseForm/EditExpenseForm';
+
+
+import DashboardPage from './DashboardPage';
+
+import Chart from '../Chart/Chart';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('Edit Expense Page component', () => {
+describe('DashboardPage component', () => {
 
     let wrapper;
 
@@ -22,16 +25,16 @@ describe('Edit Expense Page component', () => {
         const div = document.createElement('div');
         ReactDOM.render(
          <BrowserRouter>
-           <EditExpensePage />
+           <DashboardPage />
          </BrowserRouter>,
           
           div);
         ReactDOM.unmountComponentAtNode(div);
       });
 
-    it('renders the form component', () => {
-        wrapper = shallow(<EditExpenseForm />);
+    it('renders the chart component', () => {
+        wrapper = shallow(<Chart />);
 
-        expect(wrapper.find(EditExpenseForm));
+        expect(wrapper.find(Chart));
     })  
 })

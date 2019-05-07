@@ -7,31 +7,32 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 
-import EditExpensePage from './EditExpensePage';
 
 
-import EditExpenseForm from '../EditExpenseForm/EditExpenseForm';
+
+
+import AddItemPage from './AddItemPage';
+
+
+
+import AddItemForm from '../AddItemForm/AddItemForm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('Edit Expense Page component', () => {
+describe('AddItemPage component', () => {
 
-    let wrapper;
+    // let wrapper;
 
     it('renders without crashing', () => {
         const div = document.createElement('div');
         ReactDOM.render(
          <BrowserRouter>
-           <EditExpensePage />
+           <AddItemPage />
          </BrowserRouter>,
           
           div);
         ReactDOM.unmountComponentAtNode(div);
       });
 
-    it('renders the form component', () => {
-        wrapper = shallow(<EditExpenseForm />);
-
-        expect(wrapper.find(EditExpenseForm));
-    })  
+    
 })

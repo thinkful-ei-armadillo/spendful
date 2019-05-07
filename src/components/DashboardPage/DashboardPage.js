@@ -32,6 +32,9 @@ export default class DashboardPage extends Component {
       })
       .catch(error => {
         this.context.setError(error)
+        this.setState({
+          errors: this.context.errors
+        })
         
       })
   }
