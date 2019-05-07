@@ -18,10 +18,10 @@ class ListItem extends Component {
 
     if(this.props.type === 'expenses') {
       classname += 'list-expense';
-      prefix = '➖';
+      prefix = <i className="fas fa-wallet"></i>;
     } else {
       classname += 'list-income';
-      prefix = '💵';
+      prefix = <i className="fas fa-money-bill-alt"></i>;
     }
 
     // only show extraInfo if list is NOT recent only

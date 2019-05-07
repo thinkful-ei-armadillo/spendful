@@ -28,7 +28,7 @@
 }
 
 /* item title */
-.item-list li p:nth-child(1) {
+.item-list .item-title {
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.8em;
@@ -36,6 +36,8 @@
   padding: 5px 10px;
   border-radius: 4px;
 }
+.item-title i { font-size: 1.25em; margin-right: 5px }
+
 .list-income .item-title {
   background-color: #52bf88;
 }
@@ -73,21 +75,19 @@
 
 .item-list .list-add {
   margin: 1em 0 0;  
-  padding: 5px 0;
   display: block;
-  background-color: #dadde2;
   border: 0;
 }
 
 .list-add:link li,
 .list-add:visited li {
   margin: auto;
+  padding: 2px 0;
   font-size: 1.3em;
-  color: #808080;
+  color: #969696;
   display: block;
   text-align: center;
-  background-color: #e2e2e2;
-  border: 0;
+  border: 2px solid #cecece;
 }
 
 .list-add:hover li {
@@ -136,8 +136,8 @@
 
 
 /* edit/delete btns */
-.list-controls a:nth-child(1) { background-color: #d2d2d2; color: #696969; }
-.list-controls a:nth-child(2) { background-color: #ff6868 }
+.list-controls a:nth-child(1) { color: #696969 }
+.list-controls a:nth-child(2) { color: #ff6868 }
 
 
   
