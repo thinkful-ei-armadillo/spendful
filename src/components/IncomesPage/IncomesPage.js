@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../loader/loader'
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 import BarChart from '../BarChart/BarChart';
 import { getAllIncomes } from '../../services/incomes-service'
@@ -16,7 +17,8 @@ export default class IncomePage extends Component {
     },
     incomes: [],
     showIncomes: '',
-    errors: []
+    errors: [],
+    isLoading: true
   }
 
 
@@ -30,6 +32,7 @@ export default class IncomePage extends Component {
     getAllIncomes()
         .then(incomes => {
             this.setState({incomes})
+            this.setState({isLoading: false})
         })
         .catch(error => {
             this.context.setError(error.errors)
@@ -84,7 +87,8 @@ export default class IncomePage extends Component {
     let data = this.state.showIncomes === 'monthly' ? this.context.incomes : this.state.incomes
     let chart = this.state.showIncomes === 'all' ? <BarChart data={data} type="incomes" /> : '';
     
-    return <>
+    let content = (
+      <>
       <section className="page-controls">
         <select className="form-control" onChange={this.handleChangeIncomes}>
           <option value='all'>All Incomes</option>
@@ -96,14 +100,17 @@ export default class IncomePage extends Component {
       </section>
 
       {this.state.incomes.length > 0 && chart}
-      
+    
       <section className="page-content">
-        {(this.state.incomes.length > 0)
+        {(data.length > 0)
           ? <IncomeExpenseList type="incomes" data={data} updateIncomes={this.updateIncomes}/>
-          : 
-           <p className="alert">There are no items to display</p> 
-          }
+          : <p className="alert">There are no items to display</p> 
+        }
       </section>
-    </>;
+    </>
+    )
+    return <>
+      {this.state.isLoading ? <Loader /> : content}
+    </>
   }
 }

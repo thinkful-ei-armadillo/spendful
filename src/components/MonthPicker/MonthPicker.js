@@ -50,7 +50,7 @@ export default class MonthPicker extends Component {
                 <div className="edit">
                     <Picker
                         ref="pickAMonth"
-                        years={[2019, 2020, 2021, 2022]}
+                        years={[2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]}
                         value={mvalue}
                         lang={pickerLang.months}
                         onChange={this.handleAMonthChange}
