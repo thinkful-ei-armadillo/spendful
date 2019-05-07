@@ -24,7 +24,7 @@ export class UserContextProvider extends Component {
     if (jwtPayload)
       state.user = {
         id: jwtPayload.user_id,
-        name: jwtPayload.name,
+        name: jwtPayload.full_name,
         username: jwtPayload.sub,
       }
 
@@ -61,10 +61,9 @@ export class UserContextProvider extends Component {
   processLogin = authToken => {
     TokenService.saveAuthToken(authToken)
     const jwtPayload = TokenService.parseAuthToken()
-    console.log(jwtPayload)
     this.setUser({
       id: jwtPayload.user_id,
-      name: jwtPayload.name,
+      name: jwtPayload.full_name,
       username: jwtPayload.sub,
     })
     IdleService.registerIdleTimerResets()
