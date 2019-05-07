@@ -1,31 +1,26 @@
 import React, { Component } from 'react'
 import AddItemForm from '../AddItemForm/AddItemForm'
 import { withRouter } from 'react-router-dom'
-
+import DataContext from '../../contexts/DataContext';
 
 class AddItemPage extends Component {
+  static contextType = DataContext;
 
-  state = {
-    errors: []
-  }
-  
   onSuccess = (itemType) => {
     const { history } = this.props;
     history.push(itemType)
   }
 
   onFailure = (errors) => {
-    this.setState({
-      errors: this.context.errors 
-    })
+    this.context.setError(errors);
   }
 
   render(){
     return( 
       <main className="flex-main">
-        {this.state.errors.length > 0 
-        ? <div className="alert-error">{this.state.errors}</div>
-        : ''}
+        {this.context.errors.length > 0 && <div className="alert-error">{this.context.errors}</div>}
+        
+        <div className="w-100"></div>
 
         <div className="flex-form-container">
           <AddItemForm 
