@@ -54,7 +54,6 @@ export default class Chart extends Component {
     const balance = totalIncomes - totalExpenses
     categories['Balance'] = balance
     
-
     this.context.categories.forEach(c => {
       this.context.expenses.forEach(e => {
         if(c.id === e.category_id){
