@@ -47,12 +47,20 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log(this.context.user)
     const isLoggedIn = TokenService.hasAuthToken();
+
     const navLinks = <>
       <Link className={this.getNavBtnClass('/dashboard')} to="/dashboard">Dashboard</Link>
       <Link className={this.getNavBtnClass('/incomes')} to="/incomes">Incomes</Link>
       <Link className={this.getNavBtnClass('/expenses')} to="/expenses">Expenses</Link>
+    </>;
+
+    const navRight = <>
+      <div className='user-container nav-hide-tablet'>
+        <i className="far fa-user"></i>
+        <p className="user-name">{this.context.user.name}</p>
+      </div>
+      <Link className="nav-link" to="/" onClick={this.handleLogout}>Logout</Link>
     </>;
 
     return (
@@ -68,12 +76,7 @@ class Navbar extends Component {
 
           <div className="nav-right nav-hide-mobile">
             {isLoggedIn
-              ? 
-              <div className='user-container'>
-                <i className="far fa-user"></i>
-                <p className="user-name">{this.context.user.name}</p>
-                <Link className="nav-link" to="/" onClick={this.handleLogout}>Logout</Link>
-              </div>
+              ? navRight
               : <Link className="nav-link" to="/login">Login</Link>}
           </div>
           <div className="nav-right nav-show-mobile">

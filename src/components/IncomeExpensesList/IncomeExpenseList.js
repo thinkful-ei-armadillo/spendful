@@ -10,50 +10,55 @@ class ListItem extends Component {
   static contextType = DataContext;
 
   render() {
-    let classname = '';
-    let prefix = '';
-    let extraInfo = '';
-    let controls = '';
-
     const dateString = this.props.item.occurrence_date || this.props.item.start_date
+    let listClassname = '';
+    let amountClassname = this.props.type === 'incomes' ? 'text-green' : 'text-red';
+    let titlePrefix = '';
+    let details = '';
+    let buttons = '';
     let date = new Date(dateString).toLocaleDateString();
 
     if(this.props.type === 'expenses') {
-      classname += 'list-expense';
-      prefix = <i className="fas fa-wallet"></i>;
+      listClassname += 'list-expense';
+      titlePrefix = <i className="fas fa-wallet"></i>;
     } else {
-      classname += 'list-income';
-      prefix = <i className="fas fa-money-bill-alt"></i>;
+      listClassname += 'list-income';
+      titlePrefix = <i className="fas fa-money-bill-alt"></i>;
     }
 
-    // only show extraInfo if list is NOT recent only
+    // only show details if list is NOT recent only
     if(! this.props.recentOnly) {
       let category = this.context.categories.find(c => c.id === this.props.item.category_id);
 
-      extraInfo = <>
-        <div className="w-100"></div>
+      details = <>
         <p>{category ? category.name : 'n/a'}</p>
         <p>{this.props.item.recurring_rule || 'once'}</p>
       </>;
 
-      controls = <>
-        <Link to={`/edit_${this.props.type.slice(0, this.props.type.length-1)}/${this.props.item.id}`}>
+      buttons = <>
+        <a href={`/${this.props.type}`} onClick={() => this.props.deleteItem(this.props.item.id)}><i className="fas fa-trash"></i></a>
+
+        <Link to={`/edit_${this.props.type.slice(0, -1)}/${this.props.item.id}`}>
           <i className="fas fa-edit"></i>
         </Link>
-        <a href={`/${this.props.type}`} onClick={() => this.props.deleteItem(this.props.item.id)}><i className="fas fa-trash"></i></a>
       </>;
     }
 
     return (
-      <li className={classname}>
+      <li className={listClassname}>
         <div className="list-data">
-          <p className="item-title">{prefix} {this.props.item.description}</p>
-          <p className="item-date">{date}</p>
-          <p className={this.props.type === 'incomes' ? 'text-green' : 'text-red'}>${this.props.item.amount}</p>
-          {extraInfo}
+          <p className="item-title">{titlePrefix} {this.props.item.description}</p>
+          {details}
+
+          <summary>
+            <p className="item-date">{date}</p>
+            <p className={amountClassname}>${this.props.item.amount}</p>
+          </summary>
         </div>
+
+        <div className="w-100"></div>
         <div className="list-controls">
-          {controls}
+          {buttons}
         </div>
       </li>
     );
