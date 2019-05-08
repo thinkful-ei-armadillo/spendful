@@ -50,13 +50,17 @@
   font-weight: bold;
 }
 
+.item-list .item-date {
+  color: gray;
+}
 
 
-/* money amount */
+
+/* amount on dashboard list */
 .item-list-dash li p:nth-child(3) {
   text-align: right;
 }
-
+/* amount on details pages */
 .item-list-details li p:nth-child(3) {
   text-align: left;
 }
