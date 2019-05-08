@@ -11,13 +11,17 @@ class CategorySelect extends React.Component {
 
   constructor(props) {
     super(props);
-
+    console.log(props)
     this.state = {
       categories: [],
       showCreateForm: false,
       inputValue: '',
-      setCategory:'',
-    };
+      setCategory: ''
+   }
+
+    if(props.value){
+      this.state.setCategory = props.value
+    }
   }
 
   componentDidMount() {
@@ -28,8 +32,18 @@ class CategorySelect extends React.Component {
     CategoriesService
     .getAllCategories()
     .then(categories => {
-      this.setState({ categories });
-    })
+      if (this.props.value){
+        this.setState({ 
+          categories, 
+          setCategory: this.props.value 
+        });
+      }
+      else{
+        this.setState({
+          categories 
+        })
+      }
+      })
   }
 
   createOptions = () => {
