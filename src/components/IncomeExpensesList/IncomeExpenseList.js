@@ -14,8 +14,9 @@ class ListItem extends Component {
     let prefix = '';
     let extraInfo = '';
     let controls = '';
-    let date = new Date(this.props.item.start_date).toLocaleDateString();
 
+    const dateString = this.props.item.occurrence_date || this.props.item.start_date
+    let date = new Date(dateString).toLocaleDateString();
 
     if(this.props.type === 'expenses') {
       classname += 'list-expense';
@@ -76,7 +77,7 @@ export default class IncomeExpenseList extends Component {
     }
     else{
       deleteExpense(itemId)
-      .then(() => {this.props.updateExpenses(itemId)}) 
+      .then(() => {this.props.updateExpenses(itemId)})
     }
   }
 
@@ -87,11 +88,11 @@ export default class IncomeExpenseList extends Component {
     return <>
       <article className={this.props.onlyShowRecent ? 'item-list-dash' : 'item-list-details'}>
         {this.props.onlyShowRecent && <h4>{this.props.type}</h4>}
-      
+
         {(this.props.onlyShowRecent && data.length === 0) && <p>There are no items to display.</p>}
-        
+
         <ul className="item-list">
-          {data.map((item, i) => 
+          {data.map((item, i) =>
             <ListItem deleteItem={this.deleteItem} item={item} type={this.props.type} recentOnly={this.props.onlyShowRecent} key={i} />)}
 
             <Link className="list-add" to={`/add#${this.props.type.slice(0, -1)}`}>
@@ -99,10 +100,9 @@ export default class IncomeExpenseList extends Component {
             </Link>
         </ul>
 
-        {this.props.onlyShowRecent && 
+        {this.props.onlyShowRecent &&
           <Link className="recent-link" to={'/' + this.props.type}>See all {this.props.type}</Link>}
       </article>
     </>;
   }
 }
-
