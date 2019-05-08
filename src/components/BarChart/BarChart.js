@@ -84,9 +84,9 @@ export default class BarChart extends Component {
         year = offsetYear - 1
       } 
 
-      labels.push(months[pointer])
-      yearsTracker.push(year)
-      monthsTracker.push(pointer)
+      labels.unshift(months[pointer])
+      yearsTracker.unshift(year)
+      monthsTracker.unshift(pointer)
     }
 
     let reports = []
@@ -124,29 +124,15 @@ export default class BarChart extends Component {
         let temp;
         if(this.props.type === "expenses"){
           temp = report.expenses
-                            .reduce((acc, curr) => {
-                                if(curr.recurring_rule === 'weekly'){
-                                  acc = acc + (parseInt(curr.amount) * 4)
-                                } else if(curr.recurring_rule === 'biweekly'){
-                                  acc = acc + (parseInt(curr.amount) * 2)
-                                } else {
-                                  acc = acc + parseInt(curr.amount)
-                                }
-                                return acc
-                              }, 0)
+                        .reduce((acc, curr) => {
+                            return acc += parseInt(curr.amount)
+                          }, 0)
     
         } else {
           temp = report.incomes
-                            .reduce((acc, curr) => {
-                                if(curr.recurring_rule === 'weekly'){
-                                  acc = acc + (parseInt(curr.amount) * 4)
-                                } else if(curr.recurring_rule === 'biweekly'){
-                                  acc = acc + (parseInt(curr.amount) * 2)
-                                } else {
-                                  acc = acc + parseInt(curr.amount)
-                                }
-                                return acc
-                              }, 0)
+                          .reduce((acc, curr, i) => {
+                              return acc += parseInt(curr.amount)
+                            }, 0)
         }
         
         data.push(temp)
