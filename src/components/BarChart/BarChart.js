@@ -9,11 +9,12 @@ export default class BarChart extends Component {
 
   constructor(props) {
     super(props);
-
     const barColor = this.props.type === 'incomes' ? '93, 204, 132': '255,99,132';
     const gridLineColor = '0, 0, 0';
-
     this.state = {
+      report: [],
+      months: [],
+      error: null,
       chart: {
         data: {
           labels: [],
@@ -67,16 +68,11 @@ export default class BarChart extends Component {
     }
   }
 
-
-  renderChart = () => {
+  async componentDidMount(){
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    let chart = this.state.chart
-    let data = []
     let labels = []
     let yearsTracker = []
     let monthsTracker = []
-
- 
     let offset = new Date().getMonth()
     let offsetYear = new Date().getFullYear()
     
@@ -93,60 +89,80 @@ export default class BarChart extends Component {
       monthsTracker.push(pointer)
     }
 
-    console.log(yearsTracker, monthsTracker)
-
+    let reports = []
     for(let i=0; i<labels.length; i++){
-      getMonthlyReport(yearsTracker[i], monthsTracker[i]+1)
-        .then(report => {
-          let temp;
-          if(this.props.type === "expenses"){
-            temp = report.expenses
-                              .reduce((acc, curr) => {
-                                  if(curr.recurring_rule === 'weekly'){
-                                    acc = acc + (parseInt(curr.amount) * 4)
-                                  } else if(curr.recurring_rule === 'biweekly'){
-                                    acc = acc + (parseInt(curr.amount) * 2)
-                                  } else {
-                                    acc = acc + parseInt(curr.amount)
-                                  }
-                                  return acc
-                                }, 0)
-
-          } else {
-            temp = report.incomes
-                              .reduce((acc, curr) => {
-                                  if(curr.recurring_rule === 'weekly'){
-                                    acc = acc + (parseInt(curr.amount) * 4)
-                                  } else if(curr.recurring_rule === 'biweekly'){
-                                    acc = acc + (parseInt(curr.amount) * 2)
-                                  } else {
-                                    acc = acc + parseInt(curr.amount)
-                                  }
-                                  return acc
-                                }, 0)
-          }
-
-          console.log(typeof temp)
-          data.push(temp)
-        })
-        .catch(error => {
-          if(error.errors) console.log(error.errors)
-          else console.log(error)
-        })
+      await this.handleReport(yearsTracker[i], monthsTracker[i]+1).then(res => {
+        reports.push(res)
+      })
     }
 
+    this.setState({
+      report: reports,
+      months: labels
+    })
+  }
+
+  handleReport = async(year, month) => {
+    let report;
+    await getMonthlyReport(year, month)
+      .then(res => {
+        report = res
+      })
+      .catch(error => {
+        this.setState({error: error.errors})
+      })
+
+    return report
+  }
+
+  renderChart = () => {
+    let chart = this.state.chart
+    let data = []
+
+    if(this.state.report.length > 0){
+      this.state.report.forEach(report => {
+        let temp;
+        if(this.props.type === "expenses"){
+          temp = report.expenses
+                            .reduce((acc, curr) => {
+                                if(curr.recurring_rule === 'weekly'){
+                                  acc = acc + (parseInt(curr.amount) * 4)
+                                } else if(curr.recurring_rule === 'biweekly'){
+                                  acc = acc + (parseInt(curr.amount) * 2)
+                                } else {
+                                  acc = acc + parseInt(curr.amount)
+                                }
+                                return acc
+                              }, 0)
     
-    console.log(data)
+        } else {
+          temp = report.incomes
+                            .reduce((acc, curr) => {
+                                if(curr.recurring_rule === 'weekly'){
+                                  acc = acc + (parseInt(curr.amount) * 4)
+                                } else if(curr.recurring_rule === 'biweekly'){
+                                  acc = acc + (parseInt(curr.amount) * 2)
+                                } else {
+                                  acc = acc + parseInt(curr.amount)
+                                }
+                                return acc
+                              }, 0)
+        }
+        
+        data.push(temp)
+      })
+    }
+
+    // console.log(data)
 
     chart.data.datasets[0].data = data
     chart.data.datasets[0].label = `Total ${this.props.type} by month`
-    chart.data.labels = labels;
+    chart.data.labels = this.state.months;
 
     return <Bar data={chart.data} options={chart.options} />;
   }
 
   render() {
-    // console.log(this.props.data)
     return (
       <section className="page-chart page-bar-chart">
         {this.renderChart()}
