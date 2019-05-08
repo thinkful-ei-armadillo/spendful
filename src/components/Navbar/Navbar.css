@@ -86,8 +86,7 @@ nav a {
 
 .user-name{
   font-size: 1.0em; 
-  margin-right: 1em;
-  margin-left: .5em; 
+  margin: 0 1em 0 .5em;
   font-weight: 700;
 }
 
@@ -95,7 +94,14 @@ nav a {
   display: flex;
   align-items: center; 
 }
-@media only screen and (max-width: 675px) {
+
+@media only screen and (max-width: 900px) {
+  nav .nav-hide-tablet {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 665px) {
   nav .nav-hide-mobile {
     display: none;
   }
@@ -104,7 +110,7 @@ nav a {
 }
 
 /* hide mobile menu on big screens */
-@media only screen and (min-width: 675px) {
+@media only screen and (min-width: 666px) {
   .nav-mobile-menu,
   .nav-mobile-menu.expanded,
   .nav-show-mobile {

@@ -69,11 +69,13 @@ class Navbar extends Component {
           <div className="nav-right nav-hide-mobile">
             {isLoggedIn
               ? 
-              <div className='user-container'>
-                <i className="far fa-user"></i>
-                <p className="user-name">{this.context.user.name}</p>
+              <>
+                <div className='user-container nav-hide-tablet'>
+                  <i className="far fa-user"></i>
+                  <p className="user-name">{this.context.user.name}</p>
+                </div>
                 <Link className="nav-link" to="/" onClick={this.handleLogout}>Logout</Link>
-              </div>
+              </>
               : <Link className="nav-link" to="/login">Login</Link>}
           </div>
           <div className="nav-right nav-show-mobile">

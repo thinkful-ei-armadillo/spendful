@@ -7,7 +7,7 @@ body {
 
 main {
   margin: 0 auto;
-  padding: 6em 0;
+  padding: 8em 0;
   max-width: 60em;
 }
 
@@ -224,6 +224,10 @@ label {
 }
 
 @media only screen and (max-width: 768px) {
+  main {
+    padding: 6em 1.5em;
+  }
+
   .page-bar-chart { margin: 0 }
 }
 
