@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2'; 
 import DataContext from '../../contexts/DataContext';
+import { getMonthlyReport } from '../../services/reports-service'
 
 
 export default class BarChart extends Component {
@@ -8,11 +9,12 @@ export default class BarChart extends Component {
 
   constructor(props) {
     super(props);
-
     const barColor = this.props.type === 'incomes' ? '93, 204, 132': '255,99,132';
     const gridLineColor = '0, 0, 0';
-
     this.state = {
+      report: [],
+      months: [],
+      error: null,
       chart: {
         data: {
           labels: [],
@@ -66,62 +68,87 @@ export default class BarChart extends Component {
     }
   }
 
+  async componentDidMount(){
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    let labels = []
+    let yearsTracker = []
+    let monthsTracker = []
+    let offset = new Date().getMonth()
+    let offsetYear = new Date().getFullYear()
+    
+    for(let i=0; i < months.length; i++) {
+      let pointer = (offset - i) % months.length;
+      let year = offsetYear
+      if(pointer < 0) {
+        pointer = months.length + pointer
+        year = offsetYear - 1
+      } 
+
+      labels.unshift(months[pointer])
+      yearsTracker.unshift(year)
+      monthsTracker.unshift(pointer)
+    }
+
+    let reports = []
+    for(let i=0; i<labels.length; i++){
+      await this.handleReport(yearsTracker[i], monthsTracker[i]+1).then(res => {
+        reports.push(res)
+      })
+    }
+
+    this.setState({
+      report: reports,
+      months: labels
+    })
+  }
+
+  handleReport = async(year, month) => {
+    let report;
+    await getMonthlyReport(year, month)
+      .then(res => {
+        report = res
+      })
+      .catch(error => {
+        this.setState({error: error.errors})
+      })
+
+    return report
+  }
 
   renderChart = () => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    let chart = this.state.chart;
-    let data = [...this.props.data]
-    let years = []
-    let labels = [];
+    let chart = this.state.chart
+    let data = []
 
-    if(data[0]){
-      data.sort((a, b) => Date.parse(b.start_date) - Date.parse(a.start_date))
-      let offset = new Date().getMonth()
-      let offsetYear = new Date(data[0].start_date).getFullYear()
-      
-      for(let i=0; i < months.length; i++) {
-        let pointer = (offset - i) % months.length;
-        let year = offsetYear
-        if(pointer < 0) {
-          pointer = months.length + pointer
-          year = offsetYear - 1
-        } 
-
-        labels.push(months[pointer])
-        years.push(year)
-      }
-
-      // console.log(years, labels)
-      let totals = [];
-      for(let i=0; i<labels.length; i++){
-        let total = 0;
-        data.forEach(d => {
-          let m = new Date(d.start_date).getMonth()
-          let y = new Date(d.start_date).getFullYear()
-          let amount = parseInt(d.amount)
-          if(months[m] === labels[i] && y === years[i] && d.recurring_rule === null){
-            total = total + amount
-
-          } else if (months[m] === labels[i] && y === years[i] && d.recurring_rule.toLowerCase() === 'monthly'){
-            total = total + amount
-            for(let i=0; i<totals.length; i++){
-              totals[i]+=amount
-            }
-          }
-        })
-        totals.push(total)
-      }
-
-      // console.log(totals)
-      chart.data.datasets[0].data = totals
-      chart.data.datasets[0].label = `Total ${this.props.type} by month`
-      chart.data.labels = labels;
+    if(this.state.report.length > 0){
+      this.state.report.forEach(report => {
+        let temp;
+        if(this.props.type === "expenses"){
+          temp = report.expenses
+                        .reduce((acc, curr) => {
+                            return acc += parseInt(curr.amount)
+                          }, 0)
+    
+        } else {
+          temp = report.incomes
+                          .reduce((acc, curr, i) => {
+                              return acc += parseInt(curr.amount)
+                            }, 0)
+        }
+        
+        data.push(temp)
+      })
     }
+
+    // console.log(data)
+
+    chart.data.datasets[0].data = data
+    chart.data.datasets[0].label = `Total ${this.props.type} by month`
+    chart.data.labels = this.state.months;
+
     return <Bar data={chart.data} options={chart.options} />;
   }
 
   render() {
-    // console.log(this.props.data)
     return (
       <section className="page-chart page-bar-chart">
         {this.renderChart()}
