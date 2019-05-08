@@ -10,31 +10,33 @@ import Adapter from 'enzyme-adapter-react-16';
 
 
 
-
-
-import Chart from '../Chart/Chart';
-import DashboardPage from './DashboardPage';
+import IncomePage from './IncomesPage';
+import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe.skip('DashboardPage component', () => {
+describe('Income Page component', () => {
 
     let wrapper;
 
-    it('renders without crashing', () => {
+    it('renders correctly', () => {
         const div = document.createElement('div');
         ReactDOM.render(
          <BrowserRouter>
-           <DashboardPage />
+           <IncomePage />
          </BrowserRouter>,
           
           div);
         ReactDOM.unmountComponentAtNode(div);
-      });
 
-    it('renders the chart component', () => {
-        wrapper = shallow(<Chart />);
+    })
 
-        expect(wrapper.find(Chart));
-    })  
-})
+    it ('renders a "page-controls" section', () => {
+        wrapper = shallow(<section className="page-controls"></section>
+        )
+
+        expect(wrapper.hasClass('.page-controls'));
+        
+    })
+    
+});
