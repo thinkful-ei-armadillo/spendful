@@ -10,6 +10,7 @@ canvas {
 .page-chart {
   max-width: 100%;
   min-height: 20em;
+  max-height: 30em;
   padding: 3.5em;
   display: flex;
   align-items: center;
