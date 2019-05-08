@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2'; 
 import DataContext from '../../contexts/DataContext';
+import { getMonthlyReport } from '../../services/reports-service'
 
 
 export default class BarChart extends Component {
@@ -69,54 +70,78 @@ export default class BarChart extends Component {
 
   renderChart = () => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    let chart = this.state.chart;
-    let data = [...this.props.data]
-    let years = []
-    let labels = [];
+    let chart = this.state.chart
+    let data = []
+    let labels = []
+    let yearsTracker = []
+    let monthsTracker = []
 
-    if(data[0]){
-      data.sort((a, b) => Date.parse(b.start_date) - Date.parse(a.start_date))
-      let offset = new Date().getMonth()
-      let offsetYear = new Date(data[0].start_date).getFullYear()
-      
-      for(let i=0; i < months.length; i++) {
-        let pointer = (offset - i) % months.length;
-        let year = offsetYear
-        if(pointer < 0) {
-          pointer = months.length + pointer
-          year = offsetYear - 1
-        } 
+ 
+    let offset = new Date().getMonth()
+    let offsetYear = new Date().getFullYear()
+    
+    for(let i=0; i < months.length; i++) {
+      let pointer = (offset - i) % months.length;
+      let year = offsetYear
+      if(pointer < 0) {
+        pointer = months.length + pointer
+        year = offsetYear - 1
+      } 
 
-        labels.push(months[pointer])
-        years.push(year)
-      }
-
-      // console.log(years, labels)
-      let totals = [];
-      for(let i=0; i<labels.length; i++){
-        let total = 0;
-        data.forEach(d => {
-          let m = new Date(d.start_date).getMonth()
-          let y = new Date(d.start_date).getFullYear()
-          let amount = parseInt(d.amount)
-          if(months[m] === labels[i] && y === years[i] && d.recurring_rule === null){
-            total = total + amount
-
-          } else if (months[m] === labels[i] && y === years[i] && d.recurring_rule.toLowerCase() === 'monthly'){
-            total = total + amount
-            for(let i=0; i<totals.length; i++){
-              totals[i]+=amount
-            }
-          }
-        })
-        totals.push(total)
-      }
-
-      // console.log(totals)
-      chart.data.datasets[0].data = totals
-      chart.data.datasets[0].label = `Total ${this.props.type} by month`
-      chart.data.labels = labels;
+      labels.push(months[pointer])
+      yearsTracker.push(year)
+      monthsTracker.push(pointer)
     }
+
+    console.log(yearsTracker, monthsTracker)
+
+    for(let i=0; i<labels.length; i++){
+      getMonthlyReport(yearsTracker[i], monthsTracker[i]+1)
+        .then(report => {
+          let temp;
+          if(this.props.type === "expenses"){
+            temp = report.expenses
+                              .reduce((acc, curr) => {
+                                  if(curr.recurring_rule === 'weekly'){
+                                    acc = acc + (parseInt(curr.amount) * 4)
+                                  } else if(curr.recurring_rule === 'biweekly'){
+                                    acc = acc + (parseInt(curr.amount) * 2)
+                                  } else {
+                                    acc = acc + parseInt(curr.amount)
+                                  }
+                                  return acc
+                                }, 0)
+
+          } else {
+            temp = report.incomes
+                              .reduce((acc, curr) => {
+                                  if(curr.recurring_rule === 'weekly'){
+                                    acc = acc + (parseInt(curr.amount) * 4)
+                                  } else if(curr.recurring_rule === 'biweekly'){
+                                    acc = acc + (parseInt(curr.amount) * 2)
+                                  } else {
+                                    acc = acc + parseInt(curr.amount)
+                                  }
+                                  return acc
+                                }, 0)
+          }
+
+          console.log(typeof temp)
+          data.push(temp)
+        })
+        .catch(error => {
+          if(error.errors) console.log(error.errors)
+          else console.log(error)
+        })
+    }
+
+    
+    console.log(data)
+
+    chart.data.datasets[0].data = data
+    chart.data.datasets[0].label = `Total ${this.props.type} by month`
+    chart.data.labels = labels;
+
     return <Bar data={chart.data} options={chart.options} />;
   }
 
