@@ -225,7 +225,7 @@ label {
 
 @media only screen and (max-width: 768px) {
   main {
-    padding: 6em 1.5em;
+    padding: 7em 1.5em;
   }
 
   .page-bar-chart { margin: 0 }

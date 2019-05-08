@@ -36,6 +36,9 @@
   padding: 5px 10px;
   border-radius: 4px;
 }
+.item-list-dash .item-title { align-self: initial }
+.item-list-details .item-title { align-self: end }
+
 .item-title i { font-size: 1.25em; margin-right: 5px }
 
 .list-income .item-title {
@@ -54,6 +57,12 @@
   color: gray;
 }
 
+.item-list summary {
+  text-align: right;
+}
+
+.item-list-dash .list-data { align-items: center }
+.item-list-details .list-data { align-items: unset }
 
 
 /* amount on dashboard list */
@@ -112,7 +121,6 @@
 
 .list-data {
   width: 100%;
-  margin: 0 1em 0 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -122,13 +130,16 @@
 }
 
 .list-controls {
+  margin: 1em 0 0 0;
+  display: flex;
+  flex-direction: row-reverse;
   flex: 1;
 }
 
 .list-controls a:link,
 .list-controls a:visited {
   margin: 0.25em;
-  padding: 0.5em;
+  padding: 1em;
   display: block;
   text-align: center;
   background-color: #d6d6d6;
@@ -139,8 +150,8 @@
 
 
 /* edit/delete btns */
-.list-controls a:nth-child(1) { color: #696969 }
-.list-controls a:nth-child(2) { color: #ff6868 }
+.list-controls a:nth-child(1) { color: #ff6868 }
+.list-controls a:nth-child(2) { color: #696969 }
 
 
 
