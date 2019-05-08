@@ -9,11 +9,12 @@ export default class Chart extends Component {
   state = {
     category: {},
     categoryColors: {
-      0: 'rgba(8, 95, 99, 0.5)',
+      0: 'rgba(221,221,221,0.5)',
       1: 'rgba(73, 190, 183, 0.5)',
       2: 'rgba(250, 207, 90, 0.5)',
       3: 'rgba(255, 89, 89, 0.5)',
       4: 'rgba(15, 169, 49, 0.5)',
+      5: 'rgba(8, 95, 99, 0.5)',
     },
     chart: {
       data: {
@@ -32,14 +33,7 @@ export default class Chart extends Component {
           labels: {
             boxWidth: 12,
             padding: 30,
-          },
-        //   events: ['click'],
-        //   onClick: (c, i) => {
-        //     let ind = i.index
-        //     let label = i.text
-        //     console.log(i)
-
-        // }
+          }
         },
         cutoutPercentage: 75,
         responsive: true,
@@ -48,13 +42,6 @@ export default class Chart extends Component {
     },
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevProps.data.expenses.length !== this.props.data.expenses.length) {
-  //     this.updateChart();
-  //   }
-  // }
-
-  
 
   renderChart = () => {
     let chart = this.state.chart;
@@ -62,8 +49,11 @@ export default class Chart extends Component {
     let labels = [];
     let backgroundColor = [];
     let categories = {}
-
-    // this is why the chart doesnt render the data properly
+    const totalExpenses = this.context.expenses.reduce((acc, curr) => acc + parseInt(curr.amount), 0)
+    const totalIncomes = this.context.incomes.reduce((acc, curr) => acc + parseInt(curr.amount), 0)
+    const balance = totalIncomes - totalExpenses
+    categories['Balance'] = balance
+    
 
     this.context.categories.forEach(c => {
       this.context.expenses.forEach(e => {
@@ -79,17 +69,9 @@ export default class Chart extends Component {
       backgroundColor.push(this.state.categoryColors[index]);
     })
 
-    // this.context.expenses.forEach(item => {
-    //   data.push(parseInt(item.amount));
-    //   labels.push(this.context.categories.find(c => c.id === item.category_id).name);
-    //   backgroundColor.push(this.state.categoryColors[item.category_id] || this.state.categoryColors[0]);
-    // });
-
     chart.data.labels = labels;
     chart.data.datasets[0].data = data;
     chart.data.datasets[0].backgroundColor = backgroundColor;
-
-    //this.setState({chart});
 
     return <Doughnut data={chart.data} options={chart.options} />;
   }
