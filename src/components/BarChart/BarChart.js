@@ -69,6 +69,7 @@ export default class BarChart extends Component {
   }
 
   async componentDidMount(){
+    this.setState({error: null})
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     let labels = []
     let yearsTracker = []
@@ -151,6 +152,7 @@ export default class BarChart extends Component {
   render() {
     return (
       <section className="page-chart page-bar-chart">
+        {this.state.error !== null && <div className="alert-error">{this.state.error}</div>}
         {this.renderChart()}
       </section>
     );
