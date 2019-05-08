@@ -163,7 +163,7 @@ class CategorySelect extends React.Component {
           required />
 
         <button onClick={this.handleCreateFormSubmit} type="button" className="btn"><i className="fas fa-check"></i></button>
-        <button onClick={() => this.toggleShowCreate('cancel')} type="button" className="btn"><i className="fas fa-window-close"></i></button>
+        <button onClick={() => this.toggleShowCreate('cancel')} type="button" className="btn"><i className="fas fa-times"></i></button>
       </>;
     }
 

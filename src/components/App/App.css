@@ -39,7 +39,6 @@ article {
   background: #f7f7f7;
   border: 1px solid #cccccc;
   border-radius: 6px;
-  padding: 1.25em;
   padding-bottom: 3em;
 }
 
@@ -60,9 +59,10 @@ label {
   font-weight: bold;
 }
 
-.flex-main {
+.main-dash {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
+  padding: 5em 0;
 }
 
 .flex-form-container {

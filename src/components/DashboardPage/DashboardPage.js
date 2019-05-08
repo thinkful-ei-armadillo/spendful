@@ -76,11 +76,15 @@ export default class DashboardPage extends Component {
     let content = (
       <>
         {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
+        <div className="w-100"></div>
+
         <section className="page-controls">
           <MonthPicker setMonth={this.handleSetMonth} />
         </section>
         <div className="w-100"></div>
+
         {this.context.expenses.length > 0 && <Chart data={data} key={date}/>}
+
         <section className="page-summaries">
           <IncomeExpenseList type="incomes" data={this.context.incomes} key={'incomes' + date} onlyShowRecent />
           <IncomeExpenseList type="expenses" data={this.context.expenses} key={'expenses' + date} onlyShowRecent />
@@ -89,7 +93,7 @@ export default class DashboardPage extends Component {
     )
 
     return (
-      <main className="flex-main">
+      <main className="main-dash">
         {this.state.isLoading ? <Loader /> : content}
       </main>
     )
