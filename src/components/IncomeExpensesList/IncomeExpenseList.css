@@ -45,7 +45,7 @@
   background-color: #ff4949;
 }
 
-.item-list li p:nth-child(2) {
+.item-list li p:nth-child(3) {
   text-align: center;
   font-weight: bold;
 }
@@ -53,11 +53,11 @@
 
 
 /* money amount */
-.item-list-dash li p:nth-child(2) {
+.item-list-dash li p:nth-child(3) {
   text-align: right;
 }
 
-.item-list-details li p:nth-child(2) {
+.item-list-details li p:nth-child(3) {
   text-align: left;
 }
 

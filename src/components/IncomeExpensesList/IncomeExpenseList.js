@@ -14,6 +14,7 @@ class ListItem extends Component {
     let prefix = '';
     let extraInfo = '';
     let controls = '';
+    let date = new Date(this.props.item.start_date).toLocaleDateString();
 
 
     if(this.props.type === 'expenses') {
@@ -26,11 +27,9 @@ class ListItem extends Component {
 
     // only show extraInfo if list is NOT recent only
     if(! this.props.recentOnly) {
-      let date = new Date(this.props.item.start_date).toLocaleDateString();
       let category = this.context.categories.find(c => c.id === this.props.item.category_id);
 
       extraInfo = <>
-        <p>{date}</p>
         <div className="w-100"></div>
         <p>{category ? category.name : 'n/a'}</p>
         <p>{this.props.item.recurring_rule || 'once'}</p>
@@ -48,6 +47,7 @@ class ListItem extends Component {
       <li className={classname}>
         <div className="list-data">
           <p className="item-title">{prefix} {this.props.item.description}</p>
+          <p className="item-date">{date}</p>
           <p className={this.props.type === 'incomes' ? 'text-green' : 'text-red'}>${this.props.item.amount}</p>
           {extraInfo}
         </div>
@@ -67,18 +67,7 @@ export default class IncomeExpenseList extends Component {
     errors: []
   }
 
-  // componentDidMount() {
-  //   getAllCategories()
-  //     .then(categories => {
-  //       this.context.setCategories(categories);
-  //     })
-  //     .catch(error => {
-  //       this.context.setError(error)
-  //       this.setState({
-  //         errors: this.context.errors
-  //       })
-  //     });
-  // }
+
 
   deleteItem = (itemId) => {
     if (this.props.type === 'incomes'){
@@ -98,7 +87,7 @@ export default class IncomeExpenseList extends Component {
     return <>
       <article className={this.props.onlyShowRecent ? 'item-list-dash' : 'item-list-details'}>
         {this.props.onlyShowRecent && <h4>{this.props.type}</h4>}
-       
+      
         {(this.props.onlyShowRecent && data.length === 0) && <p>There are no items to display.</p>}
         
         <ul className="item-list">
@@ -117,8 +106,3 @@ export default class IncomeExpenseList extends Component {
   }
 }
 
-// IncomeExpenseList.defaultProps = {
-//   type: 'income',
-//   onlyShowRecent: false,
-//   data: [],
-// }
