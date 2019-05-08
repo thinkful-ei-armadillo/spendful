@@ -36,11 +36,11 @@ class EditIncomePage extends React.Component {
       <main className="flex-main">
 
         {
-          this.state.errors.length > 0
-            ? <div className="alert-error">{this.state.errors}</div>
-            : ''
+          this.state.errors.length > 0 && <div className="alert-error">{this.state.errors}</div>
         }
 
+        <div className="w-100"></div>
+        
         <div className="flex-form-container">
           <EditIncomeForm
             incomeId={this.props.incomeId}
