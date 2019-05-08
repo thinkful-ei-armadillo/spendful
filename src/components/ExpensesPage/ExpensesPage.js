@@ -7,6 +7,7 @@ import { getAllExpenses } from '../../services/expenses-service'
 import { getMonthlyReport } from '../../services/reports-service';
 import DataContext from '../../contexts/DataContext'
 import MonthPicker from '../MonthPicker/MonthPicker'
+import { getAllCategories } from '../../services/categories-service';
 
 export default class ExpensesPage extends Component {
   static contextType = DataContext
@@ -34,10 +35,20 @@ export default class ExpensesPage extends Component {
           this.setState({isLoading: false})
       })
       .catch(error => {
-          this.context.setError(error.errors)
-          this.setState({
-            errors: this.context.errors
-          })
+        this.context.setError(error.errors)
+        this.setState({
+          errors: this.context.errors
+        })
+      })
+    getAllCategories()
+      .then(categories => {
+        this.context.setCategories(categories)
+      })
+      .catch(error => {
+        this.context.setError(error.errors)
+        this.setState({
+          errors: this.context.errors
+        })
       })
   }
 
