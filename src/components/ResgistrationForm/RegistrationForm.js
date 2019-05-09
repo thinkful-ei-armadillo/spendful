@@ -56,11 +56,6 @@ export default class RegistrationForm extends Component {
   render() {
     return (
       <>
-
-      <div className="test-error">
-      {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
-      </div>
-
       <form onSubmit={this.handleRegistrationSubmit}>
         <label htmlFor="input_email">Email</label>
         <input type="email" id="input_email" className="form-control" name="email_address" autoComplete="off" required></input>
