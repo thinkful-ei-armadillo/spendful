@@ -15,7 +15,14 @@ export default class LandingPage extends Component {
     this.featuresRef = React.createRef()
     this.registrationRef = React.createRef() 
     this.state = {
-      isloading: true
+      isloading: true,
+      team: [
+        {name: 'Andre Willie', href: 'https://github.com/andre-kw'},
+        {name: 'Chris Carnivale', href: 'https://github.com/cjcarnivale'},
+        {name: 'Ethan Zimmerman', href: 'https://github.com/thebinarypenguin'},
+        {name: 'Michael Bonner', href: 'https://github.com/mdb1710'},
+        {name: 'Zoljargal Fallows', href: 'https://github.com/ZolFallows'},
+      ],
     }  
   }
 
@@ -109,11 +116,7 @@ export default class LandingPage extends Component {
               <h3>About us</h3>
               {/* <hr className="underline"/> */}
               <ul>
-                <li>Andre Willie</li>
-                <li>Christopher Carnivale</li>
-                <li>Ethan Zimmerman</li>
-                <li>Michael Bonner</li>
-                <li>Zoljargal Fallows</li>
+                {this.state.team.map(guy => <li><a href={guy.href} target="_blank"><i className="fab fa-github"></i> {guy.name}</a></li>)}
               </ul>
             </div>
           </div>
