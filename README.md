@@ -16,7 +16,7 @@ for recurring expenses.
 
 ####Dashboard Page
 
-![Dashboard Page]()
+![Dashboard Page](./images/DashBoardPage.png)
 
 As a logged in user, communicates with `get api/categories` to retrieve all categories for the page.
 
@@ -26,11 +26,14 @@ Displays a donut chart with expenses broken down by category and includes a rema
 
 Displays the last 5 transactions for both incomes and expenses.
 
+Displays a drop down allowing the user to choose the month to view.
+
 Contains buttons that redirect the user to a page to add either incomes or expenses.
+
 
 ####Income/Expense Page
 
-![Income/Expense Page]()
+![Income/Expense Page](.images/ExpensePage.png)`
 
 As a logged in user, commmunicate with either `get api/expenses` or `get api/incomes` to retrieve all transactions depending on props.
 
