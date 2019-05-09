@@ -221,6 +221,7 @@ select, .flex-form > input, .input-date {
 
 .demo-btn {
   margin-top: 8px;
+  background-color: #018201b8;
 }
 
 .password-instructions{

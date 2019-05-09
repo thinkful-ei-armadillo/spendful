@@ -79,7 +79,7 @@ export default class RegistrationForm extends Component {
           title="Password must be 8-30 characters long and contain at least one uppercase letter, at least one lowercase letter, and at least one number."required></input>
         <p className="password-instructions">Password must be 8-30 characters long and contain at least one uppercase letter, at least one lowercase letter, and at least one number.</p>
         <button type="submit" className="btn">Create an account!</button>
-        <button type="button" className="btn demo-btn" onClick={this.handleDemoLogin}>Demo account</button>
+        <button type="button" className="btn demo-btn" onClick={this.handleDemoLogin}>Demo account!</button>
       </form>
 
       </>
