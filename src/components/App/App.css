@@ -214,9 +214,14 @@ select, .flex-form > input, .input-date {
   text-decoration: none;
   background-color: #6697ff;
   color: #fff;
+  cursor: pointer;
 }
 
 .btn-submit { margin: 1.5em 0 0 0 }
+
+.demo-btn {
+  margin-top: 8px;
+}
 
 .password-instructions{
   font-size: 10px;

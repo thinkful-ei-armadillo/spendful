@@ -13,7 +13,7 @@ export default function Loader() {
             focusable="false"
             data-prefix="fas"
             data-icon="dollar-sign"
-            class="svg-inline--fa fa-dollar-sign fa-w-9"
+            className="svg-inline--fa fa-dollar-sign fa-w-9"
             role="img"
             viewBox="0 0 288 512"
           >
