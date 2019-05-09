@@ -11,8 +11,10 @@ import Adapter from 'enzyme-adapter-react-16';
 import LandingPage from './LandingPage';
 
 import RegistrationForm from '../ResgistrationForm/RegistrationForm';
+import UserContext from '../../contexts/UserContext';
 
 Enzyme.configure({ adapter: new Adapter() });
+
 
 
 describe ('LandingPage component', () => {
@@ -30,6 +32,16 @@ describe ('LandingPage component', () => {
           div);
         ReactDOM.unmountComponentAtNode(div);
       });
+
+    it('render an "alert-error-lg"', ()  => {
+      wrapper = shallow(
+        <LandingPage />
+      )
+
+      expect(wrapper.containsMatchingElement(
+        <div className="alert-error-lg">{this.context.error[0]}</div>
+      )).toBeTruthy();
+    })  
 
     it('renders an `landing-header`', () => {
       wrapper = shallow(<LandingPage />);

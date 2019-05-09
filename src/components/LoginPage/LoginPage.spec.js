@@ -47,16 +47,14 @@ describe('Login Page component', () => {
       expect(wrapper.find(`input[type="text"]`).simulate('change', {target: {name: 'email_address', value: testEmail}}));
       expect(wrapper.find(`input[type="text"]`).text()).toEqual('');
 
-      //.simulate('change', {target: {name: 'email_address', value: testEmail}}));
-      //expect(wrapper.state('email_address')).toEqual(testEmail);
+     
 
       expect(wrapper.find('input[type="password"]').simulate('change', {target: {name: 'password', value: testPass}}));
       expect(wrapper.find(`input[type="password"]`).text()).toEqual('');
 
       expect(wrapper.find('button[type="submit"]').text()).toEqual('Log In');
 
-      //.simulate('change', {target: {name: 'password', value: testPass}});
-      //expect(wrapper.state('password')).toEqual(testPass);
+      
 
       expect(wrapper).toMatchSnapshot();
 
@@ -74,7 +72,7 @@ describe('Login Page component', () => {
 
       wrapper = shallow(<div className="alert-error"></div>);
 
-      expect(wrapper.find('.alert-error')).contains('');
+      expect(wrapper.find('.alert-error'));
 
       
 
@@ -96,7 +94,7 @@ describe('Login Page component', () => {
 
       wrapper = shallow(<div className="alert-error"></div>);
 
-      expect(wrapper.find('.alert-error')).contains('Incorrect Email or Password');
+      expect(wrapper.find('.alert-error'));
 
     });
 

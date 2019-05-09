@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+
 import { BrowserRouter } from 'react-router-dom';
 import Enzyme from 'enzyme'
 import { shallow } from 'enzyme';
