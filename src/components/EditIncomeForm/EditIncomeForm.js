@@ -91,6 +91,12 @@ class EditIncomeForm extends React.Component {
 
       <h2>Edit income</h2>
 
+      <label htmlFor="description">Short description (max 50 chars.)</label>
+      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />
+
+      <label htmlFor="amount">Amount</label>
+      <input type="number" id="amount" name="amount" defaultValue={this.state.income.amount} step=".01" min=".01"/>
+      
       <label htmlFor="input-category">Category</label>
       <CategorySelect type="income" id="category" name="category" value={`${this.state.income.category_id}`} onChange={this.handleCategoryChange} />
 
@@ -99,12 +105,6 @@ class EditIncomeForm extends React.Component {
 
       <label htmlFor="endDate">End Date (Optional)</label>
       <input type="date" id="endDate" name="endDate" defaultValue={this.state.income.end_date} />
-
-      <label htmlFor="description">Short description (max 50 chars.)</label>
-      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />
-
-      <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" name="amount" defaultValue={this.state.income.amount} step=".01" min=".01"/>
 
       <label htmlFor="frequency">Frequency</label>
       <select id="frequency" name="frequency" value={this.state.income.recurring_rule} onChange={this.handleFrequencyChange} >
