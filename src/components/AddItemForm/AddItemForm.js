@@ -85,7 +85,7 @@ This is not true for 500 level-errors
       <input required type="text" id="description" maxLength="50" />
 
       <label htmlFor="amount">Amount</label>
-      <input required type="number" id="amount" />
+      <input required type="number" id="amount" step=".01" min=".01"/>
 
       <label htmlFor="input-category">Category</label>
       <CategorySelect id="category" type={this.props.itemType} />

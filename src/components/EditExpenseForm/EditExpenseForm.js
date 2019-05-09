@@ -95,6 +95,12 @@ class EditExpenseForm extends React.Component {
 
       <h2>Edit expense</h2>
 
+      <label htmlFor="description">Short description (max 50 chars.)</label>
+      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
+      
+      <label htmlFor="amount">Amount</label>
+      <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} step=".01" min=".01"/>
+
       <label htmlFor="input-category">Category</label>
       <CategorySelect type="expense" id="category" name="category" value={`${this.state.expense.category_id}`} handleChange={this.handleCategoryChange} />
 
@@ -103,12 +109,6 @@ class EditExpenseForm extends React.Component {
 
       <label htmlFor="endDate">End Date (Optional)</label>
       <input type="date" id="endDate" name="endDate" defaultValue={this.state.expense.end_date} />
-
-      <label htmlFor="description">Short description (max 50 chars.)</label>
-      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
-
-      <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} />
 
       <label htmlFor="frequency">Frequency</label>
       <select id="frequency" name="frequency" value={this.state.expense.recurring_rule} onChange={this.handleFrequencyChange} >
