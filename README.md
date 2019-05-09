@@ -16,7 +16,7 @@ for recurring expenses.
 
 #### Dashboard Page
 
-![Dashboard Page](./src/images/DashBoardPage.png)
+![Dashboard Page](./src/images/DashboardPage.png)
 
 As a logged in user, communicates with `get api/categories` to retrieve all categories for the page.
 
