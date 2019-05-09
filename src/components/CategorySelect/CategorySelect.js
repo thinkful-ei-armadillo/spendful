@@ -141,8 +141,8 @@ class CategorySelect extends React.Component {
     let jsx = <>
       <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category">
         <option value=''>Please select a category...</option>
-        {this.createOptions()}
         <option value='create'>Create new category...</option>
+        {this.createOptions()}
       </select>
 
       <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button" className="btn">
@@ -160,6 +160,7 @@ class CategorySelect extends React.Component {
           name="newCategoryName" 
           className="form-control"
           placeholder="Enter a new category name..."
+          autoComplete="off"
           required />
 
         <button onClick={this.handleCreateFormSubmit} type="button" className="btn"><i className="fas fa-check"></i></button>

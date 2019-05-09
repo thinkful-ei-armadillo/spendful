@@ -91,10 +91,10 @@ This is not true for 500 level-errors
       <CategorySelect id="category" type={this.props.itemType} />
 
       <label htmlFor="start_date">Start Date</label>
-      <input required type="date" id="start_date"/>
+      <input required type="date" id="start_date" className="input-date"/>
 
       <label htmlFor="end_date">End Date (Optional)</label>
-      <input type="date" id="end_date"/>
+      <input type="date" id="end_date" className="input-date"/>
 
       <label htmlFor="recurring_rule">Frequency</label>
       <select required id="recurring_rule">
