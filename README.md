@@ -1,68 +1,68 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Spendful
 
-## Available Scripts
+Michael Bonner, Ethan Zimmerman, Andre Willie, Zoljargal Fallows, and Chris Carnivale
 
-In the project directory, you can run:
+[LiveApp](http://spendful.now.sh)
+[Server Repo](https://github.com/thinkful-ei-armadillo/spendful-server)
 
-### `npm start`
+## Summary
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Reach your financial goals by tracking every dollar you spend and earn.  This app allows you to 
+add all of your incomes and expenses and visualize them through convenient charts and graphs.  The
+front-end utilizes React to create a responsive design.  The back-end leverages the RRule library to allow
+for recurring expenses.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Pages
 
-### `npm test`
+#### Dashboard Page
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Dashboard Page](./src/images/DashboardPage.png)
 
-### `npm run build`
+As a logged in user, communicates with `get api/categories` to retrieve all categories for the page.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+As a logged in user, communicates with `get api/reports/:year/:month` to retrieve incomes and expenses for a given month.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Displays a donut chart with expenses broken down by category and includes a remaining balance.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Displays the last 5 transactions for both incomes and expenses.
 
-### `npm run eject`
+Displays a drop down allowing the user to choose the month to view.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Contains buttons that redirect the user to a page to add either incomes or expenses.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Income/Expense Page
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Income/Expense Page](./src/images/ExpensePage.png)`
 
-## Learn More
+As a logged in user, commmunicate with either `get api/expenses` or `get api/incomes` to retrieve all transactions depending on props.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+As a logged in user, changing from All Expenses to Monthly will communicate with `get api/reports/:year/:month and update incomes and expenses in context for the chosen month.
 
-### Code Splitting
+Displays either all incomes/expenses or just expenses for a chosen month
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+When displaying all incomes/expenses, also displays a bar chart representing the previous year
 
-### Analyzing the Bundle Size
+For each transaction, displays a delete button that communicate with `delete api/expenses/:id` to remove a transaction
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+For each transaction, displays an edit button that re-directs the user to another page, allowing them to change the values of the income/expense.
 
-### Making a Progressive Web App
+Displays two buttons, one on the top of the page, and one at the end of the transaction list to add an income/expense.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## Technology
+- React
+- HTML5
+- CSS3
+- Enzyme
 
-### Advanced Configuration
+## Setup
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+To setup the application
 
-### Deployment
+1. Fork and clone the project to your machine.
+2. `npm install`.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Running project
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This is a `create-react-app` project so `npm start` will start the project in development mode with hot reloading by default.
