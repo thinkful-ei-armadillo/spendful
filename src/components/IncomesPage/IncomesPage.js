@@ -103,7 +103,11 @@ export default class IncomePage extends Component {
           <option value='monthly'>Monthly</option>
         </select>
 
-        {this.state.showIncomes === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
+        {this.state.showIncomes === 'monthly' && <>
+          <MonthPicker setMonth={this.handleSetMonth}/>
+          <div className="w-100 show-mobile"></div>
+        </>}
+
         <Link className="btn" to="/add#income">Add income</Link>
       </section>
 
