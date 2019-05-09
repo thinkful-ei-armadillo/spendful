@@ -16,7 +16,7 @@ for recurring expenses.
 
 #### Dashboard Page
 
-![Dashboard Page](./src/images/DashboardPage.png)
+![Dashboard Page](./src/images/DashboardPage1.png)
 
 As a logged in user, communicates with `get api/categories` to retrieve all categories for the page.
 
@@ -33,7 +33,7 @@ Contains buttons that redirect the user to a page to add either incomes or expen
 
 #### Income/Expense Page
 
-![Income/Expense Page](./src/images/ExpensePage.png)`
+![Income/Expense Page](./src/images/ExpensePage1.png)`
 
 As a logged in user, commmunicate with either `get api/expenses` or `get api/incomes` to retrieve all transactions depending on props.
 
