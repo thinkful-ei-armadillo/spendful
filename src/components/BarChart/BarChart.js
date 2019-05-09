@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2'; 
+import moment from 'moment-timezone';
 import DataContext from '../../contexts/DataContext';
 import { getMonthlyReport } from '../../services/reports-service'
 
@@ -93,6 +94,15 @@ export default class BarChart extends Component {
     let reports = []
     for(let i=0; i<labels.length; i++){
       await this.handleReport(yearsTracker[i], monthsTracker[i]+1).then(res => {
+        res.incomes.forEach(income => {
+          income.start_date = moment(income.start_date).format('YYYY-MM-DD HH:mm:ss')
+          // income.start_date = moment.utc(income.start_date).local().format('YYYY-MM-DD HH:mm:ss')
+        })
+        res.expenses.forEach(expense => {
+          expense.start_date = moment(expense.start_date).format('YYYY-MM-DD HH:mm:ss')
+          // expense.start_date = moment.utc(expense.start_date).local().format('YYYY-MM-DD HH:mm:ss')
+        })
+        console.log(res)
         reports.push(res)
       })
     }
