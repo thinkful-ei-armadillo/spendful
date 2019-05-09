@@ -2,8 +2,7 @@
 
 .landing-header {
   max-width: 60em;
-  margin: 4em auto 0;
-  padding: 5em 15%;
+  padding: 7em 15% 5em;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -18,14 +17,14 @@
 
 .landing-header-left h2 {
   max-width: 12em;
-  margin: 0;
+  margin: 1em 0;
   padding: 1em;
   background-color: #eff2f6;
-  border: 9px solid #3d4143;
-  color: #383838;
+  border: 9px solid #3d4143ed;
+  color: #383838de;
   font-family: 'Muli';
   font-size: 1.75em;
-  font-weight: 100;
+  font-weight: 800;
   text-align: center;
   transform: rotate(-9deg);
   box-shadow: 5px 0px 4px 0px #44444487;
