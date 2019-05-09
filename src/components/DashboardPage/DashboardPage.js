@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; 
+import { Link } from 'react-router-dom';
 import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 import Chart from '../Chart/Chart';
 import DataContext from '../../contexts/DataContext';
@@ -73,6 +74,13 @@ export default class DashboardPage extends Component {
       categories: this.context.categories
     }
 
+    let chartPlaceholder = (
+      <p className="alert alert-chart">
+        You haven't logged any expenses yet! <Link to="/add#expense">Create an expense</Link> to start tracking
+        your balance.
+      </p>
+    );
+
     let content = (
       <>
         {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
@@ -83,7 +91,7 @@ export default class DashboardPage extends Component {
         </section>
         <div className="w-100"></div>
 
-        {this.context.expenses.length > 0 && <Chart data={data} key={date}/>}
+        {this.context.expenses.length > 0 ? <Chart data={data} key={date}/> : chartPlaceholder}
 
         <section className="page-summaries">
           <IncomeExpenseList type="incomes" data={this.context.incomes} key={'incomes' + date} onlyShowRecent />

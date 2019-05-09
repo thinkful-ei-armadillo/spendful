@@ -11,25 +11,47 @@ class CategorySelect extends React.Component {
 
   constructor(props) {
     super(props);
-
+    console.log(props)
     this.state = {
       categories: [],
       showCreateForm: false,
       inputValue: '',
-      setCategory:'',
-    };
+      setCategory: ''
+   }
+
+    if(props.value){
+      this.state.setCategory = props.value
+    }
   }
 
   componentDidMount() {
     this.setCategories()
   }
 
+  componentWillReceiveProps(props){
+    if (props.value){
+      this.setState({
+        setCategory: props.value
+      })
+    }
+  }
+
   setCategories = () => {
     CategoriesService
     .getAllCategories()
     .then(categories => {
-      this.setState({ categories });
-    })
+      if (this.props.value){
+        this.setState({ 
+          categories, 
+          setCategory: this.props.value 
+        });
+      }
+      else{
+        this.setState({
+          categories 
+        })
+      }
+      })
   }
 
   createOptions = () => {
@@ -141,8 +163,8 @@ class CategorySelect extends React.Component {
     let jsx = <>
       <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category">
         <option value=''>Please select a category...</option>
-        {this.createOptions()}
         <option value='create'>Create new category...</option>
+        {this.createOptions()}
       </select>
 
       <button onClick={() => {this.handleDeleteCategory(this.state.setCategory)}} type="button" className="btn">
@@ -160,6 +182,7 @@ class CategorySelect extends React.Component {
           name="newCategoryName" 
           className="form-control"
           placeholder="Enter a new category name..."
+          autoComplete="off"
           required />
 
         <button onClick={this.handleCreateFormSubmit} type="button" className="btn"><i className="fas fa-check"></i></button>

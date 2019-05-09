@@ -72,7 +72,7 @@ export default class ExpensesPage extends Component {
     this.context.clearError()
     getMonthlyReport(year, month)
       .then(report => {
-        // console.log(report)
+        
         this.context.setAllExpenses(report.expenses);
         this.context.setAllIncomes(report.incomes);
       })
@@ -103,7 +103,12 @@ export default class ExpensesPage extends Component {
                           <option value='all'>All Expenses</option>
                           <option value='monthly'>Monthly</option>
                         </select>
-                        {this.state.showExpenses === 'monthly' && <MonthPicker setMonth={this.handleSetMonth}/>}
+                        
+                        {this.state.showExpenses === 'monthly' && <>
+                          <MonthPicker setMonth={this.handleSetMonth}/>
+                          <div className="w-100 show-mobile"></div>
+                        </>}
+                        
                         <Link className="btn" to="/add#expense">Add expense</Link>
                       </section>
 

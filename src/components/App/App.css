@@ -30,6 +30,11 @@ h4 {
   text-transform: capitalize;
 }
 
+main .loader, .loader {
+  margin: 10% auto;
+  text-align: center;
+}
+
 article {
   max-width: 40em;
   margin: 0 auto 4em;
@@ -66,7 +71,6 @@ label {
 }
 
 .flex-form-container {
-  width: 100%;
   max-width: 25em;
   margin: 0 auto;
   padding: 2em;
@@ -86,13 +90,18 @@ label {
 }
 
 .flex-form > input,
-.flex-form > select {
+.flex-form > select,
+.input-date {
   width: 100%;
   margin: .5em auto;
   padding: 0.5em 0.75em;
   border-radius: 3px;
   border: 2px solid #d2d2d2;
   box-sizing: border-box;
+}
+
+select, .flex-form > input, .input-date {
+  min-height: 3em;
 }
 
 .flex-form label {
@@ -128,12 +137,13 @@ label {
 
 .page-controls {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto 1.5em;
   max-width: 42.5em;
 }
-.flex-main .page-controls {
+.main-dash .page-controls {
   padding: 0 3.5em;
 }
 
@@ -171,6 +181,8 @@ label {
   color: gray;
   text-align: center;
 }
+.alert a:link,
+.alert a:visited { color: #424242; }
 
 .alert-error {
   margin: 0 auto;
@@ -186,6 +198,12 @@ label {
   margin: 5em 0 0 0;
 }
 
+.alert-chart {
+  max-width: 25em;
+  margin: 4em auto 2em;
+  line-height: 2em;
+}
+
 
 .btn,
 .btn:link,
@@ -196,15 +214,44 @@ label {
   text-decoration: none;
   background-color: #6697ff;
   color: #fff;
+  cursor: pointer;
 }
 
 .btn-submit { margin: 1.5em 0 0 0 }
+
+.demo-btn {
+  margin-top: 8px;
+  background-color: #0182019e;
+}
 
 .password-instructions{
   font-size: 10px;
   margin-top: 0;
   margin-bottom: 2em; 
 }
+
+.page-404 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: brown;
+}
+
+.page-404 > div {
+  text-align: center;
+  max-width: 15em;
+  font-size: 1.25em;
+  line-height: 1.75em;
+}
+
+.page-404 > div i {
+  font-size: 2em;
+}
+
+
+
 
 @media only screen and (max-width: 425px) {
   .show-mobile { display: block; }
@@ -219,7 +266,17 @@ label {
 
   .page-chart.page-bar-chart {
     margin: 3em 0;
-    min-height: 10em;
+    min-height: 20em;
+  }
+
+  
+  /* css dark magic.
+    make button in flex container full width
+    if it comes after a width 100% element.
+    (but only on mobile) */
+  .w-100 + .btn {
+    flex: 1;
+    text-align: center;
   }
 }
 

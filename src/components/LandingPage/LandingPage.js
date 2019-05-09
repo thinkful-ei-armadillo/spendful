@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import doughnut from '../../images/doughnut-chart.png'
+import bar from '../../images/bar-chart.png'
 import Loader from '../loader/loader'
 import UserContext from '../../contexts/UserContext';
 import RegistrationForm from '../ResgistrationForm/RegistrationForm';
@@ -13,7 +15,14 @@ export default class LandingPage extends Component {
     this.featuresRef = React.createRef()
     this.registrationRef = React.createRef() 
     this.state = {
-      isloading: true
+      isloading: true,
+      team: [
+        {name: 'Andre Willie', href: 'https://github.com/andre-kw'},
+        {name: 'Chris Carnivale', href: 'https://github.com/cjcarnivale'},
+        {name: 'Ethan Zimmerman', href: 'https://github.com/thebinarypenguin'},
+        {name: 'Michael Bonner', href: 'https://github.com/mdb1710'},
+        {name: 'Zoljargal Fallows', href: 'https://github.com/ZolFallows'},
+      ],
     }  
   }
 
@@ -73,20 +82,19 @@ export default class LandingPage extends Component {
 
           <section className="feature-list" >
             <figure>
-              <img src="https://via.placeholder.com/250" alt="placeholder"></img>
+              <img src={bar} alt="placeholder"></img>
               <figcaption>
-                Track your earnings and expenses! <br/>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
-              condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
+                On the dedicated incomes and expenses pages, see all of your transactions, or select a specific month to view.
+                When viewing all transactions, an easy-to-read  bar chart will show you when in the previous year you bought that boat and
+                the subsequent months where all you ate was Ramen.
               </figcaption>
             </figure>
 
             <figure>
-              <img src="https://via.placeholder.com/250" alt="placeholder"></img>
+              <img src={doughnut} alt="placeholder" />
               <figcaption>
-                Understand where you money goes! <br/>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
-                condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
+                On your dashboard, a handy doughnut chart displays your expenses broken down by category and includes a balance sheet.
+                This intuitive and easy to read display will help you determine whether or not that seventh IPA for the evening is a good idea.
               </figcaption>
             </figure>
           </section>
@@ -95,6 +103,7 @@ export default class LandingPage extends Component {
           <div className='footer-wrapper'>
             <div className="project">
               <h3>Project</h3>
+              {/* <hr className="underline"/> */}
               <ul>
                 <li><a href="https://github.com/thinkful-ei-armadillo/spendful-client" target="_blank" rel="noopener noreferrer">Github Client</a></li>
                 <li><a href="https://github.com/thinkful-ei-armadillo/spendful-server" target="_blank" rel="noopener noreferrer">Github Server</a></li>
@@ -104,16 +113,13 @@ export default class LandingPage extends Component {
             </div>
             <div className="about-us">
               <h3>About us</h3>
+              {/* <hr className="underline"/> */}
               <ul>
-                <li>Andre</li>
-                <li>Chris</li>
-                <li>Ethan</li>
-                <li>Michael</li>
-                <li>Zoljargal</li>
+                {this.state.team.map((guy, i) => <li key={i}><a href={guy.href} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i> {guy.name}</a></li>)}
               </ul>
             </div>
           </div>
-          <hr/>
+          <hr className="copyright-hr"/>
           <div className="copyright">
             <p>Copyright 2019</p>
           </div>
