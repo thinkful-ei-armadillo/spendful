@@ -5,7 +5,7 @@ export default function Loader() {
   // SVG from FontAwesome
   return (
     <div className="loader">
-      <div class="lds-circle">
+      <div className="lds-circle">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"

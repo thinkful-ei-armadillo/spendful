@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import doughnut from '../../images/doughnut-chart.png'
+import bar from '../../images/bar-chart.png'
 import Loader from '../loader/loader'
 import UserContext from '../../contexts/UserContext';
 import RegistrationForm from '../ResgistrationForm/RegistrationForm';
@@ -73,7 +75,7 @@ export default class LandingPage extends Component {
 
           <section className="feature-list" >
             <figure>
-              <img src="https://via.placeholder.com/250" alt="placeholder"></img>
+              <img src={bar} alt="placeholder"></img>
               <figcaption>
                 Track your earnings and expenses! <br/>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
@@ -82,7 +84,7 @@ export default class LandingPage extends Component {
             </figure>
 
             <figure>
-              <img src="https://via.placeholder.com/250" alt="placeholder"></img>
+              <img src={doughnut} alt="placeholder" />
               <figcaption>
                 Understand where you money goes! <br/>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
@@ -95,6 +97,7 @@ export default class LandingPage extends Component {
           <div className='footer-wrapper'>
             <div className="project">
               <h3>Project</h3>
+              {/* <hr className="underline"/> */}
               <ul>
                 <li><a href="https://github.com/thinkful-ei-armadillo/spendful-client" target="_blank" rel="noopener noreferrer">Github Client</a></li>
                 <li><a href="https://github.com/thinkful-ei-armadillo/spendful-server" target="_blank" rel="noopener noreferrer">Github Server</a></li>
@@ -104,16 +107,17 @@ export default class LandingPage extends Component {
             </div>
             <div className="about-us">
               <h3>About us</h3>
+              {/* <hr className="underline"/> */}
               <ul>
-                <li>Andre</li>
-                <li>Chris</li>
-                <li>Ethan</li>
-                <li>Michael</li>
-                <li>Zoljargal</li>
+                <li>Andre Willie</li>
+                <li>Christopher Carnivale</li>
+                <li>Ethan Zimmerman</li>
+                <li>Michael Bonner</li>
+                <li>Zoljargal Fallows</li>
               </ul>
             </div>
           </div>
-          <hr/>
+          <hr className="copyright-hr"/>
           <div className="copyright">
             <p>Copyright 2019</p>
           </div>

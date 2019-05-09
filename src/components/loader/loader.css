@@ -10,7 +10,7 @@
   border: 3px solid rgb(56, 168, 50);
   padding: 0px 6.5px;
   border-radius: 60px;
-  animation: lds-circle 3.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: lds-circle 3.5s cubic-bezier(1, 0.2, 0.8, 1) infinite;
 }
 .lds-circle > div {
   display: inline-block;
