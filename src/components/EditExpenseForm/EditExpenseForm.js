@@ -23,7 +23,7 @@ class EditExpenseForm extends React.Component {
       .getExpense(this.props.expenseId)
       .then((expense) => {
 
-        if (expense.recurring_rule === null) {
+        if (expense.recurring_rule === null || expense.recurring_rule === '') {
           expense.recurring_rule = 'once';
         }
 
@@ -44,7 +44,7 @@ class EditExpenseForm extends React.Component {
     if(! isNaN(id)) {
       const expense = this.state.expense;
       expense.category_id = id;
-  
+
       this.setState({ expense });
     }
   }

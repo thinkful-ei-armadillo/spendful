@@ -23,7 +23,7 @@ class EditIncomeForm extends React.Component {
       .getIncome(this.props.incomeId)
       .then((income) => {
 
-        if (income.recurring_rule === null) {
+        if (income.recurring_rule === null || income.recurring_rule === '') {
           income.recurring_rule = 'once';
         }
 
