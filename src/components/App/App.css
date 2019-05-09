@@ -212,6 +212,29 @@ label {
   margin-bottom: 2em; 
 }
 
+.page-404 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: brown;
+}
+
+.page-404 > div {
+  text-align: center;
+  max-width: 15em;
+  font-size: 1.25em;
+  line-height: 1.75em;
+}
+
+.page-404 > div i {
+  font-size: 2em;
+}
+
+
+
+
 @media only screen and (max-width: 425px) {
   .show-mobile { display: block; }
 
