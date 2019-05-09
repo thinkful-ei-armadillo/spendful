@@ -68,7 +68,7 @@ export default class BarChart extends Component {
             }]
           },
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
         }
       },
     }
