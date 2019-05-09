@@ -30,6 +30,11 @@ h4 {
   text-transform: capitalize;
 }
 
+main .loader, .loader {
+  margin: 10% auto;
+  text-align: center;
+}
+
 article {
   max-width: 40em;
   margin: 0 auto 4em;

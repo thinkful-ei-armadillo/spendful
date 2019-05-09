@@ -33,7 +33,12 @@ export default class BarChart extends Component {
         },
         options: {
           legend: {
-            display: false,
+            display: true,
+            position: 'bottom'
+          },
+          title: {
+            display: true,
+            text: `${this.props.type.charAt(0).toUpperCase() + this.props.type.slice(1)} for the past 12 months`
           },
           scales: {
             xAxes: [{
@@ -86,10 +91,15 @@ export default class BarChart extends Component {
         year = offsetYear - 1
       } 
 
-      labels.push(months[pointer])
-      yearsTracker.push(year)
-      monthsTracker.push(pointer)
+      labels.unshift(months[pointer])
+      yearsTracker.unshift(year)
+      monthsTracker.unshift(pointer)
     }
+
+    labels = labels.map((m, i)=> {
+      let year = yearsTracker[i].toString().slice(2)
+      return `${m}/${year}`
+    })
 
     let reports = []
     for(let i=0; i<labels.length; i++){
@@ -102,7 +112,6 @@ export default class BarChart extends Component {
           expense.start_date = moment(expense.start_date).format('YYYY-MM-DD HH:mm:ss')
           // expense.start_date = moment.utc(expense.start_date).local().format('YYYY-MM-DD HH:mm:ss')
         })
-        console.log(res)
         reports.push(res)
       })
     }
@@ -149,8 +158,6 @@ export default class BarChart extends Component {
         data.push(temp)
       })
     }
-
-    // console.log(data)
 
     chart.data.datasets[0].data = data
     chart.data.datasets[0].label = `Total ${this.props.type} by month`
