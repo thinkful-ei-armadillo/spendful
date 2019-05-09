@@ -58,7 +58,7 @@ describe('Login Page component', () => {
       //.simulate('change', {target: {name: 'password', value: testPass}});
       //expect(wrapper.state('password')).toEqual(testPass);
 
-
+      expect(wrapper).toMatchSnapshot();
 
     });
 
@@ -72,6 +72,12 @@ describe('Login Page component', () => {
 
       wrapper.find('button').simulate('click');
 
+      wrapper = shallow(<div className="alert-error"></div>);
+
+      expect(wrapper.find('.alert-error')).contains('');
+
+      
+
       
 
 
@@ -79,6 +85,18 @@ describe('Login Page component', () => {
     })
 
     it('displays error if no password is provided', () => {
+
+      let wrapper = shallow(<LoginForm />);
+
+      wrapper.find(`input[type="text"]`).simulate('change', {target: {name: 'email_address', value: testEmail}});
+
+      wrapper.find('input[type="password"]').simulate('change', {target: {name: 'password', value: ''}});
+
+      wrapper.find('button').simulate('click');
+
+      wrapper = shallow(<div className="alert-error"></div>);
+
+      expect(wrapper.find('.alert-error')).contains('Incorrect Email or Password');
 
     });
 
