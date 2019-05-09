@@ -28,6 +28,14 @@ class CategorySelect extends React.Component {
     this.setCategories()
   }
 
+  componentWillReceiveProps(props){
+    if (props.value){
+      this.setState({
+        setCategory: props.value
+      })
+    }
+  }
+
   setCategories = () => {
     CategoriesService
     .getAllCategories()
