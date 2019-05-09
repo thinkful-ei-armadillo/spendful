@@ -84,18 +84,17 @@ export default class LandingPage extends Component {
             <figure>
               <img src={bar} alt="placeholder"></img>
               <figcaption>
-                Track your earnings and expenses! <br/>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
-              condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
+                On the dedicated incomes and expenses pages, see all of your transactions, or select a specific month to view.
+                When viewing all transactions, an easy-to-read  bar chart will show you when in the previous year you bought that boat and
+                the subsequent months where all you ate was Ramen.
               </figcaption>
             </figure>
 
             <figure>
               <img src={doughnut} alt="placeholder" />
               <figcaption>
-                Understand where you money goes! <br/>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque posuere, massa non bibendum 
-                condimentum, dui purus dignissim sem, nec posuere sapien ex quis mauris.
+                On your dashboard, a handy doughnut chart displays your expenses broken down by category and includes a balance sheet.
+                This intuitive and easy to read display will help you determine whether or not that seventh IPA for the evening is a good idea.
               </figcaption>
             </figure>
           </section>
