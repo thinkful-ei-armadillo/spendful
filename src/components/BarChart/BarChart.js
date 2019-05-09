@@ -86,9 +86,9 @@ export default class BarChart extends Component {
         year = offsetYear - 1
       } 
 
-      labels.unshift(months[pointer])
-      yearsTracker.unshift(year)
-      monthsTracker.unshift(pointer)
+      labels.push(months[pointer])
+      yearsTracker.push(year)
+      monthsTracker.push(pointer)
     }
 
     let reports = []
