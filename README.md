@@ -1,4 +1,4 @@
-#Spendful
+# Spendful
 
 Michael Bonner, Ethan Zimmerman, Andre Willie, Zoljargal Fallows, and Chris Carnivale
 
@@ -12,9 +12,9 @@ add all of your incomes and expenses and visualize them through convenient chart
 front-end utilizes React to create a responsive design.  The back-end leverages the RRule library to allow
 for recurring expenses.
 
-##Pages
+## Pages
 
-####Dashboard Page
+#### Dashboard Page
 
 ![Dashboard Page](./images/DashBoardPage.png)
 
@@ -31,9 +31,9 @@ Displays a drop down allowing the user to choose the month to view.
 Contains buttons that redirect the user to a page to add either incomes or expenses.
 
 
-####Income/Expense Page
+#### Income/Expense Page
 
-![Income/Expense Page](.images/ExpensePage.png)`
+![Income/Expense Page](./images/ExpensePage.png)`
 
 As a logged in user, commmunicate with either `get api/expenses` or `get api/incomes` to retrieve all transactions depending on props.
 
@@ -50,19 +50,19 @@ For each transaction, displays an edit button that re-directs the user to anothe
 
 Displays two buttons, one on the top of the page, and one at the end of the transaction list to add an income/expense.
 
-##Technology
+## Technology
 -React
 -HTML5
 -CSS3
 -Enzyme
 
-##Setup
+## Setup
 
 To setup the application
 
 1. Fork and clone the project to your machine.
 2. `npm install`.
 
-##Running project
+## Running project
 
 This is a `create-react-app` project so `npm start` will start the project in development mode with hot reloading by default.
