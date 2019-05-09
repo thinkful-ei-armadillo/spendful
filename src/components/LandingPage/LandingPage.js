@@ -116,7 +116,7 @@ export default class LandingPage extends Component {
               <h3>About us</h3>
               {/* <hr className="underline"/> */}
               <ul>
-                {this.state.team.map(guy => <li><a href={guy.href} target="_blank"><i className="fab fa-github"></i> {guy.name}</a></li>)}
+                {this.state.team.map((guy, i) => <li key={i}><a href={guy.href} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i> {guy.name}</a></li>)}
               </ul>
             </div>
           </div>
