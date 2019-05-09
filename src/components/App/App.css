@@ -186,6 +186,12 @@ label {
   margin: 5em 0 0 0;
 }
 
+.alert-chart {
+  max-width: 25em;
+  margin: 4em auto 2em;
+  line-height: 2em;
+}
+
 
 .btn,
 .btn:link,
