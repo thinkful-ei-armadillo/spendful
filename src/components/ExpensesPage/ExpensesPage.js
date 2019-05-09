@@ -72,7 +72,7 @@ export default class ExpensesPage extends Component {
     this.context.clearError()
     getMonthlyReport(year, month)
       .then(report => {
-        // console.log(report)
+        
         this.context.setAllExpenses(report.expenses);
         this.context.setAllIncomes(report.incomes);
       })
