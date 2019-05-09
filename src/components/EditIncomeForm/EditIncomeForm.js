@@ -104,7 +104,7 @@ class EditIncomeForm extends React.Component {
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />
 
       <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" name="amount" defaultValue={this.state.income.amount} />
+      <input type="number" id="amount" name="amount" defaultValue={this.state.income.amount} step=".01" min=".01"/>
 
       <label htmlFor="frequency">Frequency</label>
       <select id="frequency" name="frequency" value={this.state.income.recurring_rule} onChange={this.handleFrequencyChange} >

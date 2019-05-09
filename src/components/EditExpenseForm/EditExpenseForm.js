@@ -108,7 +108,7 @@ class EditExpenseForm extends React.Component {
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
 
       <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} />
+      <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} step=".01" min=".01"/>
 
       <label htmlFor="frequency">Frequency</label>
       <select id="frequency" name="frequency" value={this.state.expense.recurring_rule} onChange={this.handleFrequencyChange} >
