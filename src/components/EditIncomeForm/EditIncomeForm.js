@@ -98,7 +98,7 @@ class EditIncomeForm extends React.Component {
       <form className="flex-form" onSubmit={this.onSubmit}>
 
       <h2>Edit income</h2>
-      {this.state.errors > 0 && <div className="alert-error">{this.state.errors}</div>}
+      {this.state.errors.length > 0 && <div className="alert-error">{this.state.errors}</div>}
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />
