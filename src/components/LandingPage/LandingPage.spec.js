@@ -33,23 +33,26 @@ describe ('LandingPage component', () => {
         ReactDOM.unmountComponentAtNode(div);
       });
 
-    it('render an "alert-error-lg"', ()  => {
-      wrapper = shallow(
-        <LandingPage />
-      )
+    
 
-      expect(wrapper.containsMatchingElement(
-        <div className="alert-error-lg">{this.context.error[0]}</div>
-      )).toBeTruthy();
-    })  
+    // it('renders an header component', () => {
+    //   wrapper = shallow(<header>
+    //     <div className="landing-header">
+    //       <div className="landing-header-left">
+    //         <h2>Spendful is the newest way to prevent yourself from becoming broke.</h2>          
+    //       </div>
 
-    it('renders an `landing-header`', () => {
-      wrapper = shallow(<LandingPage />);
+    //       <div className="landing-header-right">
+           
+    //       </div>
+    //     </div>
+    //   </header>
+    //   );
 
-      expect(wrapper.contains('header'));
+    //   expect(wrapper.find('h2')).text('Spendful is the newest way to prevent yourself from becoming broke.')
 
 
-    });
+    // });
 
     it('renders a Registration Form component', () => {
 

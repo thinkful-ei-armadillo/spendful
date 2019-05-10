@@ -70,8 +70,7 @@ export default class DashboardPage extends Component {
       expenses: this.context.expenses,
       categories: this.context.categories
     }
-    // console.log(this.state.month)
-    // console.log(data)
+    
     return (
       <main className="flex-main">
         {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
