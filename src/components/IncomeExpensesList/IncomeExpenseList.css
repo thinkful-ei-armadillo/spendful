@@ -15,7 +15,7 @@
   flex-wrap: wrap;
   font-size: 0.75em;
   font-weight: bold;
-  background-color: #f5f5f5;
+  background-color: #f1efef;
   border-radius: 5px;
   border-bottom: 5px solid #d4d4d4;
 }
@@ -27,23 +27,50 @@
   flex-basis: 8em;
 }
 
-.item-list li p:nth-child(1) {
-  min-width: 10em;
+/* item title */
+.item-list .item-title {
   font-weight: bold;
   text-transform: uppercase;
+  font-size: 0.8em;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.item-list-dash .item-title { align-self: initial }
+.item-list-details .item-title { align-self: end }
+
+.item-title i { font-size: 1.25em; margin-right: 5px }
+
+.list-income .item-title {
+  background-color: #52bf88;
+}
+.list-expense .item-title {
+  background-color: #ff4949;
 }
 
-.item-list li p:nth-child(2) {
+.item-list li p:nth-child(3) {
   text-align: center;
   font-weight: bold;
 }
 
-/* money amount */
-.item-list-dash li p:nth-child(2) {
+.item-list .item-date {
+  color: gray;
+}
+
+.item-list summary {
   text-align: right;
 }
 
-.item-list-details li p:nth-child(2) {
+.item-list-dash .list-data { align-items: center }
+.item-list-details .list-data { align-items: unset }
+
+
+/* amount on dashboard list */
+.item-list-dash li p:nth-child(3) {
+  text-align: right;
+}
+/* amount on details pages */
+.item-list-details li p:nth-child(3) {
   text-align: left;
 }
 
@@ -59,22 +86,41 @@
   display: none;
 }
 
+.item-list .list-add {
+  margin: 1em 0 0;  
+  display: block;
+  border: 0;
+}
+
+.list-add:link li,
+.list-add:visited li {
+  margin: auto;
+  padding: 2px 0;
+  font-size: 1.3em;
+  color: #969696;
+  display: block;
+  text-align: center;
+}
+
+.list-add:hover li {
+  background-color: #cccccc;
+}
+
 .recent-link {
   bottom: -35px;
   left: -1px;
   right: -1px;
   position: absolute;
   padding: .5em 1em;
-  background: gray;
+  background: #a5a5a5;
   color: #fff;
   text-align: center;
-  border-bottom: 7px solid #4e4e4e;
+  border-bottom: 7px solid #828282;
   border-radius: 0 0 5px 5px;
 }
 
 .list-data {
   width: 100%;
-  margin: 0 1em 0 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -84,36 +130,34 @@
 }
 
 .list-controls {
+  display: flex;
+  flex-direction: row-reverse;
   flex: 1;
 }
 
 .list-controls a:link,
 .list-controls a:visited {
   margin: 0.25em;
-  padding: 0.5em;
+  padding: .5em 1em;
   display: block;
   text-align: center;
   background-color: #d6d6d6;
   border-radius: 4px;
+  border-bottom: 3px solid #b1acac;
   color: #fff;
 }
 
 
-  .item-list li p:nth-child(2) { text-align: right } 
+/* edit/delete btns */
+.list-controls a:nth-child(1) { color: #ff6868 }
+.list-controls a:nth-child(2) { color: #696969 }
 
-  
 
 
-.add-link {
-  width: 15em;
-  
-  
-  
-  padding: .5em 1em;
-  background: gray;
-  color: #fff;
-  text-align: center;
-  margin-top: -20px; 
-  margin-bottom: 20px;
+@media only screen and (max-width: 425px) {
+  .item-list li {
+    margin: 0 0 2em;
+    flex-direction: column;
+  }
 
 }

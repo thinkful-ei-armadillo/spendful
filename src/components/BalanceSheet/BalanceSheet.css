@@ -1,0 +1,39 @@
+.balance-sheet{
+  list-style-type: none;
+  margin: auto;
+  position: absolute;
+  top: -5px;
+  bottom: 0;
+  left: 0;
+  right: 2.75em;
+  height: 10em;
+  width: 150px;
+  color: gray;
+  line-height: 2em;
+}
+
+.balance-sheet li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.balance-sheet hr{
+  margin: 5px 0;
+  height: 2px;
+  background-image: none;
+  background-color: #dedede;  
+}
+
+@media only screen and (max-width: 800px){
+  .balance-sheet{
+    font-size: 14px;
+    width: 125px; 
+  } 
+}
+
+
+@media only screen and (max-width: 375px){
+  .balance-sheet{
+    height: 13em; 
+  }
+}

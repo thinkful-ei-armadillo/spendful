@@ -1,8 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import EditIncomeForm from '../EditIncomeForm/EditIncomeForm';
+import DataContext from '../../contexts/DataContext';
 
 class EditIncomePage extends React.Component {
+  static contextType = DataContext;
 
   constructor(props) {
     super(props);
@@ -34,13 +36,10 @@ class EditIncomePage extends React.Component {
 
     return (
       <main className="flex-main">
+        {this.context.errors.length > 0 && <div className="alert-error">{this.context.errors}</div>}
 
-        {
-          this.state.errors.length > 0
-            ? <div className="alert-error">{this.state.errors}</div>
-            : ''
-        }
-
+        <div className="w-100"></div>
+        
         <div className="flex-form-container">
           <EditIncomeForm
             incomeId={this.props.incomeId}

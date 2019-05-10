@@ -2,14 +2,17 @@ import React from 'react';
 import moment from 'moment-timezone';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import * as ExpensessService from '../../services/expenses-service';
+import DataContext from '../../contexts/DataContext';
 
 class EditExpenseForm extends React.Component {
+  static contextType = DataContext;
 
   constructor(props) {
     super(props);
 
     this.state = {
       expense: {},
+      errors: []
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -18,31 +21,38 @@ class EditExpenseForm extends React.Component {
   }
 
   componentDidMount() {
-
+    this.setState({errors: []})
     ExpensessService
       .getExpense(this.props.expenseId)
       .then((expense) => {
 
-        if (expense.recurring_rule === null) {
+        if (expense.recurring_rule === null || expense.recurring_rule === '') {
           expense.recurring_rule = 'once';
         }
 
         // Create local date from input UTC data, format it
         expense.start_date = moment(expense.start_date).format('YYYY-MM-DD');
-        expense.end_date   = moment(expense.end_date).format('YYYY-MM-DD');
+
+        if (expense.end_date) {
+          expense.end_date   = moment(expense.end_date).format('YYYY-MM-DD');
+        }
 
         this.setState({ expense });
       })
       .catch((err) => {
-        console.log(err)
+        this.setState({errors: err.errors})
       });
   }
 
   handleCategoryChange(ev) {
-    const expense = this.state.expense;
-    expense.category_id = ev.target.value;
+    const id = parseInt(ev.target.value);
 
-    this.setState({ expense });
+    if(! isNaN(id)) {
+      const expense = this.state.expense;
+      expense.category_id = id;
+
+      this.setState({ expense });
+    }
   }
 
   handleFrequencyChange(ev) {
@@ -54,6 +64,11 @@ class EditExpenseForm extends React.Component {
 
   onSubmit(ev) {
     ev.preventDefault();
+
+    if(! ev.target.category) {
+      this.context.setError(['Please enter a category.'])
+      return
+    }
 
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
@@ -90,21 +105,22 @@ class EditExpenseForm extends React.Component {
       <form className="flex-form" onSubmit={this.onSubmit}>
 
       <h2>Edit expense</h2>
+      {this.state.errors.length > 0 && <div className="alert-error">{this.state.errors}</div>}
+
+      <label htmlFor="description">Short description (max 50 chars.)</label>
+      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
+
+      <label htmlFor="amount">Amount</label>
+      <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} step=".01" min=".01"/>
 
       <label htmlFor="input-category">Category</label>
-      <CategorySelect type="expense" id="category" name="category" value={`${this.state.expense.category_id}`} onChange={this.handleCategoryChange} />
+      <CategorySelect type="expense" id="category" name="category" value={`${this.state.expense.category_id}`} handleChange={this.handleCategoryChange} />
 
       <label htmlFor="startDate">Start Date</label>
       <input type="date" id="startDate" name="startDate" defaultValue={this.state.expense.start_date} />
 
       <label htmlFor="endDate">End Date (Optional)</label>
       <input type="date" id="endDate" name="endDate" defaultValue={this.state.expense.end_date} />
-
-      <label htmlFor="description">Short description (max 50 chars.)</label>
-      <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
-
-      <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} />
 
       <label htmlFor="frequency">Frequency</label>
       <select id="frequency" name="frequency" value={this.state.expense.recurring_rule} onChange={this.handleFrequencyChange} >
@@ -116,7 +132,7 @@ class EditExpenseForm extends React.Component {
         <option value="weekly">Weekly</option>
       </select>
 
-      <button type="submit">Save</button>
+      <button className="btn btn-submit" type="submit">Save</button>
     </form>
     );
   }

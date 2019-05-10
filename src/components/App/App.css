@@ -7,7 +7,7 @@ body {
 
 main {
   margin: 0 auto;
-  padding: 7em 2em 0;
+  padding: 8em 0;
   max-width: 60em;
 }
 
@@ -30,17 +30,21 @@ h4 {
   text-transform: capitalize;
 }
 
+main .loader, .loader {
+  margin: 10% auto;
+  text-align: center;
+}
+
 article {
   max-width: 40em;
   margin: 0 auto 4em;
   padding: 1.25em;
   position: relative;
   flex-basis: 22em;
-  background: #ececec;
-
-  padding: 1.25em;
+  background: #f7f7f7;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
   padding-bottom: 3em;
-
 }
 
 article > p {
@@ -60,15 +64,15 @@ label {
   font-weight: bold;
 }
 
-.flex-main {
+.main-dash {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
+  padding: 5em 0;
 }
 
 .flex-form-container {
-  min-width: 25em;  
-  max-width: 40em;
-  margin: 4em auto 0;
+  max-width: 25em;
+  margin: 0 auto;
   padding: 2em;
   background-color: #e8e8e8;
   border-radius: 6px;
@@ -85,14 +89,19 @@ label {
   margin: 0 0 1.5em;
 }
 
-.flex-form input,
-.flex-form > select {
+.flex-form > input,
+.flex-form > select,
+.input-date {
   width: 100%;
   margin: .5em auto;
   padding: 0.5em 0.75em;
   border-radius: 3px;
   border: 2px solid #d2d2d2;
   box-sizing: border-box;
+}
+
+select, .flex-form > input, .input-date {
+  min-height: 3em;
 }
 
 .flex-form label {
@@ -106,6 +115,21 @@ label {
   margin-top: 3em;
 }
 
+.form-row {
+  margin: .5em 0;
+  display: flex;
+}
+
+.form-row > select,
+.form-row > input {
+  flex: 4;
+}
+
+.form-row button {
+  margin-left: .5em;
+  background-color: gray;
+}
+
 
 .page-bar-chart {
   margin: 0 5em;
@@ -113,12 +137,13 @@ label {
 
 .page-controls {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto 1.5em;
   max-width: 42.5em;
 }
-.flex-main .page-controls {
+.main-dash .page-controls {
   padding: 0 3.5em;
 }
 
@@ -135,7 +160,7 @@ label {
 
 .w-100 { width: 100%; height: 0 }
 
-.text-green { color: green }
+.text-green { color: #00b800 }
 .text-red { color: red }
 
 .link-sm:link,
@@ -151,9 +176,18 @@ label {
   border: 2px solid #d2d2d2;
 }
 
-.alert-error {
+.alert {
+  margin: 0 auto;
+  color: gray;
   text-align: center;
+}
+.alert a:link,
+.alert a:visited { color: #424242; }
+
+.alert-error {
+  margin: 0 auto;
   padding: 1.5em 0;
+  text-align: center;
   color: red;
 }
 .alert-error-lg {
@@ -161,6 +195,13 @@ label {
   text-align: center;
   background-color: #ff5f5f;
   color: #fff;
+  margin: 5em 0 0 0;
+}
+
+.alert-chart {
+  max-width: 25em;
+  margin: 4em auto 2em;
+  line-height: 2em;
 }
 
 
@@ -173,19 +214,78 @@ label {
   text-decoration: none;
   background-color: #6697ff;
   color: #fff;
+  cursor: pointer;
 }
+
+.btn-submit { margin: 1.5em 0 0 0 }
+
+.demo-btn {
+  margin-top: 8px;
+  background-color: #0182019e;
+}
+
+.password-instructions{
+  font-size: 10px;
+  margin-top: 0;
+  margin-bottom: 2em; 
+}
+
+.page-404 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: brown;
+}
+
+.page-404 > div {
+  text-align: center;
+  max-width: 15em;
+  font-size: 1.25em;
+  line-height: 1.75em;
+}
+
+.page-404 > div i {
+  font-size: 2em;
+}
+
+
 
 
 @media only screen and (max-width: 425px) {
   .show-mobile { display: block; }
 
+  .flex-form-container {
+    margin: 0;
+  }
+
   .flex-form {
     min-width: 100%;
   }
 
-  .page-bar-chart {
-    margin: 0 0 3em;
+  .page-chart.page-bar-chart {
+    margin: 3em 0;
+    min-height: 20em;
   }
+
+  
+  /* css dark magic.
+    make button in flex container full width
+    if it comes after a width 100% element.
+    (but only on mobile) */
+  .w-100 + .btn {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  main {
+    padding: 7em 1.5em;
+  }
+
+  .page-bar-chart { margin: 0 }
 }
 
 @media only screen and (min-width: 426px) {

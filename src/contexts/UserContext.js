@@ -21,11 +21,10 @@ export class UserContextProvider extends Component {
     const state = { user: {}, error: [] }
 
     const jwtPayload = TokenService.parseAuthToken()
-
     if (jwtPayload)
       state.user = {
         id: jwtPayload.user_id,
-        name: jwtPayload.name,
+        name: jwtPayload.full_name,
         username: jwtPayload.sub,
       }
 
@@ -64,7 +63,7 @@ export class UserContextProvider extends Component {
     const jwtPayload = TokenService.parseAuthToken()
     this.setUser({
       id: jwtPayload.user_id,
-      name: jwtPayload.name,
+      name: jwtPayload.full_name,
       username: jwtPayload.sub,
     })
     IdleService.registerIdleTimerResets()
@@ -90,7 +89,7 @@ export class UserContextProvider extends Component {
   fetchRefreshToken = () => {
     AuthApiService.refreshToken()
       .then(res => {
-        TokenService.saveAuthToken(res.authToken)
+        TokenService.saveAuthToken(res.token)
         TokenService.queueCallbackBeforeExpiry(() => {
           this.fetchRefreshToken()
         })

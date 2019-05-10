@@ -32,7 +32,6 @@ const AuthApiService = {
   },
   refreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
-      method: 'PUT',
       headers: {
         'authorization': `Bearer ${TokenService.getAuthToken()}`,
       },

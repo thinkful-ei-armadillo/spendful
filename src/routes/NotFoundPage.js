@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class NotFoundRoute extends Component {
   render() {
     return (
-      <section>
-        <h2>404 - Page not found</h2>
-        <p>Try going back to your previous page.</p>
+      <section className="page-404">
+        <div>
+          <i className="fas fa-poo"></i>
+          <h2>404 Error</h2>
+          <p>Couldn't find that page. Try going back in your history or <Link to="/">to the home page</Link>.</p>
+        </div>
       </section>
     );
   }
