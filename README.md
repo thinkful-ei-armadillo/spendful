@@ -38,7 +38,7 @@ Contains buttons that redirect the user to a page to add either incomes or expen
 As a logged in user, commmunicate with either `get api/expenses` or `get api/incomes` to retrieve all transactions depending on props.
 
 
-As a logged in user, changing from All Expenses to Monthly will communicate with `get api/reports/:year/:month and update incomes and expenses in context for the chosen month.
+As a logged in user, changing from All Expenses to Monthly will communicate with `get api/reports/:year/:month` and update incomes and expenses in context for the chosen month.
 
 Displays either all incomes/expenses or just expenses for a chosen month
 
@@ -51,6 +51,7 @@ For each transaction, displays an edit button that re-directs the user to anothe
 Displays two buttons, one on the top of the page, and one at the end of the transaction list to add an income/expense.
 
 ## Technology
+- Chart.js
 - React
 - HTML5
 - CSS3
