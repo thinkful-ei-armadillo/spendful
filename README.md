@@ -3,6 +3,7 @@
 Michael Bonner, Ethan Zimmerman, Andre Willie, Zoljargal Fallows, and Chris Carnivale
 
 [LiveApp](http://spendful.now.sh)
+
 [Server Repo](https://github.com/thinkful-ei-armadillo/spendful-server)
 
 ## Summary
@@ -16,7 +17,7 @@ for recurring expenses.
 
 #### Dashboard Page
 
-![Dashboard Page](./src/images/DashboardPage.png)
+![Dashboard Page](./src/images/DashboardPage1.png)
 
 As a logged in user, communicates with `get api/categories` to retrieve all categories for the page.
 
@@ -33,12 +34,12 @@ Contains buttons that redirect the user to a page to add either incomes or expen
 
 #### Income/Expense Page
 
-![Income/Expense Page](./src/images/ExpensePage.png)`
+![Income/Expense Page](./src/images/ExpensePage1.png)`
 
 As a logged in user, commmunicate with either `get api/expenses` or `get api/incomes` to retrieve all transactions depending on props.
 
 
-As a logged in user, changing from All Expenses to Monthly will communicate with `get api/reports/:year/:month and update incomes and expenses in context for the chosen month.
+As a logged in user, changing from All Expenses to Monthly will communicate with `get api/reports/:year/:month` and update incomes and expenses in context for the chosen month.
 
 Displays either all incomes/expenses or just expenses for a chosen month
 
@@ -51,10 +52,22 @@ For each transaction, displays an edit button that re-directs the user to anothe
 Displays two buttons, one on the top of the page, and one at the end of the transaction list to add an income/expense.
 
 ## Technology
+
+- Moment
+
+The Usual Suspects:
+- React (Create React App)
+- Chart.js
 - React
 - HTML5
 - CSS3
 - Enzyme
+
+Deployed via Now
+
+Special thanks to moment for doing all the complex date math and 
+
+preserving our sanity (mostly) 
 
 ## Setup
 

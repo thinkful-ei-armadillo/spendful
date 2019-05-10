@@ -2,14 +2,17 @@ import React from 'react';
 import moment from 'moment-timezone';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import * as IncomesService from '../../services/incomes-service';
+import DataContext from '../../contexts/DataContext';
 
 class EditIncomeForm extends React.Component {
+  static contextType = DataContext;
 
   constructor(props) {
     super(props);
 
     this.state = {
       income: {},
+      errors: []
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -18,7 +21,7 @@ class EditIncomeForm extends React.Component {
   }
 
   componentDidMount() {
-
+    this.setState({errors: []})
     IncomesService
       .getIncome(this.props.incomeId)
       .then((income) => {
@@ -29,12 +32,15 @@ class EditIncomeForm extends React.Component {
 
         // Create local date from input UTC data, format it
         income.start_date = moment(income.start_date).format('YYYY-MM-DD');
-        income.end_date   = moment(income.end_date).format('YYYY-MM-DD');
+
+        if (income.end_date) {
+          income.end_date   = moment(income.end_date).format('YYYY-MM-DD');
+        }
 
         this.setState({ income });
       })
       .catch((err) => {
-        console.log(err)
+        this.setState({errors: err.errors})
       });
   }
 
@@ -54,6 +60,11 @@ class EditIncomeForm extends React.Component {
 
   onSubmit(ev) {
     ev.preventDefault();
+
+    if(! ev.target.category) {
+      this.context.setError(['Please enter a category.'])
+      return
+    }
 
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
@@ -90,13 +101,14 @@ class EditIncomeForm extends React.Component {
       <form className="flex-form" onSubmit={this.onSubmit}>
 
       <h2>Edit income</h2>
+      {this.state.errors.length > 0 && <div className="alert-error">{this.state.errors}</div>}
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />
 
       <label htmlFor="amount">Amount</label>
       <input type="number" id="amount" name="amount" defaultValue={this.state.income.amount} step=".01" min=".01"/>
-      
+
       <label htmlFor="input-category">Category</label>
       <CategorySelect type="income" id="category" name="category" value={`${this.state.income.category_id}`} onChange={this.handleCategoryChange} />
 

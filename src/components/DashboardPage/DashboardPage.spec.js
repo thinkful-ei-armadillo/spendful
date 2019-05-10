@@ -11,13 +11,15 @@ import Adapter from 'enzyme-adapter-react-16';
 
 
 
-import DashboardPage from './DashboardPage';
 
 import Chart from '../Chart/Chart';
+import DashboardPage from './DashboardPage';
+import MonthPicker from '../MonthPicker/MonthPicker';
+import IncomeExpenseList from '../IncomeExpensesList/IncomeExpenseList';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('DashboardPage component', () => {
+describe.skip('DashboardPage component', () => {
 
     let wrapper;
 
@@ -32,9 +34,36 @@ describe('DashboardPage component', () => {
         ReactDOM.unmountComponentAtNode(div);
       });
 
+    const validMonth = {
+        year: new Date.getFullYear(),
+        month: new Date.getMonth()
+    }
+
+
+    
+    it ('renders the current month and year', () => {
+        wrapper = shallow(<MonthPicker />)
+
+        expect(wrapper.find(MonthPicker));
+
+        expect(wrapper.state('month')).to.equal(validMonth);
+    })
+
     it('renders the chart component', () => {
         wrapper = shallow(<Chart />);
 
         expect(wrapper.find(Chart));
-    })  
+    })
+    
+    it('renders an income list and expense list', () => {
+
+       
+        wrapper = shallow(<IncomeExpenseList type="incomes"/>)
+
+        expect(wrapper.prop('type')).to.equal('incomes');
+
+        wrapper = shallow(<IncomeExpenseList type="expenses" />)
+
+        expect(wrapper.prop('type')).to.equal('expenses');
+    })
 })

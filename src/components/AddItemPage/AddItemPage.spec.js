@@ -16,12 +16,13 @@ import AddItemPage from './AddItemPage';
 
 
 import AddItemForm from '../AddItemForm/AddItemForm';
+import CategorySelect from '../CategorySelect/CategorySelect';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('AddItemPage component', () => {
 
-    // let wrapper;
+    let wrapper;
 
     it('renders without crashing', () => {
         const div = document.createElement('div');
@@ -33,6 +34,29 @@ describe('AddItemPage component', () => {
           div);
         ReactDOM.unmountComponentAtNode(div);
       });
+
+    it('renders a "flex add item"', () => {
+        wrapper = shallow(
+            <main className="flex-add-item"></main>
+        )
+
+        expect(wrapper.find('.flex-add-item'));
+
+        
+    }) 
+    
+    it('renders an add item form', () => {
+        wrapper = shallow(<AddItemForm />);
+
+        expect(wrapper.find(AddItemForm));
+        
+    })
+
+    it('renders a select category component', () => {
+        wrapper = shallow(<CategorySelect />)
+
+        expect(wrapper.find(CategorySelect));
+    })
 
     
 })
