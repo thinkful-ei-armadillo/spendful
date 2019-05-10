@@ -35,8 +35,13 @@ class ListItem extends Component {
         <p>{this.props.item.recurring_rule || 'once'}</p>
       </>;
 
+      const deleteHandler = (ev) => {
+        ev.preventDefault();
+        this.props.deleteItem(this.props.item.id);
+      }
+
       buttons = <>
-        <a href={`/${this.props.type}`} onClick={() => this.props.deleteItem(this.props.item.id)}><i className="fas fa-trash"></i></a>
+        <a href={`/${this.props.type}`} onClick={deleteHandler}><i className="fas fa-trash"></i></a>
 
         <Link to={`/edit_${this.props.type.slice(0, -1)}/${this.props.item.id}`}>
           <i className="fas fa-edit"></i>
