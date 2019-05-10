@@ -32,7 +32,10 @@ class EditExpenseForm extends React.Component {
 
         // Create local date from input UTC data, format it
         expense.start_date = moment(expense.start_date).format('YYYY-MM-DD');
-        expense.end_date   = moment(expense.end_date).format('YYYY-MM-DD');
+
+        if (expense.end_date) {
+          expense.end_date   = moment(expense.end_date).format('YYYY-MM-DD');
+        }
 
         this.setState({ expense });
       })
@@ -106,7 +109,7 @@ class EditExpenseForm extends React.Component {
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />
-      
+
       <label htmlFor="amount">Amount</label>
       <input type="number" id="amount" name="amount" defaultValue={this.state.expense.amount} step=".01" min=".01"/>
 

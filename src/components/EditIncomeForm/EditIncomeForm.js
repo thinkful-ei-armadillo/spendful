@@ -32,7 +32,10 @@ class EditIncomeForm extends React.Component {
 
         // Create local date from input UTC data, format it
         income.start_date = moment(income.start_date).format('YYYY-MM-DD');
-        income.end_date   = moment(income.end_date).format('YYYY-MM-DD');
+
+        if (income.end_date) {
+          income.end_date   = moment(income.end_date).format('YYYY-MM-DD');
+        }
 
         this.setState({ income });
       })
@@ -105,7 +108,7 @@ class EditIncomeForm extends React.Component {
 
       <label htmlFor="amount">Amount</label>
       <input type="number" id="amount" name="amount" defaultValue={this.state.income.amount} step=".01" min=".01"/>
-      
+
       <label htmlFor="input-category">Category</label>
       <CategorySelect type="income" id="category" name="category" value={`${this.state.income.category_id}`} onChange={this.handleCategoryChange} />
 
