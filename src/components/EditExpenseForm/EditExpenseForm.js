@@ -2,14 +2,17 @@ import React from 'react';
 import moment from 'moment-timezone';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import * as ExpensessService from '../../services/expenses-service';
+import DataContext from '../../contexts/DataContext';
 
 class EditExpenseForm extends React.Component {
+  static contextType = DataContext;
 
   constructor(props) {
     super(props);
 
     this.state = {
       expense: {},
+      errors: []
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -18,7 +21,7 @@ class EditExpenseForm extends React.Component {
   }
 
   componentDidMount() {
-
+    this.setState({errors: []})
     ExpensessService
       .getExpense(this.props.expenseId)
       .then((expense) => {
@@ -34,7 +37,7 @@ class EditExpenseForm extends React.Component {
         this.setState({ expense });
       })
       .catch((err) => {
-        console.log(err)
+        this.setState({errors: err.errors})
       });
   }
 
@@ -58,6 +61,11 @@ class EditExpenseForm extends React.Component {
 
   onSubmit(ev) {
     ev.preventDefault();
+
+    if(! ev.target.category) {
+      this.context.setError(['Please enter a category.'])
+      return
+    }
 
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
@@ -94,6 +102,7 @@ class EditExpenseForm extends React.Component {
       <form className="flex-form" onSubmit={this.onSubmit}>
 
       <h2>Edit expense</h2>
+      {this.state.errors.length > 0 && <div className="alert-error">{this.state.errors}</div>}
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.expense.description} />

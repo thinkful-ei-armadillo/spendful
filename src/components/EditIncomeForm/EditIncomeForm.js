@@ -2,14 +2,17 @@ import React from 'react';
 import moment from 'moment-timezone';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import * as IncomesService from '../../services/incomes-service';
+import DataContext from '../../contexts/DataContext';
 
 class EditIncomeForm extends React.Component {
+  static contextType = DataContext;
 
   constructor(props) {
     super(props);
 
     this.state = {
       income: {},
+      errors: []
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -18,7 +21,7 @@ class EditIncomeForm extends React.Component {
   }
 
   componentDidMount() {
-
+    this.setState({errors: []})
     IncomesService
       .getIncome(this.props.incomeId)
       .then((income) => {
@@ -34,7 +37,7 @@ class EditIncomeForm extends React.Component {
         this.setState({ income });
       })
       .catch((err) => {
-        console.log(err)
+        this.setState({errors: err.errors})
       });
   }
 
@@ -54,6 +57,11 @@ class EditIncomeForm extends React.Component {
 
   onSubmit(ev) {
     ev.preventDefault();
+
+    if(! ev.target.category) {
+      this.context.setError(['Please enter a category.'])
+      return
+    }
 
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
@@ -90,6 +98,7 @@ class EditIncomeForm extends React.Component {
       <form className="flex-form" onSubmit={this.onSubmit}>
 
       <h2>Edit income</h2>
+      {this.state.errors.length > 0 && <div className="alert-error">{this.state.errors}</div>}
 
       <label htmlFor="description">Short description (max 50 chars.)</label>
       <input type="text" id="description" name="description" maxLength="50" defaultValue={this.state.income.description} />
