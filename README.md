@@ -3,6 +3,7 @@
 Michael Bonner, Ethan Zimmerman, Andre Willie, Zoljargal Fallows, and Chris Carnivale
 
 [LiveApp](http://spendful.now.sh)
+
 [Server Repo](https://github.com/thinkful-ei-armadillo/spendful-server)
 
 ## Summary
