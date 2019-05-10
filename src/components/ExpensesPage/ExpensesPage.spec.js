@@ -36,7 +36,7 @@ describe('Expenses Page component', () => {
         wrapper = shallow(<section className="page-controls"></section>
         )
 
-        expect(wrapper.hasClass('.page-controls'));
+        expect(wrapper.find('.page-controls'));
         
     })
     
