@@ -52,7 +52,7 @@ Displays two buttons, one on the top of the page, and one at the end of the tran
 
 ## Technology
 
-Moment
+- Moment
 
 The Usual Suspects:
 - React (Create React App)
