@@ -51,11 +51,21 @@ For each transaction, displays an edit button that re-directs the user to anothe
 Displays two buttons, one on the top of the page, and one at the end of the transaction list to add an income/expense.
 
 ## Technology
+
+- Moment
+
+The Usual Suspects:
+- React (Create React App)
 - Chart.js
 - React
 - HTML5
 - CSS3
 - Enzyme
+
+Deployed via Now
+
+Special thanks to moment for doing all the complex date math and 
+preserving our sanity (mostly) 
 
 ## Setup
 
