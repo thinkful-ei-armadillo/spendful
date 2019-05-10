@@ -2,8 +2,10 @@ import React from 'react';
 import moment from 'moment-timezone';
 import CategorySelect from '../CategorySelect/CategorySelect';
 import * as IncomesService from '../../services/incomes-service';
+import DataContext from '../../contexts/DataContext';
 
 class EditIncomeForm extends React.Component {
+  static contextType = DataContext;
 
   constructor(props) {
     super(props);
@@ -54,6 +56,11 @@ class EditIncomeForm extends React.Component {
 
   onSubmit(ev) {
     ev.preventDefault();
+
+    if(! ev.target.category) {
+      this.context.setError(['Please enter a category.'])
+      return
+    }
 
     // Take form input string in YYYY-MM-DD format, create moment object,
     // translate to UTC, output string in default ISO 8601 format
