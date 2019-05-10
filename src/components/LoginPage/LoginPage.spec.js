@@ -47,18 +47,16 @@ describe('Login Page component', () => {
       expect(wrapper.find(`input[type="text"]`).simulate('change', {target: {name: 'email_address', value: testEmail}}));
       expect(wrapper.find(`input[type="text"]`).text()).toEqual('');
 
-      //.simulate('change', {target: {name: 'email_address', value: testEmail}}));
-      //expect(wrapper.state('email_address')).toEqual(testEmail);
+     
 
       expect(wrapper.find('input[type="password"]').simulate('change', {target: {name: 'password', value: testPass}}));
       expect(wrapper.find(`input[type="password"]`).text()).toEqual('');
 
       expect(wrapper.find('button[type="submit"]').text()).toEqual('Log In');
 
-      //.simulate('change', {target: {name: 'password', value: testPass}});
-      //expect(wrapper.state('password')).toEqual(testPass);
+      
 
-
+      expect(wrapper).toMatchSnapshot();
 
     });
 
@@ -72,6 +70,12 @@ describe('Login Page component', () => {
 
       wrapper.find('button').simulate('click');
 
+      wrapper = shallow(<div className="alert-error"></div>);
+
+      expect(wrapper.find('.alert-error'));
+
+      
+
       
 
 
@@ -79,6 +83,18 @@ describe('Login Page component', () => {
     })
 
     it('displays error if no password is provided', () => {
+
+      let wrapper = shallow(<LoginForm />);
+
+      wrapper.find(`input[type="text"]`).simulate('change', {target: {name: 'email_address', value: testEmail}});
+
+      wrapper.find('input[type="password"]').simulate('change', {target: {name: 'password', value: ''}});
+
+      wrapper.find('button').simulate('click');
+
+      wrapper = shallow(<div className="alert-error"></div>);
+
+      expect(wrapper.find('.alert-error'));
 
     });
 

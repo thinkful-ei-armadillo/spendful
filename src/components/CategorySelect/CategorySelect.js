@@ -11,7 +11,7 @@ class CategorySelect extends React.Component {
 
   constructor(props) {
     super(props);
-
+    
     this.state = {
       categories: [],
       showCreateForm: false,
@@ -41,14 +41,19 @@ class CategorySelect extends React.Component {
     .getAllCategories()
     .then(categories => {
       if (this.props.value){
+
         this.setState({
           categories,
           setCategory: this.props.value
+
         });
       }
       else{
         this.setState({
+
+          
           categories
+
         })
       }
       })
@@ -124,7 +129,9 @@ class CategorySelect extends React.Component {
         this.setCategories();
       })
       .catch(err => {
+
         this.context.setError(err.errors);
+
       })
     }
 
@@ -174,12 +181,14 @@ class CategorySelect extends React.Component {
 
     if(this.state.showCreateForm) {
       jsx = <>
+
         <input
           value={this.state.inputValue}
           onChange={this.updateInputValue}
           type="text"
           id="newCategoryName"
           name="newCategoryName"
+
           className="form-control"
           placeholder="Enter a new category name..."
           autoComplete="off"

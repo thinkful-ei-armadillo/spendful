@@ -74,6 +74,7 @@ export default class DashboardPage extends Component {
       categories: this.context.categories
     }
 
+
     let chartPlaceholder = (
       <p className="alert alert-chart">
         You haven't logged any expenses yet! <Link to="/add#expense">Create an expense</Link> to start tracking
@@ -83,6 +84,7 @@ export default class DashboardPage extends Component {
 
     let content = (
       <>
+
         {this.state.errors ? <div className="alert-error">{this.state.errors}</div> : ''}
         <div className="w-100"></div>
 

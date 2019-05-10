@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page component displays a email and password field for login 1`] = `ShallowWrapper {}`;
