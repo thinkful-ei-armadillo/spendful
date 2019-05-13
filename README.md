@@ -79,3 +79,7 @@ To setup the application
 ## Running project
 
 This is a `create-react-app` project so `npm start` will start the project in development mode with hot reloading by default.
+
+## Demo Account
+
+On the Landing Page, in the registration form, there is a green demo account button that gives the user access to the app without registering.
