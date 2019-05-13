@@ -44,7 +44,6 @@ class Navbar extends Component {
 
   handleLogout = () => {
     this.context.processLogout();
-    this.props.history.push("/");
   }
 
   render() {
