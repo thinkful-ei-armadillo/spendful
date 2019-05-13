@@ -23,7 +23,7 @@ class EditIncomePage extends React.Component {
   }
 
   onFailure (err) {
-
+    window.scrollTo(0, 0)
     if (err.errors) {
       this.setState({ errors: err.errors })
     } else {

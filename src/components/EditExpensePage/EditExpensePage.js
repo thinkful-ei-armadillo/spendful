@@ -20,6 +20,7 @@ class EditExpensePage extends React.Component {
   }
 
   onFailure = (err) => {
+    window.scrollTo(0, 0)
     if (err.errors) {
       this.context.setError(err.errors)
     } else {

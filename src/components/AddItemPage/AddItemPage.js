@@ -12,6 +12,7 @@ class AddItemPage extends Component {
   }
 
   onFailure = (errors) => {
+    window.scrollTo(0, 0)
     this.context.setError(errors);
   }
 
