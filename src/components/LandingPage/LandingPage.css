@@ -9,6 +9,7 @@
 }
 
 .landing-header-left {
+  margin: 0 0 4em;
   display: flex;
   align-items: center;
   flex: 3;
@@ -16,8 +17,8 @@
 }
 
 .landing-header-left h2 {
-  max-width: 12em;
-  margin: 1em 0;
+  max-width: 7em;
+  margin: 0;
   padding: 1em;
   background-color: #eff2f6;
   border: 9px solid #3d4143ed;

@@ -168,7 +168,7 @@ class CategorySelect extends React.Component {
 
   render() {
     let jsx = <>
-      <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control" name="category">
+      <select required value={this.state.setCategory} onChange={this.handleCategoryChange} id="category" className="form-control category-control" name="category">
         <option value=''>Please select a category...</option>
         <option value='create'>Create new category...</option>
         {this.createOptions()}

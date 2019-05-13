@@ -15,6 +15,12 @@ class EditExpensePage extends React.Component {
     };
   }
 
+  componentDidUpdate(prev){
+    if(this.context.errors.length > 0){
+      window.scrollTo(0, 0)
+    }
+  }
+
   onSuccess = (updates) => {
     this.props.history.push('/expenses');
   }
