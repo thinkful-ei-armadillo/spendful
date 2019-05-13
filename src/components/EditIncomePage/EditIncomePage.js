@@ -29,11 +29,10 @@ class EditIncomePage extends React.Component {
   }
 
   onFailure (err) {
-    
     if (err.errors) {
-      this.setState({ errors: err.errors })
+      this.context.setError(err.errors)
     } else {
-      this.setState({errors: err});
+      this.context.setError(['There was an error. Try again.'])
     }
   }
 
