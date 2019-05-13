@@ -18,18 +18,23 @@ class EditIncomePage extends React.Component {
     this.onFailure = this.onFailure.bind(this);
   }
 
+  componentDidUpdate(prev){
+    if(this.context.errors.length > 0){
+      window.scrollTo(0, 0)
+    }
+  }
+
   onSuccess (updates) {
     this.props.history.push('/incomes');
   }
 
   onFailure (err) {
-    window.scrollTo(0, 0)
+    
     if (err.errors) {
       this.setState({ errors: err.errors })
     } else {
       this.setState({errors: err});
     }
-
   }
 
   render () {

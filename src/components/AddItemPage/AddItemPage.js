@@ -6,6 +6,12 @@ import DataContext from '../../contexts/DataContext';
 class AddItemPage extends Component {
   static contextType = DataContext;
 
+  componentDidUpdate(prev){
+    if(this.context.errors.length > 0){
+      window.scrollTo(0, 0)
+    }
+  }
+
   onSuccess = (itemType) => {
     const { history } = this.props;
     history.push(itemType)
