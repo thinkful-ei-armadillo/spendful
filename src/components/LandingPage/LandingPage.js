@@ -28,6 +28,8 @@ export default class LandingPage extends Component {
 
   componentDidMount(){
     this.setState({isloading: false})
+    // this.scrollToRegistration()
+    window.scrollTo(0, 0)
   }
      // Scroll to ref function 
   scrollTo = (el) => {
