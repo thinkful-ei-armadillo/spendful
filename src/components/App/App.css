@@ -297,3 +297,10 @@ select, .flex-form > input, .input-date {
   flex-direction: column; 
   justify-content: space-between
 }
+
+@media only screen and (min-width: 320px) and (max-width: 425px){
+  .category-control{
+    width: 80%;
+  }
+}
+
